@@ -1,0 +1,66 @@
+$green: #0A7742;
+$green_light: #169d5b;
+/* Change Width and Height of Logo Image + Add Custom Image File */
+div#login{
+    width: 400px!important;
+}
+.login h1 a {
+    width:auto !important;
+    height: 70px !important;
+    background-size: contain;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    object-fit: cover !important;
+    font-size: 100px !important;
+    margin-bottom: 3rem!important;
+}
+
+/* Add a few changes to the color and style of form itself */
+.login label {
+    display: block;
+    margin-bottom: 1em;
+    font-weight: 600;
+}
+
+.login form {
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.1) !important;
+    -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.1) !important;
+    border: 0!important;
+    padding: 38px 36px 40px!important;
+}
+
+.login form .input {
+    font-weight: normal;
+}
+
+.login #backtoblog a,
+.login #nav a {
+
+    font-weight: 600;
+}
+.login form .input {
+    border-radius: 10px !important;
+    padding: 10px 10px!important;
+
+}
+.wp-core-ui .button-primary {
+    background: $green;
+    border-radius: 10px !important;
+    padding: 5px 30px !important;
+    font-size: 1rem;
+    transition: .3s ease;
+    border-color: $green!important;
+}
+
+.wp-core-ui .button-primary:hover {
+    background: $green_light;
+}
+
+.login .button.wp-hide-pw .dashicons{
+    top: .7rem!important;
+}
+
+#login form p {
+    margin-bottom: 12px!important;
+}

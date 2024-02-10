@@ -1,11 +1,11 @@
 <?php
 /**
- * Register Herbanext Pre Get Posts.
- * @package herbanext
+ * Register agromedika Pre Get Posts.
+ * @package agromedika
  */
-namespace HERBANEXT_THEME\Inc;
+namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 class Namespacecpt{
     use Singleton;

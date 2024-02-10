@@ -1,11 +1,11 @@
 <?php
 /**
- * Register Herbanext Custom Post Type.
- * @package herbanext
+ * Register agromedika Custom Post Type.
+ * @package agromedika
  */
-namespace HERBANEXT_THEME\Inc;
+namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 class Restriction {
     use Singleton;
@@ -50,7 +50,7 @@ class Restriction {
     public function restrict_menus_for_non_admin() {
         if (!current_user_can('administrator')) {
             remove_menu_page('blog-settings');
-            remove_menu_page('herbanext-shop');
+            remove_menu_page('agromedika-shop');
         }
     }
     // add hr role custom role and permission   

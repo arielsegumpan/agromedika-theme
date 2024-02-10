@@ -1,7 +1,7 @@
 <?php
 /**
  *Template Name: Blog
- * @package herbanext
+ * @package agromedika
  */
 get_header();
 

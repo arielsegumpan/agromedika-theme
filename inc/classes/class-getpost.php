@@ -1,6 +1,6 @@
 <?php
 /**
- * @package herbanext
+ * @package agromedika
  */
 
 namespace HERBANEXT_THEME\Inc;

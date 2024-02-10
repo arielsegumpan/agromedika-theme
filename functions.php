@@ -1,7 +1,7 @@
 <?php
 /**
  * Functions template
- * @package herbanext
+ * @package agromedika
  */
 use HERBANEXT_THEME\Inc\HERBANEXT_THEME;
 // Define HERBANEXT_DIR_PATH and HERBANEXT_DIR_URI if not defined

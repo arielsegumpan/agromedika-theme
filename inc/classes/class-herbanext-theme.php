@@ -1,15 +1,15 @@
 <?php
 /**
  * Bootstrap the theme
- * @package herbanext
+ * @package agromedika
  * 
  */
 
- namespace HERBANEXT_THEME\Inc;
+ namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
- class HERBANEXT_THEME{
+ class AGROMEDIKA_THEME{
     use Singleton;
     protected function __construct() {
         // Define an array of classes to initialize
@@ -18,7 +18,7 @@ use HERBANEXT_THEME\Inc\Traits\Singleton;
             Namespacecpt::class,
             Menus::class,
             Assets::class,
-            HerbanextCPT::class,
+            AGROMEDIKACPT::class,
             Careercat::class,
             Shortcodes::class,
             Woofeat::class,
@@ -40,10 +40,10 @@ use HERBANEXT_THEME\Inc\Traits\Singleton;
         add_action('after_setup_theme', [$this,'setup_theme']);
         add_filter( 'woocommerce_product_get_rating_html', [$this, 'filter_woocommerce_product_get_rating_html'], 10, 3 ); 
         add_action('init', [$this, 'remove_price_related_actions']);
-        add_filter( 'woocommerce_variable_sale_price_html', [$this,'herbanext_remove_prices'], 10, 2 );
+        add_filter( 'woocommerce_variable_sale_price_html', [$this,'agromedika_remove_prices'], 10, 2 );
         add_action( 'init', [$this,'remove_add_to_cart_button']);
         add_filter( 'woocommerce_is_purchasable', '__return_false' );
-        add_action('woocommerce_product_meta_start',[$this,'herbanext_custom_btn_single']);
+        add_action('woocommerce_product_meta_start',[$this,'agromedika_custom_btn_single']);
         add_filter('woocommerce_sale_flash', [$this,'remove_woocommerce_sale_flash'], 10, 3);
         add_action('woocommerce_shop_loop_item_title', [$this,'abChangeProductsTitle'], 10 );
         add_shortcode('custom_page_headers', [$this,'custom_page_headers_shortcode']);
@@ -111,14 +111,14 @@ use HERBANEXT_THEME\Inc\Traits\Singleton;
         remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
     }
-    // custom button sa herbanext
-    function herbanext_custom_btn_single() {
+    // custom button sa agromedika
+    function agromedika_custom_btn_single() {
         $custom_btn_link = esc_url(site_url('/contact'));
         $custom_btn_link_2 = esc_url(home_url('/products'));
     
         echo '<div id="product_btn" class="vstack gap-3 col-md-5 mx-auto w-100 mt-5 mb-5">';
-        echo '<a href="' . $custom_btn_link . '" class="btn btn-success py-3 fs-6"><i class="bi bi-info-circle me-2"></i>' . __("Inquire", "herbanext") . '</a>';
-        echo '<a href="' . $custom_btn_link_2 . '" class="btn btn-outline-success btn-block btn-md py-3 px-4 mt-2 mb-3 ripple"><i class="bi bi-eye me-2"></i>' . __("View Other Products", "herbanext") . '</a>';
+        echo '<a href="' . $custom_btn_link . '" class="btn btn-success py-3 fs-6"><i class="bi bi-info-circle me-2"></i>' . __("Inquire", "agromedika") . '</a>';
+        echo '<a href="' . $custom_btn_link_2 . '" class="btn btn-outline-success btn-block btn-md py-3 px-4 mt-2 mb-3 ripple"><i class="bi bi-eye me-2"></i>' . __("View Other Products", "agromedika") . '</a>';
         echo '</div>';
     }
     
@@ -155,11 +155,11 @@ use HERBANEXT_THEME\Inc\Traits\Singleton;
         return ''; // Return an empty string if the condition is not met.
     }
   
-    // add herbanext logo in dashboard
+    // add agromedika logo in dashboard
     function wpb_custom_logo() {
         echo '<style>';
         echo '#wpadminbar #wp-admin-bar-wp-logo > .ab-item .ab-icon:before {
-            background-image: url(' . esc_url(get_stylesheet_directory_uri() . '/assets/imgs/herbanext_16x16.png') . ') !important;
+            background-image: url(' . esc_url(get_stylesheet_directory_uri() . '/assets/imgs/agromedika_16x16.png') . ') !important;
             background-position: center!important;
             background-size: cover!important;
             object-fit: cover!important;
@@ -172,8 +172,8 @@ use HERBANEXT_THEME\Inc\Traits\Singleton;
     }
     // Custom admin Footer text
     function custom_footer_admin_text() {
-        echo esc_html__("The Official Website of Herbanext", "herbanext");
-        echo ' | <a target="_blank" href="'. esc_url('https://dev-asegumpan.pantheonsite.io/herbanext-healthier-solutions-from-nature/' ) .'">Made by: <b>AS</b></a>';
+        echo esc_html__("The Official Website of Agromedika", "agromedika");
+        echo ' | <a target="_blank" href="'. esc_url('https://dev-asegumpan.pantheonsite.io/agromedika-healthier-solutions-from-nature/' ) .'">Made by: <b>AS</b></a>';
     }
 
     // get Search Query

@@ -1,7 +1,7 @@
 <?php
 /**
- * Register Herbanext Custom Post Type.
- * @package herbanext
+ * Register agromedika Custom Post Type.
+ * @package agromedika
  */
 namespace HERBANEXT_THEME\Inc;
 

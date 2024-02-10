@@ -1,10 +1,10 @@
 <?php
 /**
  * Register Shortcodes.
- * @package herbanext
+ * @package agromedika
  */
-namespace HERBANEXT_THEME\Inc;
- use HERBANEXT_THEME\Inc\Traits\Singleton;
+namespace AGROMEDIKA_THEME\Inc;
+ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 
  class Shortcodes{

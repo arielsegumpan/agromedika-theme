@@ -1,6 +1,6 @@
 <?php
 
-namespace HERBANEXT_THEME\Inc\Traits;
+namespace AGROMEDIKA_THEME\Inc\Traits;
 
 trait Singleton {
 
@@ -31,9 +31,9 @@ trait Singleton {
 			$instance[ $called_class ] = new $called_class();
 
 			/**
-			 * Dependent items can use the `herbanext_theme_singleton_init_{$called_class}` hook to execute code
+			 * Dependent items can use the `agromedika_theme_singleton_init_{$called_class}` hook to execute code
 			 */
-			do_action( sprintf( 'herbanext_theme_singleton_init%s', $called_class ) ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
+			do_action( sprintf( 'agromedika_theme_singleton_init%s', $called_class ) ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
 
 		}
 

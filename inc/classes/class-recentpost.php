@@ -1,11 +1,11 @@
 <?php
 /**
- * @package herbanext
+ * @package agromedika
  */
 
-namespace HERBANEXT_THEME\Inc;
+namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 class Recentpost {
     use Singleton;
@@ -15,11 +15,11 @@ class Recentpost {
     }
 
     protected function setup_recent_post_hooks() {
-        add_shortcode('herbanext_recent_product', [$this, 'herbanext_recent_products']);
+        add_shortcode('agromedika_recent_product', [$this, 'agromedika_recent_products']);
     }
 
     // Create shortcode to get recent products displayed on the front page
-    public function herbanext_recent_products() {
+    public function agromedika_recent_products() {
         $args = array(
             'post_type'      => 'product',
             'post_status'    => 'publish',
@@ -39,7 +39,7 @@ class Recentpost {
                 <div class="col" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="<?php echo esc_attr($prod_delay); ?>">
                     <a href="<?php echo esc_url(get_the_permalink()) ?>" class="text-decoration-none position-relative">
                         <div class="products_tag position-absolute">
-                            <span class="badge text-bg-green rounded-2 text-small px-3 me-2"><?php esc_html_e('New', 'herbanext'); ?></span>
+                            <span class="badge text-bg-green rounded-2 text-small px-3 me-2"><?php esc_html_e('New', 'agromedika'); ?></span>
                         </div>
                         <?php
                         if (has_post_thumbnail()) {
@@ -55,7 +55,7 @@ class Recentpost {
             endwhile;
         else :
             ?>
-            <p class="text-center"><?php esc_html_e('No Recent Product<br>display', 'herbanext'); ?></p>
+            <p class="text-center"><?php esc_html_e('No Recent Product<br>display', 'agromedika'); ?></p>
         <?php
         endif;
         wp_reset_postdata();

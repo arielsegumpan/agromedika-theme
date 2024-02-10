@@ -1,12 +1,12 @@
 <?php
 /**
  * Assets theme assets
- * @package herbanext
+ * @package agromedika
  */
 
- namespace HERBANEXT_THEME\Inc;
+ namespace AGROMEDIKA_THEME\Inc;
 
- use HERBANEXT_THEME\Inc\Traits\Singleton;
+ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
  
  class Assets {
      use Singleton;
@@ -27,7 +27,7 @@
          wp_register_style('owl_carousel_css', '//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], false, 'all');
          wp_register_style('icons', '//cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css', [], false, 'all');
          wp_register_style('aos_css', '//cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css', [], false, 'all');
-         wp_register_style('woo_style', HERBANEXT_DIR_URI . '/assets/css/woo-style.css', [], false, 'all');
+         wp_register_style('woo_style', AGROMEDIKA_DIR_URI . '/assets/css/woo-style.css', [], false, 'all');
 
          wp_enqueue_style('style');
          wp_enqueue_style('owl_carousel_css');

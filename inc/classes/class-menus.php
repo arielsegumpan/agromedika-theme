@@ -1,10 +1,10 @@
 <?php
 /**
  * Register Menus.
- * @package herbanext
+ * @package agromedika
  */
-namespace HERBANEXT_THEME\Inc;
- use HERBANEXT_THEME\Inc\Traits\Singleton;
+namespace AGROMEDIKA_THEME\Inc;
+ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 
  class Menus{
@@ -21,8 +21,8 @@ namespace HERBANEXT_THEME\Inc;
     public function register_menus(){
         register_nav_menus(
            [
-            'herbanext-header-menu' =>  esc_html__('Header Menu', 'herbanext'),
-            'herbanext-footer-menu' =>  esc_html__('Footer Menu', 'herbanext')
+            'agromedika-header-menu' =>  esc_html__('Agromedika Header Menu', 'agromedika'),
+            'agromedika-footer-menu' =>  esc_html__('Agromedika Footer Menu', 'agromedika')
            ]
         );
     }

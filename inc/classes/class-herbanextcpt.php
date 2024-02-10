@@ -1,15 +1,15 @@
 <?php
 
 /**
- * Register Herbanext Custom Post Type.
- * @package herbanext
+ * Register agromedika Custom Post Type.
+ * @package agromedika
  */
 
-namespace HERBANEXT_THEME\Inc;
+namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
-class HerbanextCPT
+class AGROMEDIKACPT
 {
     use Singleton;
 

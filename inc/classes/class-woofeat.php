@@ -1,10 +1,10 @@
 <?php
 /**
  * woofeature
- * @package herbanext
+ * @package agromedika
  */
-namespace HERBANEXT_THEME\Inc;
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+namespace AGROMEDIKA_THEME\Inc;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 class Woofeat {
     use Singleton;
@@ -18,7 +18,7 @@ class Woofeat {
         add_action('woocommerce_after_shop_loop_item', [$this,'custom_add_buttons_to_product_loop'], 5);
         add_filter('loop_shop_columns',[$this,'custom_woocommerce_loop_columns']);
         add_filter('loop_shop_per_page', [$this,'custom_woocommerce_products_per_page']);
-        add_shortcode('herbanext_product_categories', [$this,'herbanext_categories_shortcode']);
+        add_shortcode('agromedika_product_categories', [$this,'agromedika_categories_shortcode']);
         add_filter('woocommerce_output_related_products_args', [$this,'custom_related_products_args']);
         add_action('woocommerce_after_shop_loop', [$this,'custom_woocommerce_pagination']);
         // remove product meta single product page
@@ -45,7 +45,7 @@ class Woofeat {
                                 <div class="position-relative">
                                     <a href="' . $product_link . '" class="text-decoration-none position-relative">
                                         <span class="position-absolute badge mt-3 ms-3 rounded-3 bg-success px-2 text-white small">
-                                            ' . esc_html__('Featured', 'herbanext') . '
+                                            ' . esc_html__('Featured', 'agromedika') . '
                                         </span>
                                         <img src="' . $product_image . '" alt="' . $product_name . '" class="img-fluid object-fit-cover rounded-5">
                                     </a>
@@ -53,7 +53,7 @@ class Woofeat {
                             </div>';
             endforeach;
         else:
-            $output .= '<p class="fw-bold display-5">' . esc_html__('No featured products found.', 'herbanext') . '</p>';
+            $output .= '<p class="fw-bold display-5">' . esc_html__('No featured products found.', 'agromedika') . '</p>';
         endif;
         return $output;
     }
@@ -61,7 +61,7 @@ class Woofeat {
     function custom_add_buttons_to_product_loop() {
         $product_permalink = esc_url(get_permalink());
         $contact_url = esc_url(site_url('/contact'));
-        $view_button_text = esc_html__('View', 'herbanext');
+        $view_button_text = esc_html__('View', 'agromedika');
         $inquiry_button_text = esc_html__('Inquiry', 'herbeanext');
     
         echo '<div id="product_btn" class="vstack gap-3 col-md-5 mx-auto w-100 mt-4 px-4">
@@ -80,7 +80,7 @@ class Woofeat {
     }
 
     // get all product categories
-    function herbanext_categories_shortcode() {
+    function agromedika_categories_shortcode() {
       // Get WooCommerce categories
     $woocommerce_categories = get_terms(array(
             'taxonomy' => 'product_cat',
@@ -105,8 +105,8 @@ class Woofeat {
     function custom_woocommerce_pagination() {
         global $wp_query;
     
-        $prev_link = get_previous_posts_link('<i class="bi bi-arrow-left me-2"></i>' . esc_html__('Previous', 'herbanext'));
-        $next_link = get_next_posts_link(esc_html__('Next', 'herbanext') . '<i class="bi bi-arrow-right ms-2"></i>', $wp_query->max_num_pages);
+        $prev_link = get_previous_posts_link('<i class="bi bi-arrow-left me-2"></i>' . esc_html__('Previous', 'agromedika'));
+        $next_link = get_next_posts_link(esc_html__('Next', 'agromedika') . '<i class="bi bi-arrow-right ms-2"></i>', $wp_query->max_num_pages);
     
         if ($prev_link || $next_link) {
             echo '<div class="woocommerce-pagination">

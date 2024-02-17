@@ -3,24 +3,23 @@
  * Functions template
  * @package agromedika
  */
-use HERBANEXT_THEME\Inc\HERBANEXT_THEME;
-// Define HERBANEXT_DIR_PATH and HERBANEXT_DIR_URI if not defined
-!defined('HERBANEXT_DIR_PATH') ? define('HERBANEXT_DIR_PATH',untrailingslashit( get_template_directory() )) : '';
-!defined('HERBANEXT_DIR_URI') ? define('HERBANEXT_DIR_URI',untrailingslashit( get_template_directory_uri() )) : '';
-require_once HERBANEXT_DIR_PATH . '/inc/helpers/autoloader.php';
+use AGROMEDIKA_THEME\Inc\AGROMEDIKA_THEME;
+!defined('AGROMEDIKA_DIR_PATH') ? define('AGROMEDIKA_DIR_PATH',untrailingslashit( get_template_directory() )) : '';
+!defined('AGROMEDIKA_DIR_URI') ? define('AGROMEDIKA_DIR_URI',untrailingslashit( get_template_directory_uri() )) : '';
+require_once AGROMEDIKA_DIR_PATH . '/inc/helpers/autoloader.php';
 
-function herbanext_get_theme_instance(){
-    HERBANEXT_THEME::get_instance();
+function agromedika_get_theme_instance(){
+    AGROMEDIKA_THEME::get_instance();
 }
-herbanext_get_theme_instance();
+agromedika_get_theme_instance();
 
 function custom_script(){
     wp_enqueue_script('custom_js', get_theme_file_uri() . '/assets/js/js.js', NULL, '1.0', true);
 }
 add_action('wp_enqueue_scripts', 'custom_script');
 
-apply_filters( 'acf/prepare_field', 'herbanext_acf_prepare_field' );
-function herbanext_acf_prepare_field($field) {
+apply_filters( 'acf/prepare_field', 'agromedika_acf_prepare_field' );
+function agromedika_acf_prepare_field($field) {
     return get_all_acf($field['name'], $field['name'] . '_option');
 }
 
@@ -30,6 +29,8 @@ function get_acf_field($field_name) {
 function get_acf_option_field($field_name) {
     return function_exists('get_field') ? get_field($field_name,'option') : null;
 }
+
+
 
 function get_all_acf($acf_val, $acf_option_val){
     $acf_field_value = get_acf_field($acf_val);
@@ -43,11 +44,11 @@ function get_all_acf($acf_val, $acf_option_val){
 }
 
 // register sidebar widget
-function herbanext_register_custom_sidebars() {
-    // Register Herbanext Product Sidebar
+function agromedika_register_custom_sidebars() {
+    // Register agromedika Product Sidebar
     register_sidebar(array(
-        'name' => 'Herbanext Product Sidebar',
-        'id' => 'herbanext-product-sidebar',
+        'name' => 'Agromedika Product Sidebar',
+        'id' => 'agromedika-product-sidebar',
         'description' => 'Widgets in this sidebar will appear on product-related pages.',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
@@ -55,10 +56,10 @@ function herbanext_register_custom_sidebars() {
         'after_title' => '</h4>',
     ));
 
-    // Register Herbanext Post Sidebar
+    // Register agromedika Post Sidebar
     register_sidebar(array(
-        'name' => 'Herbanext Post Sidebar',
-        'id' => 'herbanext-post-sidebar',
+        'name' => 'Agromedika Post Sidebar',
+        'id' => 'agromedika-post-sidebar',
         'description' => 'Widgets in this sidebar will appear on post-related pages.',
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget' => '</div>',
@@ -66,7 +67,7 @@ function herbanext_register_custom_sidebars() {
         'after_title' => '</h4>',
     ));
 }
-add_action('widgets_init', 'herbanext_register_custom_sidebars');
+add_action('widgets_init', 'agromedika_register_custom_sidebars');
 
 // Add custom image tag in product catalog
 if (!function_exists('woocommerce_template_loop_product_thumbnail')) {
@@ -145,14 +146,14 @@ add_shortcode('all_categories', 'display_all_categories');
 
 // Breadcrumbs
 function custom_breadcrumbs() {
-    echo '<a class="text-success text-decoration-none" href="'.esc_url(home_url()).'" rel="nofollow"><i class="bi bi-house me-2"></i>'.__('Home', 'herbanext').'</a>';
+    echo '<a class="text-success text-decoration-none" href="'.esc_url(home_url()).'" rel="nofollow"><i class="bi bi-house me-2"></i>'.__('Home', 'agromedika').'</a>';
     $delimiter = "&nbsp;&nbsp;&#187;&nbsp;&nbsp;"; // Delimiter between breadcrumbs
     if (is_archive() || is_home()) {
         echo $delimiter . '<span>' . esc_html(wp_title('', false)) . '</span>';
     }
     if (is_category() || is_single()) {
         $post_type = get_post_type();
-        $post_type_slug = ($post_type == 'post') ? __('News', 'herbanext') : ucfirst($post_type);
+        $post_type_slug = ($post_type == 'post') ? __('News', 'agromedika') : ucfirst($post_type);
 
         $archive_link = esc_url(get_post_type_archive_link($post_type));
         echo $delimiter . '<a class="text-success text-decoration-none" href="' . esc_url($archive_link) . '">' . esc_html($post_type_slug) . '</a>';
@@ -163,19 +164,6 @@ function custom_breadcrumbs() {
         $post_slug = get_post_field('post_name', get_post());
         echo $delimiter . '<a class="text-decoration-none text-secondary" href="' . esc_url(home_url('/' . $post_slug)) . '">' . esc_html(get_the_title()) . '</a>';
     } elseif (is_search()) {
-        echo $delimiter . __('Search Results for...', 'herbanext') . ' "<em>' . esc_html(get_search_query()) . '</em>"';
+        echo $delimiter . __('Search Results for...', 'agromedika') . ' "<em>' . esc_html(get_search_query()) . '</em>"';
     }
 }
-  // Remove the product title from WooCommerce product loop
-  add_action('init', 'remove_loop_title');
-  function remove_loop_title() {
-      remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10);
-  }
-
-  remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
-  add_filter( 'woocommerce_page_title', 'new_woocommerce_page_title' );
-  function new_woocommerce_page_title( $page_title ) {
-      if ( $page_title == 'Shop' ) {
-          return '<span class="fw-bold fs-2">Product Catalog</span>';
-      }
-  }

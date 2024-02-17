@@ -1,7 +1,7 @@
 <?php
 /**
  * Template for post entry header
- * @package herbanext
+ * @package agromedika
  */
  ?>
 <?php

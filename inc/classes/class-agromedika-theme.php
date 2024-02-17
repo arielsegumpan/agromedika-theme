@@ -14,17 +14,17 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
     protected function __construct() {
         // Define an array of classes to initialize
         $classes = [
-            Restriction::class,
+            // Restriction::class,
             Namespacecpt::class,
             Menus::class,
             Assets::class,
-            AGROMEDIKACPT::class,
-            Careercat::class,
+            // AGROMEDIKACPT::class,
+            // Careercat::class,
             Shortcodes::class,
             Woofeat::class,
-            Recentpost::class,
-            Getpost::class,
-            Customlogin::class,
+            Recentproductpost::class,
+            // Getpost::class,
+            // Customlogin::class,
         ];
         // Initialize each class
         foreach ($classes as $class) {
@@ -43,7 +43,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         add_filter( 'woocommerce_variable_sale_price_html', [$this,'agromedika_remove_prices'], 10, 2 );
         add_action( 'init', [$this,'remove_add_to_cart_button']);
         add_filter( 'woocommerce_is_purchasable', '__return_false' );
-        add_action('woocommerce_product_meta_start',[$this,'agromedika_custom_btn_single']);
+        // add_action('woocommerce_product_meta_start',[$this,'agromedika_custom_btn_single']);
         add_filter('woocommerce_sale_flash', [$this,'remove_woocommerce_sale_flash'], 10, 3);
         add_action('woocommerce_shop_loop_item_title', [$this,'abChangeProductsTitle'], 10 );
         add_shortcode('custom_page_headers', [$this,'custom_page_headers_shortcode']);
@@ -112,15 +112,15 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
     }
     // custom button sa agromedika
-    function agromedika_custom_btn_single() {
-        $custom_btn_link = esc_url(site_url('/contact'));
-        $custom_btn_link_2 = esc_url(home_url('/products'));
+    // function agromedika_custom_btn_single() {
+    //     $custom_btn_link = esc_url(site_url('/contact'));
+    //     $custom_btn_link_2 = esc_url(home_url('/products'));
     
-        echo '<div id="product_btn" class="vstack gap-3 col-md-5 mx-auto w-100 mt-5 mb-5">';
-        echo '<a href="' . $custom_btn_link . '" class="btn btn-success py-3 fs-6"><i class="bi bi-info-circle me-2"></i>' . __("Inquire", "agromedika") . '</a>';
-        echo '<a href="' . $custom_btn_link_2 . '" class="btn btn-outline-success btn-block btn-md py-3 px-4 mt-2 mb-3 ripple"><i class="bi bi-eye me-2"></i>' . __("View Other Products", "agromedika") . '</a>';
-        echo '</div>';
-    }
+    //     echo '<div id="product_btn" class="vstack gap-3 col-md-5 mx-auto w-100 mt-5 mb-5">';
+    //     echo '<a href="' . $custom_btn_link . '" class="btn btn-success py-3 fs-6"><i class="bi bi-info-circle me-2"></i>' . __("Inquire", "agromedika") . '</a>';
+    //     echo '<a href="' . $custom_btn_link_2 . '" class="btn btn-outline-success btn-block btn-md py-3 px-4 mt-2 mb-3 ripple"><i class="bi bi-eye me-2"></i>' . __("View Other Products", "agromedika") . '</a>';
+    //     echo '</div>';
+    // }
     
     // Remove sale tag
     function remove_woocommerce_sale_flash($html, $post, $product) {

@@ -3,9 +3,9 @@
  * @package agromedika
  */
 
-namespace HERBANEXT_THEME\Inc;
+namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 class Getpost {
     use Singleton;
@@ -16,10 +16,10 @@ class Getpost {
 
     protected function setup_hooks() {
         $shortcodes = array(
-            'herbanext_career_posts'        => 'careers',
-            'herbanext_training_seminar_posts' => 'trainingseminars',
-            'herbanext_publications_posts'   => 'publications',
-            'herbanext_medicinal_herbs_posts'   => 'medicinal_herbs',
+            'agromedika_career_posts'        => 'careers',
+            'agromedika_training_seminar_posts' => 'trainingseminars',
+            'agromedika_publications_posts'   => 'publications',
+            'agromedika_medicinal_herbs_posts'   => 'medicinal_herbs',
         );
         foreach ($shortcodes as $shortcode => $post_type) {
             add_shortcode($shortcode, function () use ($post_type) {

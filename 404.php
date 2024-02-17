@@ -1,7 +1,7 @@
 <?php 
 /**
  * Template Name: 404 Error
- * @package herbanext
+ * @package agromedika
  */
 get_header();
 $err_page = get_acf_option_field('error_page');

@@ -7,7 +7,7 @@ namespace AGROMEDIKA_THEME\Inc;
 
 use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
-class Recentpost {
+class Recentproductpost {
     use Singleton;
 
     protected function __construct() {
@@ -26,39 +26,33 @@ class Recentpost {
             'stock'          => 1,
             'posts_per_page' => 4,
         );
-
+    
         $loop = new \WP_Query($args);
         ob_start();
-
+    
         if ($loop->have_posts()) :
-            $prod_delay = 200;
             while ($loop->have_posts()) : $loop->the_post();
-                $product = wc_get_product();
-                $average_rating = $product->get_average_rating();
                 ?>
-                <div class="col" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="<?php echo esc_attr($prod_delay); ?>">
-                    <a href="<?php echo esc_url(get_the_permalink()) ?>" class="text-decoration-none position-relative">
-                        <div class="products_tag position-absolute">
-                            <span class="badge text-bg-green rounded-2 text-small px-3 me-2"><?php esc_html_e('New', 'agromedika'); ?></span>
-                        </div>
-                        <?php
+                <div class="col">
+                 <a href="<?php echo esc_url(get_the_permalink()) ?>" class="text-decoration-none">
+                    <?php
                         if (has_post_thumbnail()) {
                             the_post_thumbnail('shop_catalog', array('class' => 'rounded-5'));
                         } else {
                             echo '<img src="' . esc_url(woocommerce_placeholder_img_src()) . '" alt="' . esc_attr(get_the_title()) . '" class="rounded-5"/>';
                         }
-                        ?>
-                    </a>
+                    ?>
+                 </a>
                 </div>
-                <?php
-                $prod_delay += 200;
-            endwhile;
+    
+                <?php endwhile;
         else :
             ?>
-            <p class="text-center"><?php esc_html_e('No Recent Product<br>display', 'agromedika'); ?></p>
+            <p class="text-center"><?php esc_html_e('No Recent Product display', 'agromedika'); ?></p>
         <?php
         endif;
         wp_reset_postdata();
         return ob_get_clean();
     }
+    
 }

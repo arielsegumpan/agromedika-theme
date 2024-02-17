@@ -1,14 +1,14 @@
 <?php
 /**
  * Header menu
- * @package herbanext
+ * @package agromedika
  */
 
- use HERBANEXT_THEME\Inc\Menus;
+ use AGROMEDIKA_THEME\Inc\Menus;
 
  $menu_class = Menus::get_instance();
- $header_menu_id = $menu_class->get_menu_id('herbanext-header-menu');
- 
+ $header_menu_id = $menu_class->get_menu_id('agromedika-header-menu');
+  
  $header_menus = wp_cache_get('header_menus', 'menu_cache');
  
  if (false === $header_menus) {

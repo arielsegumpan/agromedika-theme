@@ -3,9 +3,9 @@
  * @package agromedika
  */
 
- namespace HERBANEXT_THEME\Inc;
+ namespace AGROMEDIKA_THEME\Inc;
 
-use HERBANEXT_THEME\Inc\Traits\Singleton;
+use AGROMEDIKA_THEME\Inc\Traits\Singleton;
 
 class Customlogin {
     use Singleton;
@@ -28,7 +28,7 @@ class Customlogin {
      */
     public function modify_login_logo() {
         $logo_style = '<style type="text/css">';
-        $logo_style .= 'h1 a {background-image: url(' . esc_url(get_template_directory_uri()) . '/assets/imgs/herbanext.png) !important;}';
+        $logo_style .= 'h1 a {background-image: url(' . esc_url(get_template_directory_uri()) . '/assets/imgs/agromedika.png) !important;}';
         $logo_style .= '</style>';
         echo $logo_style;
     }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Content Template
- * @package herbanext
+ * @package agromedika
  */
 $featured_image_url = get_the_post_thumbnail_url(get_the_ID());
 $featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);

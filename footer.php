@@ -1,79 +1,113 @@
 <?php
 /**
  * Footer template
- * @package herbanext
+ * @package agromedika
  */
-$global_setup = get_acf_option_field('global_settings_setup');
-if (is_array($global_setup) && isset($global_setup['global_contact_number'])) :
-    $contact_number = strip_tags($global_setup['global_contact_number']);
-    substr($contact_number, 0, 1) === '0' ? $contact_number = '+63' . substr($contact_number, 1) : '';
-endif?>
-    <footer class="bg-success w-100">
-        <div class="container">
-            <!-- main footer -->
-            <div class="row">
-                <?php if(!empty($global_setup['subscribe_form']['content_form'])): ?>
-                <div class="col-12 col-md-6 mb-5 mb-md-0">
-                    <h4 class="fw-bold avenir text-white pe-md-5 mb-4 text-center text-md-start"><?php echo esc_html_e($global_setup['subscribe_form']['title']) ?></h5>
-                    <?php echo wp_kses_decode_entities( $global_setup['subscribe_form']['content_form'] ) ?>
-                </div>
-                <?php endif ?>
-                <?php if(has_nav_menu('herbanext-footer-menu')):?>
-                <div class="col-12 col-md-3 mb-5 mb-md-0">
-                    <h4 class="fw-bold avenir text-white pe-md-5 mb-4 text-center"><?php echo esc_html_e('Quicklinks') ?></h5>
-                   <?php get_template_part('template-parts/footer/nav');?>
-                </div>
-                <?php endif?>
-                <div class="col-12 col-md-3 text-center text-md-start">
-                    <div class="d-flex flex-column gap-5">
-                        <?php if(!empty($contact_number)):?>
-                        <div class="col text-center text-md-start">
-                            <h4 class="avenir fw-bold text-white mb-3"><?php echo esc_html_e('Call') ?></h4>
-                            <div class="d-flex flex-row justify-content-center justify-content-md-start">
-                                <i class="bi bi-telephone-outbound text-black fs-5 me-3"></i>
-                                <a href="tel:<?php echo esc_attr($contact_number); ?>" class="text-decoration-none text-black fw-bold"><?php echo esc_html($contact_number); ?></a>
-                            </div>
-                        </div>
-                        <?php endif?>
-                        <?php if(!empty($global_setup['global_email_address'])):?>
-                        <div class="col">
-                            <h4 class="avenir fw-bold text-white mb-3"><?php echo esc_html_e('Email') ?></h4>
-                            <div class="d-flex flex-wrap flex-row align-items-center justify-content-center justify-content-md-start">
-                                <i class="bi bi-link-45deg text-black fs-3 me-2"></i>
-                                <a href="mailto:<?php echo esc_attr($global_setup['global_email_address'])?>" class="text-decoration-none text-black fw-bold"><?php echo esc_html_e($global_setup['global_email_address'])?></a>
-                            </div>
-                        </div>
-                        <?php endif?>
-                        <?php if(!empty($global_setup['socmed_link'])):?>
-                        <div class="col">
-                            <h4 class="avenir fw-bold text-white mb-3"><?php echo esc_html_e('Follow us') ?></h4>
-                            <a href="<?php echo esc_url($global_setup['socmed_link']) ?>" class="text-decoration-none" target="_blank">
-                                <?php echo wp_kses_post($global_setup['socmed_icon']) ?>
-                            </a>
-                        </div>
-                        <?php endif?>
+
+$option_fields = array(
+    'page_footer_about',
+    'page_footer_address_and_contact',
+    'page_footer_soc_med',
+    'privacy_policy_and_terms_conditions',
+    'page_footer_google_map',
+);
+
+$option_values = array();
+
+foreach ($option_fields as $field) {
+    $option_values[$field] = get_acf_option_field($field);
+}
+
+$page_footer_about = $option_values['page_footer_about'];
+$page_footer_address_and_contact = $option_values['page_footer_address_and_contact'];
+$page_footer_contacts = $page_footer_address_and_contact['page_footer_contact'];
+$page_footer_soc_med = $option_values['page_footer_soc_med'];
+$privacy_policy_and_terms_conditions = $option_values['privacy_policy_and_terms_conditions'];
+$page_footer_google_map = $option_values['page_footer_google_map'];
+
+?>
+
+<footer class="bg-primary">
+    <div class="container">
+        <div class="row">
+            <?php if (!empty($page_footer_about['page_about_logo_icon']['url']) && !empty($page_footer_about['page_about_content'])) : ?>
+                <div class="col-12 col-lg-3">
+                    <div class="footer-logo">
+                        <a href="<?php echo esc_url($page_footer_about['page_about_page_link']); ?>" class="text-decoration-none">
+                            <img src="<?php echo esc_url($page_footer_about['page_about_logo_icon']['url']); ?>" alt="<?php echo esc_html($page_footer_about['page_about_logo_icon']['alt']); ?>">
+                        </a>
+                        <p class="text-lteal mt-4">
+                            <?php echo nl2br(esc_textarea($page_footer_about['page_about_content'])); ?>
+                        </p>
                     </div>
                 </div>
+            <?php endif; ?>
+            <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+                <h6 class="fw-bold text-uppercase text-lteal ps-lg-5"><?php echo esc_html('Applications') ?></h6>
+                <?php get_template_part('template-parts/footer/nav'); ?>
             </div>
-            <!-- bottom footer -->
-            <div class="d-flex flex-column flex-md-row justify-content-center justify-content-md-between align-items-center gap-4 pb-4">
-                <?php if(!empty($global_setup['global_copyright'])) :?>
-                    <p class="fw-bold text-black"><?php echo esc_html_e($global_setup['global_copyright']) ?></p>
-                <?php endif?>
-                <?php if(!empty($global_setup['footer_logo']['url'])) :?>
-                <a href="<?php echo esc_url(site_url('/')) ?>" class="text-decoration-none">
-                    <img src="<?php echo esc_url( $global_setup['footer_logo']['url'] ) ?>" alt="<?php echo esc_attr( $global_setup['footer_logo']['alt'] ) ?>" style="width:100%;height:50px!important;">
-                </a>
-                <?php endif?>
-                <?php if(!empty($global_setup['global_terms_and_conditions']) || !empty($global_setup['global_privacy_policy'])) :?>
-                <div class="d-flex flex-column flex-md-row gap-3 text-center text-lg-start">
-                    <a href="<?php echo esc_url($global_setup['global_terms_and_conditions']) ?>" class=" fw-bold text-black"><?php echo esc_html_e('Terms and Conditions') ?></a>
-                    <a href="<?php echo esc_url($global_setup['global_privacy_policy']) ?>" class=" fw-bold text-black"><?php echo esc_html_e('Privacy Policy') ?></a>
+
+            <?php if (!empty($page_footer_address_and_contact['page_footer_address'])) : ?>
+                <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+                    <h6 class="fw-bold text-uppercase text-lteal"><?php echo esc_html_e('Address') ?></h6>
+                    <div class="d-flex mb-3 mt-4">
+                        <div class="flex-shrink-0">
+                            <i class="bi bi-geo-alt text-lteal fs-4"></i>
+                        </div>
+                        <div class="flex-grow-1 ms-3 text-lteal">
+                            <p><?php echo esc_html($page_footer_address_and_contact['page_footer_address']); ?></p>
+                        </div>
+                    </div>
+
+                    <?php if (!empty($page_footer_contacts)) : ?>
+                        <?php foreach ($page_footer_contacts as $page_footer_contact) : ?>
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-telephone text-lteal fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3 text-lteal">
+                                <p><?php echo esc_html($page_footer_contact['contact_number']); ?></p>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <?php if (!empty($page_footer_address_and_contact['page_footer_email'])) : ?>
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0">
+                                <i class="bi bi-envelope text-lteal fs-4"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3 text-lteal">
+                                <a class="text-lteal" href="mailto:<?php echo esc_html($page_footer_address_and_contact['page_footer_email']); ?>"><?php echo esc_html($page_footer_address_and_contact['page_footer_email']); ?></a>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
-                <?php endif?>
+            <?php endif; ?>
+
+            <?php if (!empty($page_footer_google_map)) : ?>
+                <div class="col-12 col-lg-3 text-center text-lg-start mt-5 mt-lg-0">
+                    <?php echo wp_kses_decode_entities($page_footer_google_map); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="row pb-2">
+            <div class="d-flex flex-column flex-lg-row justify-content-start justify-content-lg-between align-items-lg-center">
+                <?php if (!empty($privacy_policy_and_terms_conditions['privacy_policy_page_link']) && !empty($privacy_policy_and_terms_conditions['terms_and_conditions_page_link'])) : ?>
+                    <p><span class="small text-lteal">Copyright © 2024 All rights reserved.</span>&nbsp; <a target="_blank" href="<?php echo esc_url($privacy_policy_and_terms_conditions['privacy_policy_page_link']); ?>" class="text-lteal small"><?php echo esc_html_e('Privacy Policy') ?></a> &nbsp;<a target="_blank" href="<?php echo esc_url($privacy_policy_and_terms_conditions['terms_and_conditions_page_link']) ?>" class="text-lteal small"><?php echo esc_html_e('Terms and Conditions'); ?></a></p>
+                <?php endif; ?>
+                <div class="d-flex flex-row gap-4 justify-content-start">
+                    <?php if (!empty($page_footer_soc_med['footer_soc_med'])) : foreach ($page_footer_soc_med['footer_soc_med'] as $page_footer_socmed) : ?>
+                            <a target="_blank" href="<?php echo esc_url($page_footer_socmed['footer_soc_med_link']); ?>" class="text-decoration-none text-lteal fs-5"><?php echo wp_kses_decode_entities($page_footer_socmed['footer_soc_med_icons']) ?></a>
+                    <?php endforeach;
+                    endif; ?>
+                </div>
             </div>
         </div>
-    </footer>
-    <?php wp_footer() ;?>
-  </body>
+    </div>
+</footer>
+<?php wp_footer(); ?>
+</body>
+
 </html>

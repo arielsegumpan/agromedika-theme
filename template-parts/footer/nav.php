@@ -1,13 +1,13 @@
 <?php
 /**
  * Footer menu
- * @package herbanext
+ * @package agromedika
  */
 
-use HERBANEXT_THEME\Inc\Menus;
+use AGROMEDIKA_THEME\Inc\Menus;
 
 $menu_class = Menus::get_instance();
-$header_menu_id = $menu_class->get_menu_id('herbanext-footer-menu');
+$header_menu_id = $menu_class->get_menu_id('agromedika-footer-menu');
 
 $header_menus = wp_cache_get('footer_menus', 'menu_cache');
 
@@ -17,7 +17,7 @@ if (false === $header_menus) {
 }
 
 if (!empty($header_menus) && is_array($header_menus)) :
-    echo '<ul class="nav flex-column text-center text-md-start mx-auto ps-lg-5 ms-lg-5 text-black fw-bold">';
+    echo '<ul class="nav flex-column mt-4 ps-lg-5">';
     foreach ($header_menus as $menu_item) :
         if (!$menu_item->menu_item_parent) :
             $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
@@ -25,7 +25,7 @@ if (!empty($header_menus) && is_array($header_menus)) :
             if (!$has_children) :
 ?>
                 <li class="nav-item mb-4">
-                    <a class="text-black fw-bold fs-6" href="<?php echo esc_url($menu_item->url); ?>">
+                    <a class="nav-link text-lteal fs-6 px-0" href="<?php echo esc_url($menu_item->url); ?>">
                         <?php echo esc_html($menu_item->title); ?>
                     </a>
                 </li>

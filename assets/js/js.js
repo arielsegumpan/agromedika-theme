@@ -1,143 +1,148 @@
-(function($){
-    'use strict';
-    $(document).ready(function () {
-
-        AOS.init();
-
-        var browserWindow = $(window);
-        browserWindow.on('load', function () {
-            $('#preloader').fadeOut('slow', function () {
-                $(this).remove();
-            });
+$(document).ready(function () {
+    let container = $('.container-img');
+    let cards = $('.card');
+  
+    // Filter gallery based on category
+    $('#filter-menu').on('click', '.filter-item', function () {
+      let selectedFilter = $(this).data('filter');
+      let matchingCards;
+  
+      if (selectedFilter === 'all') {
+        matchingCards = cards;
+      } else {
+        matchingCards = cards.filter(function () {
+          let dataId = $(this).find('a').data('id').toLowerCase();
+          return dataId === selectedFilter.toLowerCase();
         });
+      }
+  
+      // Clear the container
+      container.empty();
+  
+      // Append matching cards to the container with fadeIn animation
+      matchingCards.each(function () {
+        $(this).removeClass('fade-out').addClass('fade-in').appendTo(container).hide().fadeIn();
+      });
+  
+      // Add fade-out class to non-matching cards and fade them out
+      cards.not(matchingCards).each(function () {
+        $(this).removeClass('fade-in').addClass('fade-out').fadeOut();
+      });
+    });
 
-        $("select.wpcf7-form-control option:first").attr('disabled', 'disabled').attr('selected', true);
-        $("nav.woocommerce-breadcrumb").prepend('<i class="bi bi-house me-2 text-success"></i>');
-        //humberger
-        const icons = document.querySelectorAll('.icon_ni');
-        icons.forEach (icon => {  
-        icon.addEventListener('click', (event) => {
-            icon.classList.toggle("open");
-        });
-        });
 
-        $("div#respond small a#cancel-comment-reply-link").addClass("btn btn-outline-success ms-3");
-        $("h3#reply-title a.comment-reply-link").addClass("text-decoration-none");
-        $("h3#reply-title").addClass("museo");
-        $("nav.woocommerce-pagination ul.page-numbers").addClass("fs-4");
-        $(".woocommerce-Reviews #comments .comment").addClass("media");
-        $(".woocommerce-Reviews .comment .comment-body").addClass("media-body");
-        $(".woocommerce-Reviews .comment img.avatar").addClass("media-left");
-        $(".woocommerce-Reviews .comment .comment-author").addClass("media-heading");
-        $(".woocommerce-Reviews .comment .comment-meta").addClass("small");
-        $(".woocommerce-pagination .prev").addClass("page-item");
-        $(".woocommerce-pagination .next").addClass("page-item");
-        $(".woocommerce-pagination .prev a").addClass("page-link");
-        $(".woocommerce-pagination .next a").addClass("page-link");
-        $("#review_form textarea#comment").addClass("form-control");
-        $(".woocommerce div.product .woocommerce-product-rating a.woocommerce-review-link").addClass("text-decoration-none ps-4 d-flex flex-row pt-1");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond p.comment-form-comment textarea#comment").addClass("form-control p-3");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform p.comment-form-author input#author").addClass("form-control p-3");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform p.comment-form-email input#email").addClass("form-control p-3");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond p.comment-form-comment").addClass("mb-4");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform p.comment-form-author").addClass("mb-4");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform p.comment-form-email").addClass("mb-4");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform .comment-form-rating").addClass("my-5");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform .comment-form-rating p.stars").addClass("fs-3");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform .comment-form-rating p.stars a").addClass("text-success");
-        $("div#tab-reviews div#review_form_wrapper div#review_form div#respond form#commentform .comment-form-rating label").addClass("mb-3");
-        $("div#tab-description p").addClass("text-secondary lh-lg");
+    $('[data-fancybox="gallery"]').fancybox({
+        buttons: [
+          "slideShow",
+          "thumbs",
+          "zoom",
+          "fullScreen",
+          "share",
+          "close"
+        ],
+        loop: false,
+        protect: true
+      });
 
-        var $navbar = $('header.fixed-top');
-        var stickyTop = $navbar.offset().top;
-        var scrollTop = $(window).scrollTop();
-        
-        if (scrollTop >= 50) {
-            $navbar.addClass('bg_nav_white');
+
+      $('.dropdown').hover(
+        function () {
+            // On hover in
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(300);
+        },
+        function () {
+            // On hover out
+            $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(300);
         }
+      );
+  });
+  
 
-        $(window).scroll(function () {
-            var scrollTop = $(window).scrollTop();
-
-            if (scrollTop >= 50) {
-                $navbar.addClass('bg_nav_white');
-                $('#scroll_btn').fadeIn('slow');
-            } else {
-                $navbar.removeClass('bg_nav_white');
-                $('#scroll_btn').fadeOut('slow');
-            }
-        });
-        $('#scroll_btn').click(function () {
-            $("html, body").animate({
-                scrollTop: 0
-            },300);
-            return false;
-        });
-
-        // Add hover event handlers
-        $('.dropdown').hover(
-            function () {
-                // On hover in
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(300);
-            },
-            function () {
-                // On hover out
-                $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(300);
-            }
-        );
-
-        // story carousel
-        $('#story.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:true,
-            autoplay:true,
-            smartSpeed: 3000,
-            autoplaySpeed: 3000,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:1
-                },
-                1000:{
-                    items:1
-                }
-            }
-        })
-
-        // service carousel
-        $('#services_carous.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            nav:true,
-            autoplay:true,
-            smartSpeed: 3000,
-            autoplaySpeed: 3000,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:1
-                },
-                1000:{
-                    items:1
-                }
-            }
-        })
-
-        // add overfall when screen with less than 768px
-        var qualContent = $("#qual_content");
-        var tabContent = $("div#tab-description");
-        function handleResize() {
-            $(window).width() < 768 ? qualContent.addClass("overflow-x-scroll") : qualContent.removeClass("overflow-x-scroll");
-            $(window).width() < 768 ? tabContent.addClass("overflow-x-scroll") : tabContent.removeClass("overflow-x-scroll");
+  document.addEventListener('DOMContentLoaded', function () {
+    const scrollBtn = document.getElementById('scroll_btn');
+  
+    // Initial check for scroll position
+    checkScroll();
+  
+    // Add scroll event listener
+    window.addEventListener('scroll', function () {
+      checkScroll();
+    });
+  
+    // Add click event listener to the button
+    scrollBtn.addEventListener('click', function () {
+      scrollToTop(300);
+    });
+  
+    function checkScroll() {
+      // Show/hide the button based on the scroll position
+      if (window.scrollY > 100) {
+        scrollBtn.style.display = 'block';
+      } else {
+        scrollBtn.style.display = 'none';
+      }
+    }
+  
+    function scrollToTop(duration) {
+      const start = window.pageYOffset;
+      const startTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+  
+      function scrollStep(timestamp) {
+        const currentTime = 'now' in window.performance ? performance.now() : new Date().getTime();
+        const progress = Math.min(1, (currentTime - startTime) / duration);
+  
+        window.scrollTo(0, start - start * progress);
+  
+        if (progress < 1) {
+          requestAnimationFrame(scrollStep);
         }
-        handleResize();
-        $(window).resize(function () {
-            handleResize();
-        });
-    })
-})(jQuery);
+      }
+  
+      requestAnimationFrame(scrollStep);
+    }
+  });
+  
+  
+  function handleIntersection(entries, observer) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          startCounterAnimation(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }
+    
+    function startCounterAnimation(valueDisplay) {
+      let startValue = 0;
+      let endValue = parseInt(valueDisplay.getAttribute("data-val"));
+      let interval = 800;
+      let duration = Math.floor(interval / endValue);
+    
+      function updateCounter() {
+        startValue += 1;
+        valueDisplay.textContent = startValue;
+    
+        if (startValue < endValue) {
+          requestAnimationFrame(updateCounter);
+        }
+      }
+    
+      updateCounter();
+    }
+    
+    let observer = new IntersectionObserver(handleIntersection, { threshold: 0.5 });
+    let valueDisplays = document.querySelectorAll(".num");
+    
+    valueDisplays.forEach((valueDisplay) => {
+      observer.observe(valueDisplay);
+    });
+    
+    // Check initial state of elements
+    valueDisplays.forEach((valueDisplay) => {
+      if (observer.takeRecords().some((entry) => entry.target === valueDisplay && entry.isIntersecting)) {
+        startCounterAnimation(valueDisplay);
+      }
+    });
+    
+
+  

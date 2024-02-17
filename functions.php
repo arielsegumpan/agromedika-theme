@@ -136,8 +136,8 @@ function display_all_categories() {
         $category_name = esc_html($category->name);
 
         echo <<<HTML
-            <a href="$category_link" class="text-decoration-none mb-2">
-                <span class="badge text-bg-green rounded-2 text-small px-3 me-2"><small>$category_name</small></span>
+            <a href="$category_link" class="text-decoration-none mb-2 badge text-bg-primary">
+                <span class="badge text-bg-primary px-2 rounded-2"><small>$category_name</small></span>
             </a>
     HTML;
     }

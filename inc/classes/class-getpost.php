@@ -38,7 +38,7 @@ class Getpost {
         $args = array(
             'post_type'      => sanitize_key($post_type),
             'post_status'    => 'publish',
-            'paged'          => get_query_var('paged') ? get_query_var('paged') : 1, // Use the current page number
+            'paged'          => get_query_var('paged') ? get_query_var('paged') : 10, // Use the current page number
         );
 
         // Create a new query for the specified custom post type

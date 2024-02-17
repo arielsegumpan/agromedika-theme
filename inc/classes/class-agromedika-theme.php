@@ -15,7 +15,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         // Define an array of classes to initialize
         $classes = [
             // Restriction::class,
-            Namespacecpt::class,
+            // Namespacecpt::class,
             Menus::class,
             Assets::class,
             // AGROMEDIKACPT::class,
@@ -48,7 +48,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         add_action('woocommerce_shop_loop_item_title', [$this,'abChangeProductsTitle'], 10 );
         add_shortcode('custom_page_headers', [$this,'custom_page_headers_shortcode']);
         add_filter('admin_footer_text', [$this,'custom_footer_admin_text']);
-        add_action( 'pre_get_posts', [$this,'customize_search_query'] );
+        // add_action( 'pre_get_posts', [$this,'customize_search_query'] );
     }
 
     public function remove_price_related_actions() {
@@ -176,10 +176,10 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         echo ' | <a target="_blank" href="'. esc_url('https://dev-asegumpan.pantheonsite.io/agromedika-healthier-solutions-from-nature/' ) .'">Made by: <b>AS</b></a>';
     }
 
-    // get Search Query
-    function customize_search_query( $query ) {
-        if ( !is_admin() && $query->is_main_query() && $query->is_search() ) {
-            $query->set( 'post_type', ['post', 'careers', 'publications', 'trainingseminars', 'medicinal_herbs'] );
-        }
-    }
+    // // get Search Query
+    // function customize_search_query( $query ) {
+    //     if ( !is_admin() && $query->is_main_query() && $query->is_search() ) {
+    //         $query->set( 'post_type', ['post'] );
+    //     }
+    // }
  }

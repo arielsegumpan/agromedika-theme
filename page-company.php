@@ -37,7 +37,7 @@ foreach ($acf_field_names as $field_name) {
             <div class="jumb-overlay"></div>
         </section>
     <?php endif; ?>
-
+ 
     <?php if (!empty($acf_fields['company_about']['company_about_title'])) : ?>
         <section id="who" class="bg-lteal">
             <div class="container">
@@ -48,7 +48,7 @@ foreach ($acf_field_names as $field_name) {
                                 $col_class = 'col-12';
                                 foreach ($acf_fields['company_about']['company_about_images'] as $index => $about_img_gallery) :
                                     $col_class = ($index > 0) ? 'col' : 'col-12'; ?>
-                                    <div class="<?php echo esc_attr($col_class); ?>">
+                                    <div class="who-img <?php echo esc_attr($col_class); ?>">
                                         <img src="<?php echo esc_url($about_img_gallery['company_about_image']['url']); ?>" alt="<?php echo esc_attr($about_img_gallery['company_about_image']['alt']); ?>" class="img-fluid rounded-4">
                                     </div>
                                 <?php endforeach;
@@ -56,7 +56,7 @@ foreach ($acf_field_names as $field_name) {
                         </div>
                     </div>
                     <?php if (!empty($acf_fields['company_about']['company_about_title'])) : ?>
-                        <div class="col-12 col-lg-5 my-auto text-center text-lg-start">
+                        <div class="col-12 col-lg-5 text-center text-lg-start">
                             <h2 class="fw-bold text-black mb-4"><?php echo esc_html($acf_fields['company_about']['company_about_title']); ?></h2>
                             <p class="lh-lg text-secondary">
                                 <?php echo nl2br(esc_textarea($acf_fields['company_about']['company_about_content'])) ?>

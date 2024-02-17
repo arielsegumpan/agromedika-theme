@@ -5,71 +5,106 @@
  */
 get_header();
 
-$image_id = get_post_thumbnail_id(get_the_ID());
-$alt_text = esc_attr(get_post_meta($image_id , '_wp_attachment_image_alt', true));
+$blog_jumbotron = get_acf_option_field('blog_jumbotron');
 
-$get_blog_img = get_acf_option_field('blog_post_header_image');
-$get_blog_title = get_acf_option_field('blog_post_heading_title');
+
 ?>
 <main>
- <!-- jumbotron -->
- <section id="jumbotron_product" class="w-100 position-relative">
-    <?php if (!empty($get_blog_img['url'])) : ?>
-        <img src="<?php echo esc_url($get_blog_img['url']) ?>" alt="<?php echo esc_attr($get_blog_img['alt']) ?>" class="object-fit-cover w-100 position-absolute top-0 left-0">
-    <?php else : ?>
-        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php echo esc_attr($alt_text); ?>" class="object-fit-cover w-100 position-absolute top-0 left-0">
-    <?php endif ?>
-    <div class="container position-absolute">
-         <div class="col-12 col-md-8 col-lg-6 me-auto text-center text-md-start my-auto">
-                <?php
-                if(is_home() && !is_front_page()):?>
-                    <h1 class="display-5 museo fw-bold text-success">
-                        <?php single_post_title() ?>
-                    </h1>
-                <?php endif?>
-                <h6 class="mt-4">
-                    <nav aria-label="breadcrumb">
-                        <?php custom_breadcrumbs() ?>
-                    </nav>
-                </h6>
-         </div>
-     </div>
- </section>  
- <section id="blog">
-     <div class="container">
-         <div class="row row-gap-5">
-             <?php if(have_posts()): while(have_posts()): the_post()?>
-                     <?php get_template_part('template-parts/content/content')?> 
-                <?php endwhile; else:?>
-                    <?php get_template_part('template-parts/content/content-empty')?>
-            <?php endif;wp_reset_postdata();?>
-         </div>
-        <?php if(get_next_posts_link() || get_previous_posts_link() ) :?>
-         <div class="row">
-            <div class="container text-center">
-                <nav aria-label="Page navigation" class="mt-5 pt-4">
-                    <ul class="pagination d-flex flex-row gap-3 justify-content-center list-unstyled">
-                        <?php if (get_previous_posts_link()) : ?>
-                            <li class="page-item">
-                                <span class="btn btn-success px-4 py-3">
-                                    <?php previous_posts_link('<i class="bi bi-arrow-left me-3"></i>Previous'); ?>
-                                </span>
-                            </li>
-                        <?php endif; ?>
-                        <?php if (get_next_posts_link()) : ?>
-                            <li class="page-item">
-                                <span class="btn btn-success px-4 py-3">
-                                    <?php next_posts_link('Next<i class="bi bi-arrow-right ms-3"></i>'); ?>
-                                </span>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </nav>
+    <?php if(!empty($blog_jumbotron['blog_hero_title'])) :?>
+    <section id="jumbotron-2" style="background-image: url('<?php  echo esc_url($blog_jumbotron['blog_hero_image']['url']);?>');">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+              <h1 class="fw-bold text-black"><?php echo esc_html($blog_jumbotron['blog_hero_title']) ;?></h1>
+              <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($blog_jumbotron['blog_hero_sub_title'])) ;?></h5>
             </div>
-         </div>
-        <?php endif?>
-     </div>
- </section>
+          </div>
+        </div>
+        <div class="jumb-overlay"></div>
+    </section>
+    <?php  endif;?>
+
+
+    <section id="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-9 mb-5 mb-lg-0 pb-4 pb-lg-0">
+                    <div class="row row-cols-2 g-3 g-lg-5">
+                        <div class="col-12">
+                            <?php if(have_posts()) : while(have_posts()) : the_post() ;?>
+                                <?php get_template_part('template-parts/content/content') ?>
+                            <?php endwhile; endif;?>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex flex-row justify-content-center align-items-center gap-3">
+                                <a href="#!" class="btn btn-primary px-4 py-3">Previous<i class="bi bi-arrow-left ms-2"></i></a>
+                                <a href="#!" class="btn btn-primary px-4 py-3"><i class="bi bi-arrow-right me-2"></i>Next</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-12 col-md-3">
+                  <div id="aside">
+                    <div id="featured_prod_aside" class="mb-5">
+                        <h5 class="fw-bold text-primary mb-4">Related Post</h5>
+                        <div class="row row-cols-3 row-cols-md-1 row-cols-lg-2 g-3">
+                            <div class="col">
+                                <a href="#!" class="text-decoration-none">
+                                    <img src="assets/imgs/pexels-edward-jenner-4031695.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#!" class="text-decoration-none">
+                                    <img src="assets/imgs/pexels-nataliya-vaitkevich-7526026.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#!" class="text-decoration-none">
+                                    <img src="assets/imgs/pexels-mareefe-1638280.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#!" class="text-decoration-none">
+                                    <img src="assets/imgs/pexels-pixabay-531260.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#!" class="text-decoration-none">
+                                    <img src="assets/imgs/pexels-rfstudio-3825541.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="#!" class="text-decoration-none">
+                                    <img src="assets/imgs/pexels-edward-jenner-4031695.jpg" alt="" class="img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="blog_archive" class="mb-5">
+                        <h5 class="fw-bold text-primary">Archive</h5>
+                        <select class="form-select py-2 mt-4 mb-4" aria-label="Select category">
+                            <option selected disabled>Select</option>
+                            <option value="Category 1">August (10)</option>
+                            <option value="Category 2">September (8)</option>
+                            <option value="Category 3">October (12)</option>
+                        </select>
+                   </div>
+                    <div id="soc_med">
+                        <h5 class="fw-bold text-primary mb-3">Follow us on</h5>
+                        <div class="d-flex flex-row gap-4 fs-4">
+                          <a href="#!" target="_blank" class="text-decoration-none text-primary"><i class="bi bi-facebook"></i></a>
+                          <a href="#!" target="_blank" class="text-decoration-none text-primary"><i class="bi bi-twitter-x"></i></a>
+                          <a href="#!" target="_blank" class="text-decoration-none text-primary"><i class="bi bi-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+      </section>
 </main>
 
 <?php get_footer()?>

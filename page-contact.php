@@ -1,104 +1,121 @@
 <?php
 /**
  * Template Name: Contact
- * @package herbanext
+ * @package agromedika
  */
+
 get_header();
-$contact_alt_text = esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true));
-// Define an array of ACF field names
-$contact_acf_fields = array(
-    'contact_jumbotron_image' => 'contact_jumbotron_image',
-    'body_map' => 'body_map',
-    'contact_form' => 'contact_form',
-    'location'  => 'location',
-    'office_hours'  => 'office_hours',
-    'contact_section_page'    => 'contact_section_page'
+
+// Define ACF field names
+$acf_field_names = array(
+    'contact_jumbotron',
+    'contact_content',
+    'contact_map'
 );
-// Initialize an empty array to store the field values
-$contact_acf_values = array();
-// Loop through the field names and fetch their values
-foreach ($contact_acf_fields as $key => $contact_field_name) {
-    $contact_acf_values[$key] = get_acf_field($contact_field_name);
-}?>
+
+// Initialize an array to store ACF fields
+$acf_fields = array();
+
+// Retrieve and store ACF fields
+foreach ($acf_field_names as $field_name) {
+    $acf_fields[$field_name] = get_acf_field($field_name);
+}
+
+// Assign ACF fields to variables
+$contact_jumbotron = $acf_fields['contact_jumbotron'];
+$contact_content = $acf_fields['contact_content'];
+$contact_map = $acf_fields['contact_map'];
+
+?>
+
 <main>
-    <!-- jumbotron -->
-    <section id="jumbotron_product" class="w-100 position-relative">
-        <?php if (!empty($contact_acf_values['contact_jumbotron_image']['url'])): ?>
-             <img src="<?php echo esc_url($contact_acf_values['contact_jumbotron_image']['url']) ?>" alt="<?php echo esc_attr($contact_acf_values['contact_jumbotron_image']['alt']) ?>" class="object-fit-cover w-100 position-absolute bottom-0 left-0">
-        <?php else:?>
-            <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php echo esc_attr($contact_alt_text); ?>" class="object-fit-cover w-100 position-absolute top-0 left-0">
-        <?php endif; ?>
-        <div class="container position-absolute">
-            <div class="col-12 col-md-8 col-lg-6 me-auto text-center text-md-start my-auto">
-                <?php if(is_page() && !is_front_page()): ?>
-                    <h1 class="display-2 museo fw-bold text-success">
-                        <?php single_post_title(); ?>
-                    </h1>
-                <?php endif; ?>
-                <h6 class="mt-4">
-                    <nav aria-label="breadcrumb">
-                        <?php custom_breadcrumbs(); ?>
-                    </nav>
-                </h6>
-            </div>
-        </div>
-    </section>
-    <?php if (!empty($contact_acf_values['body_map'])): ?>
-    <section id="contact">
+    <?php if(!empty($contact_jumbotron['contact_hero_title']) && !empty($contact_jumbotron['contact_hero_image']['url'])) :?>
+    <section id="jumbotron-2" style="background: url('<?php echo esc_url($contact_jumbotron['contact_hero_image']['url']); ?>') center/cover no-repeat;">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6 mb-5 mb-lg-0">
-                   <?php echo wp_kses_decode_entities($contact_acf_values['body_map']['map']); ?>
+                <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+                    <h1 class="fw-bold text-black"><?php echo esc_html($contact_jumbotron['contact_hero_title']); ?></h1>
+                    <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($contact_jumbotron['contact_hero_content'])); ?></h5>
                 </div>
-                <div class="col-12 col-lg-6">
-                    <?php echo wp_kses_decode_entities($contact_acf_values['contact_form']); ?>
+            </div>
+        </div>
+        <div class="jumb-overlay"></div>
+    </section>
+    <?php endif; ?>
+
+    <?php if(!empty($contact_content['contact_page_title']) && !empty($contact_content['contact_page_content'])) : ?>
+    <section id="contact" class="bg-lteal">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 my-auto text-center text-lg-start">
+                    <div class="mb-5">
+                        <h1 class="fw-bold text-black mb-5"><i class="bi bi-send me-2"></i><?php echo esc_html($contact_content['contact_page_title']); ?></h1>
+                        <p class="lh-lg text-secondary mb-3"><?php echo esc_html($contact_content['contact_page_content']); ?></p>
+                        <p class="lh-lg text-secondary mb-3"><?php echo esc_html($contact_content['contact_address']); ?></p>
+                        <p><a class="text-secondary" href="mailto:<?php echo esc_attr($contact_content['contact_page_email']); ?>"><?php echo esc_html($contact_content['contact_page_email']); ?></a></p>
+                        <p><a href="tel:<?php echo esc_attr($contact_content['contact_page_phone']); ?>" class="text-secondary"><?php echo esc_html($contact_content['contact_page_phone']); ?></a></p>
+                    </div>
+
+                    <div class="map">
+                        <?php echo wp_kses_decode_entities($contact_map['contact_page_map']); ?>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mt-5 mt-lg-0">
+                    <div class="card border-0 rounded-5 bg-primary p-4 p-md-5">
+                        <form action="#!">
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <label for="name" class="form-label fw-bold text-lteal">Name</label>
+                                    <input type="text" class="form-control px-3 py-3" id="name" placeholder="Your name...">
+                                </div>
+                                <div class="col">
+                                    <label for="email" class="form-label fw-bold text-lteal">Email</label>
+                                    <input type="email" class="form-control px-3 py-3" placeholder="Your email..." aria-label="email">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="form-label fw-bold text-lteal">Phone</label>
+                                <input type="phone" class="form-control px-3 py-3" id="phone" placeholder="Your phone...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label fw-bold text-lteal">Address</label>
+                                <input type="text" class="form-control px-3 py-3" id="address" placeholder="Your address...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label fw-bold text-lteal">Subject</label>
+                                <input type="text" class="form-control px-3 py-3" id="subject" placeholder="Your subject...">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label fw-bold text-lteal">Message</label>
+                                <textarea class="form-control px-3 py-3 rounded-4" name="message" id="message" cols="30" rows="5"></textarea>
+                            </div>
+
+                            <div class="mt-5">
+                                <button class="btn btn-black px-5 py-3"><i class="bi bi-send me-2"></i>Submit</button>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <?php endif; ?>
-    <?php if(!empty( $contact_acf_values['location']['location_title']) || !empty($contact_acf_values['office_hours']['office_title']) || !empty($contact_acf_values['contact_section_page']['contact_section_page_title'])) :?>
-    <section id="officehours" class="bg-gray">
+
+    <?php if(have_posts() && !empty($content)) : ?>
+    <section id="team">
         <div class="container">
-            <div class="row row-cols-1 row-cols-md-3">
-                <?php
-                $sections = [
-                    'location' => [
-                        'title' => $contact_acf_values['location']['location_title'],
-                        'icon' => $contact_acf_values['location']['location_icon'],
-                        'contents' => $contact_acf_values['location']['contents'],
-                    ],
-                    'office_hours' => [
-                        'title' => $contact_acf_values['office_hours']['office_title'],
-                        'icon' => $contact_acf_values['office_hours']['office_icon'],
-                        'contents' => $contact_acf_values['office_hours']['contents'],
-                    ],
-                    'contact_section_page' => [
-                        'title' => $contact_acf_values['contact_section_page']['contact_section_page_title'],
-                        'icon' => $contact_acf_values['contact_section_page']['contact_section_page_icon'],
-                        'contents' => $contact_acf_values['contact_section_page']['contact_section_page_contents'],
-                    ],
-                ];
-                $delay = 200;
-                foreach ($sections as $section_key => $section_data) {
-                    if (!empty($section_data['title'])) :
-                ?>
-                        <div class="col text-center text-secondary<?php echo ($section_key === 'contact_section_page') ? '' : ' mb-5 mb-md-0'; ?>" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="<?php echo esc_attr($delay)?>">
-                            <h1 class="fs-3 fw-bold museo mb-4"><?php echo wp_kses_decode_entities($section_data['icon']) ?><?php echo esc_html($section_data['title']) ?></h1>
-                            <?php if (!empty($section_data['contents'])) : ?>
-                                <?php foreach ($section_data['contents'] as $content) : ?>
-                                    <p><?php echo nl2br(esc_textarea($content['content'])) ?></p>
-                                <?php endforeach ?>
-                            <?php endif ?>
-                        </div>
-                <?php
-                    endif;
-                $delay += 200;
-                }
-                ?>
+            <div class="row">
+                <div class="col-12 text-lg text-secondary">
+                    <?php while(have_posts()) : the_post(); ?>
+                        <?php the_content(); ?>
+                    <?php endwhile; ?>
+                </div>
             </div>
         </div>
     </section>
-    <?php endif?>
+    <?php endif; ?>
 </main>
+
 <?php get_footer(); ?>

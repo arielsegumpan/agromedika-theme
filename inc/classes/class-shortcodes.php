@@ -65,9 +65,9 @@ namespace AGROMEDIKA_THEME\Inc;
         return $output;
     }
 
-    function get_recent_front_page_posts(){
-        ob_start();
-        get_template_part('template-parts/components/blog/recent','post');
-        return ob_get_clean();
-    }
+    // function get_recent_front_page_posts(){
+    //     ob_start();
+    //     get_template_part('template-parts/components/blog/recent','post');
+    //     return ob_get_clean();
+    // }
  }

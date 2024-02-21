@@ -47,41 +47,7 @@ $blog_jumbotron = get_acf_option_field('blog_jumbotron');
 
                 <div class="col-12 col-md-3">
                   <div id="aside">
-                    <div id="featured_prod_aside" class="mb-5">
-                        <h5 class="fw-bold text-primary mb-4">Related Post</h5>
-                        <div class="row row-cols-3 row-cols-md-1 row-cols-lg-2 g-3">
-                            <div class="col">
-                                <a href="#!" class="text-decoration-none">
-                                    <img src="assets/imgs/pexels-edward-jenner-4031695.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#!" class="text-decoration-none">
-                                    <img src="assets/imgs/pexels-nataliya-vaitkevich-7526026.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#!" class="text-decoration-none">
-                                    <img src="assets/imgs/pexels-mareefe-1638280.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#!" class="text-decoration-none">
-                                    <img src="assets/imgs/pexels-pixabay-531260.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#!" class="text-decoration-none">
-                                    <img src="assets/imgs/pexels-rfstudio-3825541.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a href="#!" class="text-decoration-none">
-                                    <img src="assets/imgs/pexels-edward-jenner-4031695.jpg" alt="" class="img-fluid">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php get_template_part('template-parts/components/aside/aside', 'content')?>
                     <div id="blog_archive" class="mb-5">
                         <h5 class="fw-bold text-primary">Archive</h5>
                         <select class="form-select py-2 mt-4 mb-4" aria-label="Select category">

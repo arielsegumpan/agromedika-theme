@@ -35,12 +35,12 @@ $featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_ima
                     <div class="d-flex flex-row justify-content-start gap-3">
                         <?php echo do_shortcode('[post_categories]') ?>
                     </div>
-                    <?php endif ?>
+                    <?php endif ?> 
                 </div>
             </div>
-            <div class="content mt-4 mt-lg-5">
+            <div class="content mt-4 mt-lg-3">
                 <p class="lh-lg text-secondary">
-                    <?php echo wp_trim_words(get_the_excerpt(),20); ?>
+                    <?php echo wp_trim_words(get_the_excerpt(),30); ?>
                 </p>
             </div>
         </div>

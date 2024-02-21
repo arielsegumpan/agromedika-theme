@@ -15,7 +15,7 @@ class Woofeat {
     protected function setup_hooks() {
         // Add shortcode registration
         add_shortcode('custom_featured_products', [$this,'custom_get_featured_products_shortcode']);
-        add_action('woocommerce_after_shop_loop_item', [$this,'custom_add_buttons_to_product_loop'], 5);
+        // add_action('woocommerce_after_shop_loop_item', [$this,'custom_add_buttons_to_product_loop'], 5);
         add_filter('loop_shop_columns',[$this,'custom_woocommerce_loop_columns']);
         add_filter('loop_shop_per_page', [$this,'custom_woocommerce_products_per_page']);
         add_shortcode('agromedika_product_categories', [$this,'agromedika_categories_shortcode']);
@@ -44,7 +44,7 @@ class Woofeat {
                 $output .= '<div class="col">
                                 <div class="position-relative">
                                     <a href="' . $product_link . '" class="text-decoration-none position-relative">
-                                        <span class="position-absolute badge mt-3 ms-3 rounded-3 bg-success px-2 text-white small">
+                                        <span class="position-absolute badge mt-3 ms-3 rounded-3 bg-primary px-2 text-white small">
                                             ' . esc_html__('Featured', 'agromedika') . '
                                         </span>
                                         <img src="' . $product_image . '" alt="' . $product_name . '" class="img-fluid object-fit-cover rounded-5">
@@ -62,11 +62,11 @@ class Woofeat {
         $product_permalink = esc_url(get_permalink());
         $contact_url = esc_url(site_url('/contact'));
         $view_button_text = esc_html__('View', 'agromedika');
-        $inquiry_button_text = esc_html__('Inquiry', 'herbeanext');
+        $inquiry_button_text = esc_html__('Inquiry', 'agromedika');
     
         echo '<div id="product_btn" class="vstack gap-3 col-md-5 mx-auto w-100 mt-4 px-4">
-            <a href="' . $product_permalink . '" class="btn btn-outline-success py-3 fs-6"><i class="bi bi-eye me-2"></i>' . $view_button_text . '</a>
-            <a href="' . $contact_url . '" class="btn btn-success py-3 fs-6"><i class="bi bi-info-circle me-2"></i>' . $inquiry_button_text . '</a>
+            <a href="' . $product_permalink . '" class="btn btn-outline-primary py-3 fs-6"><i class="bi bi-eye me-2"></i>' . $view_button_text . '</a>
+            <a href="' . $contact_url . '" class="btn btn-primary py-3 fs-6"><i class="bi bi-info-circle me-2"></i>' . $inquiry_button_text . '</a>
         </div>';
     }
     // Customize the number of products per row
@@ -113,10 +113,10 @@ class Woofeat {
             <div class="d-grid gap-2 d-md-flex justify-content-center text-center">
             ';
             if ($prev_link) {
-                echo '<div class="pagination-button">' . wp_kses_post(str_replace('href', 'class="btn btn-success px-4 py-3 me-md-3" href', $prev_link)) . '</div>';
+                echo '<div class="pagination-button">' . wp_kses_post(str_replace('href', 'class="btn btn-primary px-5 text-lteal rounded-4 py-3 me-md-3" href', $prev_link)) . '</div>';
             }
             if ($next_link) {
-                echo '<div class="pagination-button">' . wp_kses_post(str_replace('href', 'class="btn btn-success px-4 py-3" href', $next_link)) . '</div>';
+                echo '<div class="pagination-button">' . wp_kses_post(str_replace('href', 'class="btn btn-primary px-5 text-lteal rounded-4 py-3" href', $next_link)) . '</div>';
             }
             echo '</div></div>';
         }

@@ -24,7 +24,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
             Woofeat::class,
             Recentproductpost::class,
             // Getpost::class,
-            // Customlogin::class,
+            Customlogin::class,
         ];
         // Initialize each class
         foreach ($classes as $class) {
@@ -38,15 +38,15 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
     protected function setup_hooks(){
         add_action('wp_before_admin_bar_render', [$this,'wpb_custom_logo']);
         add_action('after_setup_theme', [$this,'setup_theme']);
-        add_filter( 'woocommerce_product_get_rating_html', [$this, 'filter_woocommerce_product_get_rating_html'], 10, 3 ); 
+        // add_filter( 'woocommerce_product_get_rating_html', [$this, 'filter_woocommerce_product_get_rating_html'], 10, 3 ); 
         add_action('init', [$this, 'remove_price_related_actions']);
         add_filter( 'woocommerce_variable_sale_price_html', [$this,'agromedika_remove_prices'], 10, 2 );
         add_action( 'init', [$this,'remove_add_to_cart_button']);
         add_filter( 'woocommerce_is_purchasable', '__return_false' );
         // add_action('woocommerce_product_meta_start',[$this,'agromedika_custom_btn_single']);
         add_filter('woocommerce_sale_flash', [$this,'remove_woocommerce_sale_flash'], 10, 3);
-        add_action('woocommerce_shop_loop_item_title', [$this,'abChangeProductsTitle'], 10 );
-        add_shortcode('custom_page_headers', [$this,'custom_page_headers_shortcode']);
+        // add_action('woocommerce_shop_loop_item_title', [$this,'abChangeProductsTitle'], 10 );
+        // add_shortcode('custom_page_headers', [$this,'custom_page_headers_shortcode']);
         add_filter('admin_footer_text', [$this,'custom_footer_admin_text']);
         // add_action( 'pre_get_posts', [$this,'customize_search_query'] );
     }
@@ -99,12 +99,12 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
     }
 
     //ratings
-    function filter_woocommerce_product_get_rating_html( $rating_html, $rating, $count ) { 
-        $rating_html  = '<div class="star-rating fs-5 mb-4 mx-auto">';
-        $rating_html .= wc_get_star_rating_html( $rating, $count );
-        $rating_html .= '</div>';
-        return $rating_html; 
-    }
+    // function filter_woocommerce_product_get_rating_html( $rating_html, $rating, $count ) { 
+    //     $rating_html  = '<div class="star-rating fs-5 mb-4 mx-auto">';
+    //     $rating_html .= wc_get_star_rating_html( $rating, $count );
+    //     $rating_html .= '</div>';
+    //     return $rating_html; 
+    // }
 
     // remove button cart
     function remove_add_to_cart_button() {
@@ -133,7 +133,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
     
     // Custom shop title
     function abChangeProductsTitle() {
-        echo '<h5 class="woocommerce-loop-product_title museo text-center fw-bold mt-4"><a class="text-decoration-none text-success" href="' . esc_url(get_the_permalink()) . '">' . esc_html(get_the_title()) . '</a></h5>';
+        echo '<h5 class="woocommerce-loop-product_title  text-center fw-bold mt-4"><a class="text-decoration-none text-success" href="' . esc_url(get_the_permalink()) . '">' . esc_html(get_the_title()) . '</a></h5>';
     }
 
     // display jumbotron pages
@@ -141,7 +141,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         if (is_page() && !is_front_page()) {
             ob_start();
             ?>
-            <h1 class="display-2 museo fw-bold text-success mx-auto text-center">
+            <h1 class="display-2  fw-bold text-success mx-auto text-center">
                 <?php echo esc_html(single_post_title()); ?>
             </h1>
             <h6 class="mt-4">

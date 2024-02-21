@@ -1,7 +1,7 @@
 $(document).ready(function () {
     let container = $('.container-img');
     let cards = $('.card');
-  
+
     // Filter gallery based on category
     $('#filter-menu').on('click', '.filter-item', function () {
       let selectedFilter = $(this).data('filter');

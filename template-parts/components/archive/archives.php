@@ -1,7 +1,7 @@
-<select name="archive-dropdown" class="form-control px-3 py-2" id="exampleFormControlSelect1" onChange='document.location.href=this.options[this.selectedIndex].value;'>
+<select name="archive-dropdown" class="form-select py-2 mt-4 mb-4" id="exampleFormControlSelect1" onChange='document.location.href=this.options[this.selectedIndex].value;'>
     <option disabled selected value=""><?php echo esc_attr(__('Select')); ?></option>
     <?php
-    $custom_post_types = array('post', 'careers', 'publications', 'trainingseminars', 'medicinal_herbs');
+    $custom_post_types = array('post');
     foreach ($custom_post_types as $post_type) {
         $post_type_object = get_post_type_object($post_type);
         $post_count = wp_count_posts($post_type)->publish;

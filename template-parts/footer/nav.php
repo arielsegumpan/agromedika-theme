@@ -22,8 +22,7 @@ if (!empty($header_menus) && is_array($header_menus)) :
         if (!$menu_item->menu_item_parent) :
             $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
             $has_children = !empty($child_menu_items) && is_array($child_menu_items);
-            if (!$has_children) :
-?>
+            if (!$has_children) : ?>
                 <li class="nav-item mb-4">
                     <a class="nav-link text-lteal fs-6 px-0" href="<?php echo esc_url($menu_item->url); ?>">
                         <?php echo esc_html($menu_item->title); ?>

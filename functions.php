@@ -94,8 +94,8 @@ function post_categories_by_post_type_shortcode($atts) {
         return 'No post found.';
     }
 
-    // Define the allowed post types
-    $allowed_post_types = array('careers', 'publications', 'trainingseminars', 'post','medicinal_herbs');
+    // Define the allowed post types add custom post type if necessary
+    $allowed_post_types = array('post');
 
     // Get the post's post type
     $post_type = get_post_type($post);
@@ -107,8 +107,8 @@ function post_categories_by_post_type_shortcode($atts) {
         $output = '';
         if (!empty($categories)) {
             foreach ($categories as $category) {
-                $output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" class="text-decoration-none mb-2">
-                    <span class="badge text-bg-green rounded-2 text-small px-3 me-2"><small>
+                $output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" class="text-decoration-none text-lteal">
+                    <span class="badge text-bg-primary px-2 rounded-2"><small class="text-lteal">
                     ' . $category->name . '</small></span></a>';
             }
         } else {
@@ -123,26 +123,26 @@ function post_categories_by_post_type_shortcode($atts) {
 add_shortcode('post_categories', 'post_categories_by_post_type_shortcode');
 
 // Get all categoreis
-function display_all_categories() {
-    $categories = get_categories(array(
-        'hide_empty' => 0,
-    ));
-    if (empty($categories)) {
-        echo 'No categories found.';
-        return;
-    }
-    foreach ($categories as $category) {
-        $category_link = esc_url(get_category_link($category->term_id));
-        $category_name = esc_html($category->name);
+// function display_all_categories() {
+//     $categories = get_categories(array(
+//         'hide_empty' => 0,
+//     ));
+//     if (empty($categories)) {
+//         echo 'No categories found.';
+//         return;
+//     }
+//     foreach ($categories as $category) {
+//         $category_link = esc_url(get_category_link($category->term_id));
+//         $category_name = esc_html($category->name);
 
-        echo <<<HTML
-            <a href="$category_link" class="text-decoration-none mb-2 badge text-bg-primary">
-                <span class="badge text-bg-primary px-2 rounded-2"><small>$category_name</small></span>
-            </a>
-    HTML;
-    }
-}
-add_shortcode('all_categories', 'display_all_categories');
+//         echo <<<HTML
+//             <a href="$category_link" class="text-decoration-none mb-2 badge text-bg-primary">
+//                 <span class="badge text-bg-primary px-2 rounded-2"><small>$category_name</small></span>
+//             </a>
+//     HTML;
+//     }
+// }
+// add_shortcode('all_categories', 'display_all_categories');
 
 // Breadcrumbs
 function custom_breadcrumbs() {

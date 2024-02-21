@@ -33,15 +33,18 @@ class Recentproductpost {
         if ($loop->have_posts()) :
             while ($loop->have_posts()) : $loop->the_post();
                 ?>
+
                 <div class="col">
                  <a href="<?php echo esc_url(get_the_permalink()) ?>" class="text-decoration-none">
-                    <?php
+                  <div class="rounded-5">
+                  <?php
                         if (has_post_thumbnail()) {
                             the_post_thumbnail('shop_catalog', array('class' => 'rounded-5'));
                         } else {
-                            echo '<img src="' . esc_url(woocommerce_placeholder_img_src()) . '" alt="' . esc_attr(get_the_title()) . '" class="rounded-5"/>';
+                            echo '<img src="' . esc_url(woocommerce_placeholder_img_src()) . '" alt="' . esc_attr(get_the_title()) . '" class="rounded-5">';
                         }
-                    ?>
+                        ?>
+                  </div>
                  </a>
                 </div>
     

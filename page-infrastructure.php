@@ -9,7 +9,8 @@ get_header();
 $acf_field_names = array(
     'infrastructure_jumbotron',
     'infrastructure_rnd',
-    'infrastructure_organic'
+    'infrastructure_organic',
+    'infrastructure_gallery'
 );
 
 $acf_fields = array();
@@ -21,11 +22,11 @@ foreach ($acf_field_names as $field_name) {
 $infrastructure_jumbotron = $acf_fields['infrastructure_jumbotron'];
 $infrastructure_rnd = $acf_fields['infrastructure_rnd'];
 $infrastructure_organic = $acf_fields['infrastructure_organic'];
+$infrastructure_gallery = $acf_fields['infrastructure_gallery'];
 
 ?>
 <main>
-    <?php
-    if (!empty($infrastructure_jumbotron['infrastructure_hero_title'])) : ?>
+    <?php if (!empty($infrastructure_jumbotron['infrastructure_hero_title'])) : ?>
         <section id="jumbotron-2" style="background-image: url('<?php echo esc_url($infrastructure_jumbotron['infrastructure_hero_image']['url']); ?>');">
             <div class="container">
                 <div class="row">
@@ -106,6 +107,35 @@ $infrastructure_organic = $acf_fields['infrastructure_organic'];
             </div>
         </section>
     <?php endif; ?>
+    <?php if (!empty($infrastructure_gallery['infrastructure_gallery_title'])) : ?>   
+        <section id="infras-gallery" class="bg-lteal">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-lg-9 mx-auto text-center mb-5">
+                <h2 class="fw-bold text-black mb-4"><?php echo esc_html($infrastructure_gallery['infrastructure_gallery_title']) ?></h2>
+                <p class="lh-lg text-secondary"><?php echo esc_html($infrastructure_gallery['infrastructure_gallery_content']) ?></p>
+              </div>
+              <?php if(!empty($infrastructure_gallery['infrastructure_gallery_images'][0]['infrastructure_gallery_image']['url'])) : ?>
+              <div class="col-12">
+                <div class="container-img">
+                    <?php foreach ($infrastructure_gallery['infrastructure_gallery_images'] as $infras_img) :?>
+                    <div class="card border-0 bg-transparent">
+                      <div class="card-image position-relative rounded-4">
+                        <a href="<?php echo esc_url($infras_img['infrastructure_gallery_image']['url']) ;?>" class="text-decoration-none text-black" data-fancybox="gallery" data-caption="<?php echo esc_attr($infras_img['infrastructure_gallery_caption']) ;?>">
+                          <img src="<?php echo esc_url($infras_img['infrastructure_gallery_image']['url']) ;?>" alt="<?php echo esc_attr($infras_img['infrastructure_gallery_image']['alt']) ;?>" class="rounded-4">
+                        </a>
+                      </div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+              </div>
+              <?php endif;?>
+            </div>
+          </div>
+        </section>
+    <?php endif; ?>
+
+
 
      <?php $content = get_the_content();
     if(have_posts( ) && !empty($content)) : ?>

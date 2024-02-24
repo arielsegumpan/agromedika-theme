@@ -4,9 +4,9 @@
  * @package agromedika
  */
 
- $shop_page_id = wc_get_page_id('shop'); // Get the shop page ID
-$shop_page = get_post($shop_page_id); // Get the shop page object
-$shop_page && $shop_page->post_title !== 'Shop' ? $shop_url = esc_url(get_permalink($shop_page)) : $shop_url = esc_url(wc_get_page_permalink('shop'));
+// $shop_page_id = wc_get_page_id('shop'); // Get the shop page ID
+// $shop_page = get_post($shop_page_id); // Get the shop page object
+// $shop_page && $shop_page->post_title !== 'Shop' ? $shop_url = esc_url(get_permalink($shop_page)) : $shop_url = esc_url(wc_get_page_permalink('shop'));
 ?>
 <!doctype html>
 <html <?php wp_kses_decode_entities(language_attributes()) ?>>
@@ -21,12 +21,6 @@ $shop_page && $shop_page->post_title !== 'Shop' ? $shop_url = esc_url(get_permal
     <div id="scroll_btn">
       <i class='bi bi-chevron-up text-lteal fs-4 rounded-3 bg-primary'></i>
     </div>
-
-    <a href="#!" class="text-decoration-none">
-      <div id="cart" class="position-fixed shadow">
-        <i class="bi bi-cart4 fs-4"></i>
-      </div>
-    </a>
 
     <header class="position-absolute w-100">
         <nav class="navbar navbar-expand-xl bg-transparent">
@@ -66,9 +60,8 @@ $shop_page && $shop_page->post_title !== 'Shop' ? $shop_url = esc_url(get_permal
                       <input class="search expandright" id="searchright" type="search" name="q" placeholder="Search">
                       <label class="button searchbutton" for="searchright"><i class="bi bi-search btn btn-primary text-white"></i></label>
                     </form>
-                  </div>
-
-                  <a href="<?php echo $shop_url ?>" class="btn btn-primary text-white me-2"><i class="bi bi-shop-window"></i></a>
+                  </div> 
+                  <a href="#!" class="btn btn-primary text-white me-2"><i class="bi bi-whatsapp"></i></a>
                   <a href="#!" class="btn btn-primary text-white"><i class="bi bi-person"></i></a>
 
                 </div>

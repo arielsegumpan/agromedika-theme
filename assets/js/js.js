@@ -55,6 +55,10 @@ $(document).ready(function () {
             $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(300);
         }
       );
+
+
+    nextCard();
+    setInterval(nextCard, 5000); 
   });
   
 
@@ -142,7 +146,46 @@ $(document).ready(function () {
       if (observer.takeRecords().some((entry) => entry.target === valueDisplay && entry.isIntersecting)) {
         startCounterAnimation(valueDisplay);
       }
+
+
+
+      
     });
     
 
   
+
+
+    var shadow = '0 20px 50px rgba(0,34,45,0)';
+    var currentIndex = 1; // Start with the second card
+    
+    function styles(item_id, x, y, z , opacity, shadow){
+      $(item_id).css({
+        transform: 'translate3d('+ x +'px, ' + y + 'px, ' + z +'px)',
+        opacity: opacity,
+        'box-shadow': shadow,
+        transition: 'transform 1s ease, opacity 1s ease' // Smooth transition
+      });
+    }
+    
+    function nextCard() {
+      $('#first, #second, #third').removeClass('focus');
+      currentIndex = currentIndex % 3 + 1; // Cycle through 1, 2, 3
+      var currentId = '#' + (currentIndex === 1 ? 'first' : currentIndex === 2 ? 'second' : 'third');
+      $(currentId).addClass('focus');
+    
+      if (currentIndex === 1) {
+        styles('#first', 0, -37, 0, 1, shadow);
+        styles('#second', 70, 50, -50, 0.2, 'none');
+        styles('#third', 110, -107, -60, 0, 'none');
+      } else if (currentIndex === 2) {
+        styles('#first', 110, -107, -60, 0, 'none');
+        styles('#second', 0, -50, 0, 1, shadow);
+        styles('#third', 70, 50, -50, 0.2, 'none');
+      } else {
+        styles('#first', 70, 50, -50, 0.2, 'none');
+        styles('#second', 110, -107, -60, 0, 'none');
+        styles('#third', 0, -50, 0, 1, shadow);
+      }
+    }
+    

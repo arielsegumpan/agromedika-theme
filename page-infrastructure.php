@@ -8,9 +8,10 @@ get_header();
 
 $acf_field_names = array(
     'infrastructure_jumbotron',
+    'infrastructure_facility',
     'infrastructure_rnd',
     'infrastructure_organic',
-    'infrastructure_gallery'
+    'infrastructure_gallery',
 );
 
 $acf_fields = array();
@@ -20,11 +21,12 @@ foreach ($acf_field_names as $field_name) {
 }
 
 $infrastructure_jumbotron = $acf_fields['infrastructure_jumbotron'];
+$infrastructure_facility = $acf_fields['infrastructure_facility'];
 $infrastructure_rnd = $acf_fields['infrastructure_rnd'];
 $infrastructure_organic = $acf_fields['infrastructure_organic'];
 $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
 
-?>
+?>  
 <main>
     <?php if (!empty($infrastructure_jumbotron['infrastructure_hero_title'])) : ?>
         <section id="jumbotron-2" style="background-image: url('<?php echo esc_url($infrastructure_jumbotron['infrastructure_hero_image']['url']); ?>');">
@@ -40,6 +42,24 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
             </div>
             <div class="jumb-overlay"></div>
         </section>
+    <?php endif; ?>
+
+    <?php if (!empty($infrastructure_facility['infrastructure_title']) && !empty($infrastructure_facility['infrastructure_image']['url'])) : ?>
+    <section id="product_facility" class="bg-lteal">
+        <div class="container">
+            <div class="row">
+              <div class="col-12 col-lg-7 text-center text-lg-start mb-5 mb-lg-0">
+                <h1 class="fw-bold text-black mb-4"><?php echo esc_html__( $infrastructure_facility['infrastructure_title'], 'agromedika' ) ;?></h1>
+                  <p class="lh-lg text-secondary">
+                    <?php echo nl2br(esc_textarea( $infrastructure_facility['infrastructure_content'] )) ;?>
+                  </p>
+              </div>
+              <div class="col-12 col-lg-5">
+                <img src="<?php echo esc_url($infrastructure_facility['infrastructure_image']['url'])  ;?>" alt="<?php echo esc_attr($infrastructure_facility['infrastructure_image']['alt'])  ;?>" class="img-fluid rounded-4">
+              </div>
+            </div>
+        </div>
+    </section>
     <?php endif; ?>
 
     <?php if (!empty($infrastructure_rnd['infrastructure_rnd_title'])) : ?>
@@ -61,7 +81,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                     </div>
                     <div class="col-12 col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
                         <h2 class="fw-bold text-lteal"><?php echo esc_html($infrastructure_rnd['infrastructure_rnd_title']) ?></h2>
-                        <div class="lh-lg text-lteal mt-4"><?php echo wp_kses_decode_entities($infrastructure_rnd['infrastructure_rnd_content']); ?></div>
+                        <div class="lh-lg text-lteal mt-5"><?php echo wp_kses_decode_entities($infrastructure_rnd['infrastructure_rnd_content']); ?></div>
                     </div>
                 </div>
             </div>

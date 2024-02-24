@@ -11,9 +11,10 @@ $acf_fields = array();
 // Retrieve and store ACF fields
 $acf_fields['extract_price_jumbotron'] = get_field('extract_price_jumbotron');
 
-$jumbotron_image_url = $acf_fields['extract_price_jumbotron']['extract_price_jumbotron_image']['url'];
-$jumbotron_title = $acf_fields['extract_price_jumbotron']['extract_price_jumbotron_title'];
-$jumbotron_content = $acf_fields['extract_price_jumbotron']['extract_price_jumbotron_content'];
+$jumbotron_image_url = isset($acf_fields['extract_price_jumbotron']['extract_price_jumbotron_image']['url']) ? $acf_fields['extract_price_jumbotron']['extract_price_jumbotron_image']['url'] : '';
+$jumbotron_title = isset($acf_fields['extract_price_jumbotron']['extract_price_jumbotron_title']) ? $acf_fields['extract_price_jumbotron']['extract_price_jumbotron_title'] : '';
+$jumbotron_content = isset($acf_fields['extract_price_jumbotron']['extract_price_jumbotron_content']) ? $acf_fields['extract_price_jumbotron']['extract_price_jumbotron_content'] : '';
+
 
 ?>
 
@@ -30,7 +31,6 @@ $jumbotron_content = $acf_fields['extract_price_jumbotron']['extract_price_jumbo
                   </div>
               </div>
           </div>
-          <div class="jumb-overlay"></div>
       </section>
   <?php endif; ?>
 

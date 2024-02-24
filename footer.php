@@ -72,9 +72,11 @@ $page_footer_google_map = $option_values['page_footer_google_map'];
         </div>
         <div class="row pb-2">
             <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-lg-center">
+                <p class="text-center text-lg-start"><span class="small text-lteal"><?php echo esc_html__( 'Copyright © 2024 All rights reserved.', 'agromedika' ) ;?></span>&nbsp; 
                 <?php if (!empty($privacy_policy_and_terms_conditions['privacy_policy_page_link']) && !empty($privacy_policy_and_terms_conditions['terms_and_conditions_page_link'])) : ?>
-                    <p class="text-center text-lg-start"><span class="small text-lteal">Copyright © 2024 All rights reserved.</span>&nbsp; <a target="_blank" href="<?php echo esc_url($privacy_policy_and_terms_conditions['privacy_policy_page_link']); ?>" class="text-lteal small"><?php echo esc_html_e('Privacy Policy') ?></a> &nbsp;<a target="_blank" href="<?php echo esc_url($privacy_policy_and_terms_conditions['terms_and_conditions_page_link']) ?>" class="text-lteal small"><?php echo esc_html_e('Terms and Conditions'); ?></a></p>
+                    <a target="_blank" href="<?php echo esc_url($privacy_policy_and_terms_conditions['privacy_policy_page_link']); ?>" class="text-lteal small"><?php echo esc_html_e('Privacy Policy') ?></a> &nbsp;<a target="_blank" href="<?php echo esc_url($privacy_policy_and_terms_conditions['terms_and_conditions_page_link']) ?>" class="text-lteal small"><?php echo esc_html_e('Terms and Conditions'); ?></a>
                 <?php endif; ?>
+                </p>
                 <div class="d-flex flex-row gap-4 justify-content-center justify-content-lg-start">
                     <?php if (!empty($page_footer_soc_med['footer_soc_med'])) : foreach ($page_footer_soc_med['footer_soc_med'] as $page_footer_socmed) : ?>
                             <a target="_blank" href="<?php echo esc_url($page_footer_socmed['footer_soc_med_link']); ?>" class="text-decoration-none text-lteal fs-5"><?php echo wp_kses_decode_entities($page_footer_socmed['footer_soc_med_icons']) ?></a>

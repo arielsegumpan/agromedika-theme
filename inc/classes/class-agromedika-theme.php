@@ -173,7 +173,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
     // Custom admin Footer text
     function custom_footer_admin_text() {
         echo esc_html__("The Official Website of Agromedika", "agromedika");
-        echo ' | <a target="_blank" href="'. esc_url('https://dev-asegumpan.pantheonsite.io/agromedika-healthier-solutions-from-nature/' ) .'">Made by: <b>AS</b></a>';
+        echo ' | <a target="_blank" href="'. esc_url('https://dev-asegumpan.pantheonsite.io' ) .'">Made by: <b>AS</b></a>';
     }
 
     // // get Search Query

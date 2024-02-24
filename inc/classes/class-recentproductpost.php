@@ -23,28 +23,20 @@ class Recentproductpost {
         $args = array(
             'post_type'      => 'product',
             'post_status'    => 'publish',
-            'stock'          => 1,
             'posts_per_page' => 4,
         );
-    
+     
         $loop = new \WP_Query($args);
-        ob_start();
-    
+
         if ($loop->have_posts()) :
             while ($loop->have_posts()) : $loop->the_post();
                 ?>
 
                 <div class="col">
                  <a href="<?php echo esc_url(get_the_permalink()) ?>" class="text-decoration-none">
-                  <div class="rounded-5">
-                  <?php
-                        if (has_post_thumbnail()) {
-                            the_post_thumbnail('shop_catalog', array('class' => 'rounded-5'));
-                        } else {
-                            echo '<img src="' . esc_url(woocommerce_placeholder_img_src()) . '" alt="' . esc_attr(get_the_title()) . '" class="rounded-5">';
-                        }
-                        ?>
-                  </div>
+                    <div class="rounded-5">
+                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="rounded-5">
+                    </div>
                  </a>
                 </div>
     
@@ -55,7 +47,6 @@ class Recentproductpost {
         <?php
         endif;
         wp_reset_postdata();
-        return ob_get_clean();
     }
     
 }

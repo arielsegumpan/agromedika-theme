@@ -29,21 +29,20 @@ $contact_map = $acf_fields['contact_map'];
 ?>
 
 <main>
-    <?php if(!empty($contact_jumbotron['contact_hero_title']) && !empty($contact_jumbotron['contact_hero_image']['url'])) :?>
-    <section id="jumbotron-2" style="background: url('<?php echo esc_url($contact_jumbotron['contact_hero_image']['url']); ?>') center/cover no-repeat;">
+    <?php if(!empty($contact_jumbotron['contact_hero_title'])) :?>
+      <section id="no-jumbotron" class="bg-lteal">
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-8 mx-auto my-auto text-center">
-                    <h1 class="fw-bold text-black"><?php echo esc_html($contact_jumbotron['contact_hero_title']); ?></h1>
-                    <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($contact_jumbotron['contact_hero_content'])); ?></h5>
-                </div>
+          <div class="row">
+            <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+              <h1 class="fw-bold text-black"><?php echo esc_html($contact_jumbotron['contact_hero_title']); ?></h1>
+              <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($contact_jumbotron['contact_hero_content'])); ?></h5>
             </div>
+          </div>
         </div>
-        <div class="jumb-overlay"></div>
-    </section>
+      </section>
     <?php endif; ?>
 
-    <?php if(!empty($contact_jumbotron['contact_hero_title']) && !empty($contact_jumbotron['contact_hero_image']['url'])) : ?>
+    <?php if(!empty($contact_jumbotron['contact_hero_title'])) : ?>
     <section id="contact" class="bg-lteal">
         <div class="container">
             <div class="row">
@@ -114,11 +113,6 @@ $contact_map = $acf_fields['contact_map'];
             </div>
         </div>
       </section>
-
-
-
-
-
 
     <?php endif; ?>
 

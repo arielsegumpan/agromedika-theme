@@ -59,38 +59,9 @@ $alt_text = get_post_meta($image_id, '_wp_attachment_image_alt', true);
                 <div class="col-12 col-xl-3">
                     <div id="aside">
                         <div id="featured_prod_aside" class="mb-5">
-                            <h5 class="fw-bold text-primary mb-4">Related Post</h5>
+                            <h5 class="fw-bold text-primary mb-4"><?php echo esc_html__('Recent Posts', 'agromedika' ) ?></h5>
                             <div class="row row-cols-2 row-cols-lg-2 g-3">
-                                <div class="col">
-                                    <a href="#!" class="text-decoration-none">
-                                        <img src="assets/imgs/pexels-edward-jenner-4031695.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="#!" class="text-decoration-none">
-                                        <img src="assets/imgs/pexels-nataliya-vaitkevich-7526026.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="#!" class="text-decoration-none">
-                                        <img src="assets/imgs/pexels-mareefe-1638280.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="#!" class="text-decoration-none">
-                                        <img src="assets/imgs/pexels-pixabay-531260.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="#!" class="text-decoration-none">
-                                        <img src="assets/imgs/pexels-rfstudio-3825541.jpg" alt="" class="img-fluid object-fit-cover rounded-4">
-                                    </a>
-                                </div>
-                                <div class="col">
-                                    <a href="#!" class="text-decoration-none">
-                                        <img src="assets/imgs/pexels-edward-jenner-4031695.jpg" alt="" class="img-fluid">
-                                    </a>
-                                </div>
+                                <?php get_template_part( 'template-parts/components/aside/aside', 'recent' ) ;?>
                             </div>
                         </div>
                         <div id="blog_archive" class="mb-5">

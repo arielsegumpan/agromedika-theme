@@ -9,12 +9,12 @@ get_header();
 $featured_image_url = get_the_post_thumbnail_url(get_the_ID());
 $featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
 
-$product_text_slide = get_acf_option_field('product_text_slide');
-$product_page_main_section = get_acf_option_field('product_page_main_section');
-
+$product_text_slide = get_acf_field('product_text_slide');
+$product_page_main_section = get_acf_field('product_page_main_section');
 ?>
+
 <main>
-    <?php if (!empty($product_text_slide[0])): ?>
+    <?php if ($product_text_slide): ?>
         <section id="jumbotron-product" class="bg-lteal">
             <div class="container">
                 <div class="row">
@@ -36,13 +36,13 @@ $product_page_main_section = get_acf_option_field('product_page_main_section');
             </div>
         </section>
     <?php endif; ?>
-
+    <?php if($product_page_main_section['product_page_title']) : ?>
     <section id="products-main" class="bg-lteal">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8 text-center mx-auto mb-5">
-                    <h1 class="fw-bold text-black">Our Products</h1>
-                    <p class="mt-4 text-black">Agromediko supplies premium Philippine botanical and plant extracts in  extract and powder forms for companies that manufacture herbal supplements, biopharma and nutraceuticals, functional food and beverages, organic personal care and cosmetic products, and animal feed. We also offer and pre-mix herbal extracts and customised solutions based on customer demand.</p>
+                    <h1 class="fw-bold text-black"><?php echo esc_html($product_page_main_section['product_page_title']) ;?></h1>
+                    <p class="mt-4 text-black"><?php echo nl2br(esc_textarea( $product_page_main_section['product_page_content']) ) ;?></p>
                 </div>
             </div>
             <div class="row">
@@ -50,7 +50,7 @@ $product_page_main_section = get_acf_option_field('product_page_main_section');
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-5">
                         <?php get_template_part('template-parts/components/blog/product', 'page');?>
                     </div>
-                </div> 
+                </div>  
                 <div class="col-12"> 
                     <div class="d-flex flex-row justify-content-center align-items-center gap-3">
                         <?php
@@ -69,8 +69,7 @@ $product_page_main_section = get_acf_option_field('product_page_main_section');
             </div>
         </div>
     </section>
-
-
+    <?php endif; ?>
 </main>
 
 <?php get_footer(); ?>

@@ -283,3 +283,39 @@ $shop = get_field('herbanext_shop', $shop_page_id);
         </section>
     </main>
 <?php get_footer()?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php if (!empty($product_text_slide[0])): ?>
+        <section id="jumbotron-product" class="bg-lteal">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-9 mx-auto my-auto text-center">
+                        <div class="l-realise-slider-card-block">
+                            <div class="card-block-wrap">
+                                <?php foreach ($product_text_slide as $key => $getSlide) :
+                                    $class = ($key == 1) ? 'c' : (($key == 2) ? 'a' : 'b');
+                                    $id = ($key == 1) ? 'first' : (($key == 2) ? 'second' : 'third');
+                                ?>
+                                    <div class="card <?php echo $class; ?> border-0 bg-transparent" id="<?php echo $id; ?>">
+                                        <h1 class="fw-bold"><?php echo esc_html($getSlide['product_text_slide_title']); ?></h1>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>

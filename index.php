@@ -6,7 +6,7 @@
 get_header();
 
 $blog_jumbotron = get_acf_option_field('blog_jumbotron');
-
+$sidebar_socmed = get_acf_option_field('sidebar_socmed');
 
 ?>
 <main>
@@ -36,9 +36,11 @@ $blog_jumbotron = get_acf_option_field('blog_jumbotron');
                             <?php endwhile; endif;?>
                         </div>
                         <div class="col-12">
-                            <div class="d-flex flex-row justify-content-center align-items-center gap-3">
-                                <a href="#!" class="btn btn-primary px-4 py-3">Previous<i class="bi bi-arrow-left ms-2"></i></a>
-                                <a href="#!" class="btn btn-primary px-4 py-3"><i class="bi bi-arrow-right me-2"></i>Next</a>
+                            <div class="d-flex flex-row justify-content-between align-items-center gap-3">
+                                <?php if (get_query_var('paged') > 1) : ?>
+                                    <?php previous_posts_link('<i class="bi bi-arrow-left me-2"></i>Previous'); ?>
+                                <?php endif; ?>
+                                <?php next_posts_link('Next<i class="bi bi-arrow-right ms-2"></i>'); ?>
                             </div>
                         </div>
                     </div>
@@ -47,24 +49,26 @@ $blog_jumbotron = get_acf_option_field('blog_jumbotron');
 
                 <div class="col-12 col-md-3">
                   <div id="aside">
-                    <?php get_template_part('template-parts/components/aside/aside', 'content')?>
+                    <div id="featured_prod_aside" class="mb-5">
+                        <h5 class="fw-bold text-primary mb-4">Related Post</h5>
+                        <div class="row row-cols-3 row-cols-md-1 row-cols-lg-2 g-3">
+                        <?php get_template_part('template-parts/components/aside/aside', 'recent')?>
+                        </div>
+                    </div>
                     <div id="blog_archive" class="mb-5">
-                        <h5 class="fw-bold text-primary">Archive</h5>
-                        <select class="form-select py-2 mt-4 mb-4" aria-label="Select category">
-                            <option selected disabled>Select</option>
-                            <option value="Category 1">August (10)</option>
-                            <option value="Category 2">September (8)</option>
-                            <option value="Category 3">October (12)</option>
-                        </select>
+                        <h5 class="fw-bold text-primary"><?php echo esc_html__( 'Archive', 'agromedika' ) ;?></h5>
+                        <?php get_template_part('template-parts/components/archive/archives')?>
                    </div>
+                   <?php if($sidebar_socmed['sidebar_soc_med_content'][0]['sidebar_soc_med_link']) :?>
                     <div id="soc_med">
                         <h5 class="fw-bold text-primary mb-3">Follow us on</h5>
                         <div class="d-flex flex-row gap-4 fs-4">
-                          <a href="#!" target="_blank" class="text-decoration-none text-primary"><i class="bi bi-facebook"></i></a>
-                          <a href="#!" target="_blank" class="text-decoration-none text-primary"><i class="bi bi-twitter-x"></i></a>
-                          <a href="#!" target="_blank" class="text-decoration-none text-primary"><i class="bi bi-instagram"></i></a>
+                            <?php foreach($sidebar_socmed['sidebar_soc_med_content'] as $get_side_link): ?>
+                            <a href="<?php echo esc_url($get_side_link['sidebar_soc_med_link']) ;?>" target="_blank" class="text-decoration-none text-primary"><?php echo $get_side_link['sidebar_soc_med_icon'] ;?></a>
+                            <?php endforeach;?>
                         </div>
                     </div>
+                    <?php endif;?>
                 </div>
                 </div>
                 

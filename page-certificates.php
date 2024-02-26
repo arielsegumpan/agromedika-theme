@@ -51,7 +51,7 @@ $certificate_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_at
                         <?php
                         if ($query->have_posts()) :
                             while ($query->have_posts()) :
-                                $query->the_post();
+                                $query->the_post(); 
                                 $certificate_gallery = get_field('certificate_gallery');
                                 $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
                                 $cert_image_url = isset($certificate_gallery['certificate_gallery_image']['url']) ? esc_url($certificate_gallery['certificate_gallery_image']['url']) : esc_url($thumbnail_url);

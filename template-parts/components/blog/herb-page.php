@@ -1,7 +1,7 @@
 <?php
 
 $args = [
-    'post_type'      => 'product',
+    'post_type'      => 'herb',
     'post_status'    => 'publish',
     'posts_per_page' => get_option('posts_per_page'),
 ];
@@ -12,7 +12,7 @@ if ($getProd->have_posts()) : while ($getProd->have_posts()) : $getProd->the_pos
     $featured_image_url = get_the_post_thumbnail_url(get_the_ID());
     $featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
 
-    $product_single_contents = get_acf_field('product_single_contents');
+    $herb_single_contents = get_acf_field('herb_single_contents');
 ?>
    
     <div class="col text-center">
@@ -22,8 +22,8 @@ if ($getProd->have_posts()) : while ($getProd->have_posts()) : $getProd->the_pos
             </div>
             <div class="mt-4">
                 <h4 class="text-primary fw-bold"><?php echo esc_html(the_title()) ?></h4>
-            <?php if(!empty($product_single_contents['product_scientific_name'])) :?>
-                <h6 class="text-secondary"><small class="fst-italic"><?php echo esc_html( $product_single_contents['product_scientific_name'] ) ?></small></h6>
+            <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
+                <h6 class="text-secondary"><small class="fst-italic"><?php echo esc_html( $herb_single_contents['herb_scientific_name'] ) ?></small></h6>
             <?php endif;?>
             </div>
         </a>

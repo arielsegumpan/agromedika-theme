@@ -319,3 +319,12 @@ $shop = get_field('herbanext_shop', $shop_page_id);
             </div>
         </section>
     <?php endif; ?>
+
+
+
+
+
+
+     <?php if(!empty($ingredients_form_content)):?>
+                <?php echo $ingredients_form_content;?>
+              <?php endif;?>

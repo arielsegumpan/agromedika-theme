@@ -56,10 +56,7 @@
 
                 <div class="d-flex flex-row  ps-3 ps-lg-auto mt-4 mt-xl-0">
                   <div class="search-container me-2">
-                    <form action="/search" method="get">
-                      <input class="search expandright" id="searchright" type="search" name="q" placeholder="Search">
-                      <label class="button searchbutton" for="searchright"><i class="bi bi-search btn btn-primary text-white"></i></label>
-                    </form>
+                    <?php get_search_form() ?>
                   </div> 
                   <a href="#!" class="btn btn-primary text-white me-2"><i class="bi bi-whatsapp"></i></a>
                   <a href="#!" class="btn btn-primary text-white"><i class="bi bi-person"></i></a>

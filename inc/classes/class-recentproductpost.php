@@ -21,7 +21,7 @@ class Recentproductpost {
     // Create shortcode to get recent products displayed on the front page
     public function agromedika_recent_products() {
         $args = array(
-            'post_type'      => 'product',
+            'post_type'      => 'herb',
             'post_status'    => 'publish',
             'posts_per_page' => 4,
         );
@@ -43,7 +43,7 @@ class Recentproductpost {
                 <?php endwhile;
         else :
             ?>
-            <p class="text-center"><?php esc_html_e('No Recent Product display', 'agromedika'); ?></p>
+            <p class="text-center"><?php esc_html_e('No Recent Herb display', 'agromedika'); ?></p>
         <?php
         endif;
         wp_reset_postdata();

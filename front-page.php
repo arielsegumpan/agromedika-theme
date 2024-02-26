@@ -25,13 +25,8 @@ foreach ($acf_fields as $key => $field_name) {
     $acf_values[$key] = get_acf_field($field_name);
 }
 
-if (has_post_thumbnail()) {
-  $background_image = get_the_post_thumbnail_url(get_the_ID(), 'full');
-}
-
-if (empty($background_image) && !empty($acf_values['home_jumbotron']['home_jumbotron_image']['url'])) {
-  $background_image = $acf_values['home_jumbotron']['home_jumbotron_image']['url'];
-}
+has_post_thumbnail() ? $background_image = get_the_post_thumbnail_url(get_the_ID(), 'full') : '';
+$background_image = empty($background_image) && !empty($acf_values['home_jumbotron']['home_jumbotron_image']['url']) ? $acf_values['home_jumbotron']['home_jumbotron_image']['url'] : $background_image;
 
 ?>
 
@@ -104,16 +99,16 @@ if (empty($background_image) && !empty($acf_values['home_jumbotron']['home_jumbo
     <?php
     if (!empty($acf_values['home_grow']) && !empty($acf_values['home_grow']['home_grow_bg_image']['url'])) :
     ?>
-        <section id="grow" style="background-image: url('<?php echo esc_url($acf_values['home_grow']['home_grow_bg_image']['url']); ?>');');">
-            <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-9 mx-auto text-center">
+    <section id="grow" style="background-image: url('<?php echo esc_url($acf_values['home_grow']['home_grow_bg_image']['url']); ?>');');">
+        <div class="container">
+          <div class="row">
+              <div class="col-12 col-lg-9 mx-auto text-center">
                 <h2 class="fw-bold text-black mb-5"><?php echo esc_html($acf_values['home_grow']['home_grow_title']); ?></h2>
                 <a href="<?php echo esc_url($acf_values['home_grow']['home_grow_page_link']['home_grow_link']); ?>" class="text-decoration-none text-black fw-bold fs-6"><i class="bi bi-arrow-right me-2"></i><?php echo esc_html($acf_values['home_grow']['home_grow_page_link']['home_grow_button_name']); ?></a>
-                </div>
-            </div>
-            </div>
-        </section>
+              </div>
+          </div>
+        </div>
+    </section>
     <?php endif; ?>
 
 
@@ -161,7 +156,6 @@ if (empty($background_image) && !empty($acf_values['home_jumbotron']['home_jumbo
                         <div class="display-1 fw-bold  text-primary"><span class="num" data-val="<?php echo esc_attr($home_info_card['home_info_count_number']); ?>">00</span>+</div>
                         <span class="fw-bold fs-5 text-black"><?php echo esc_html($home_info_card['home_info_text_years']); ?></span>
                       </div>
-    
                       <div class="cont mt-4">
                         <p class="text-secondary">
                             <?php echo nl2br(esc_textarea($home_info_card['home_info_content'])); ?>

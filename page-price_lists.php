@@ -6,7 +6,6 @@
 
 get_header();
 
-
 $price_lists_jumbotron = get_acf_field('price_lists_jumbotron');
 ?>
 

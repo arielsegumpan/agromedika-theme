@@ -176,10 +176,10 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         echo ' | <a target="_blank" href="'. esc_url('https://dev-asegumpan.pantheonsite.io' ) .'">Made by: <b>AS</b></a>';
     }
 
-    // // get Search Query
+    // get Search Query
     // function customize_search_query( $query ) {
     //     if ( !is_admin() && $query->is_main_query() && $query->is_search() ) {
-    //         $query->set( 'post_type', ['post'] );
+    //         $query->set( 'post_type', ['post', 'product'] );
     //     }
     // }
  }

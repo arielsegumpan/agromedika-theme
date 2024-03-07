@@ -72,8 +72,8 @@ if (post_password_required()) {
 
     $args = array(
         'title_reply' => __('<span class="fw-bold fs-1 museo mt-5"><i class="bi bi-chat-quote me-3 text-primary"></i>Share Your Thoughts</span>', 'agromedika'),
-        'class_submit' => 'btn btn-primary px-5 py-3 mt-4',
-        'label_submit' => __('Post Comment', 'agromedika'),
+        'class_submit' => 'btn btn-primary text-lteal px-4 py-3 mt-4 rounded-4',
+        'label_submit' => esc_html('Post Comment'),
         'comment_field' => '<textarea id="comment" class="form-control px-3 py-3 mb-4 mt-5" name="comment" rows="4" placeholder="' . __('Your comment...', 'agromedika') . '" required></textarea>',
         'fields' => apply_filters('comment_form_default_fields', $fields),
         'comment_notes_before' => '<p class="comment-notes mt-4 text-secondary">' . __('Your email address will not be published. All fields are required <span class="text-danger fw-bold">*</span>.', 'agromedika') . '</p>',

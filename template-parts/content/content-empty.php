@@ -1,7 +1,7 @@
 <?php
 /**
  * 
- * @package herbanext
+ * @package agromedika
  */
 ?>
  <section>

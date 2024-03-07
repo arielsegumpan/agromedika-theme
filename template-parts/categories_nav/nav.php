@@ -7,20 +7,20 @@
 use AGROMEDIKA_THEME\Inc\Menus;
 
 $menu_class = Menus::get_instance();
-$header_menu_id = $menu_class->get_menu_id('agromedika-footer-menu');
+$footer_menu_id = $menu_class->get_menu_id('agromedika-categories-menu');
 
-$header_menus = wp_cache_get('footer_menus', 'menu_cache');
+$footer_menus_categories = wp_cache_get('footer_menus_categories', 'menu_cache'); 
 
-if (false === $header_menus) {
-    $header_menus = wp_get_nav_menu_items($header_menu_id);
-    wp_cache_set('footer_menus', $header_menus, 'menu_cache', 3600); // Cache for 1 hour
+if (false === $footer_menus_categories) {
+    $footer_menus_categories = wp_get_nav_menu_items($footer_menu_id);
+    wp_cache_set('footer_menus_categories', $footer_menus_categories, 'menu_cache', 3600); // Cache for 1 hour
 }
 
-if (!empty($header_menus) && is_array($header_menus)) :
+if (!empty($footer_menus_categories) && is_array($footer_menus_categories)) :
     echo '<ul class="nav flex-column mt-4 ps-lg-5">';
-    foreach ($header_menus as $menu_item) :
+    foreach ($footer_menus_categories as $menu_item) :
         if (!$menu_item->menu_item_parent) :
-            $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
+            $child_menu_items = $menu_class->get_child_menu_items($footer_menus_categories, $menu_item->ID);
             $has_children = !empty($child_menu_items) && is_array($child_menu_items);
             if (!$has_children) : ?>
                 <li class="nav-item">
@@ -49,3 +49,4 @@ if (!empty($header_menus) && is_array($header_menus)) :
     endforeach;
     echo '</ul>';
 endif;
+?>

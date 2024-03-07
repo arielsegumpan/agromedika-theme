@@ -24,31 +24,17 @@ foreach ($acf_field_names as $field_name) {
 // Assign ACF fields to variables
 $contact_jumbotron = $acf_fields['contact_jumbotron'];
 $contact_content = $acf_fields['contact_content'];
-$contact_map = $acf_fields['contact_map'];
 
 ?>
 
 <main>
-    <?php if(!empty($contact_jumbotron['contact_hero_title'])) :?>
-      <section id="no-jumbotron" class="bg-lteal">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 col-lg-8 mx-auto my-auto text-center">
-              <h1 class="fw-bold text-black"><?php echo esc_html($contact_jumbotron['contact_hero_title']); ?></h1>
-              <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($contact_jumbotron['contact_hero_content'])); ?></h5>
-            </div>
-          </div>
-        </div>
-      </section>
-    <?php endif; ?>
-
-    <?php if(!empty($contact_jumbotron['contact_hero_title'])) : ?>
     <section id="contact" class="bg-lteal">
         <div class="container">
             <div class="row">
-              <div class="col-12 col-lg-8 mx-auto position-relative">
-                <div class="card rounded-5 border-0 p-3 p-lg-5 mt-5 position-absolute">
-                  <div class="px-3 py-5 p-lg-5">
+              <div class="col-12 col-lg-6 mx-auto position-relative">
+                <div class="card rounded-5 border-0 p-3 p-xl-5 mt-5">
+                  <h1 class="fw-bold text-black text-center pt-4"><?php echo esc_html('Message Us')?></h1>
+                  <div class="px-3 py-5 p-xl-5">
                     <form action="#!">
                       <div class="row mb-md-4">
                         <div class="col-12 col-md-6">
@@ -90,7 +76,7 @@ $contact_map = $acf_fields['contact_map'];
                         <div class="col-12">
                           <div class="form-floating">
                             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                            <label for="floatingTextarea">Comments<span class="text-danger">*</span></label>
+                            <label for="floatingTextarea">Message<span class="text-danger">*</span></label>
                           </div>
                         </div>
                       </div>
@@ -101,20 +87,22 @@ $contact_map = $acf_fields['contact_map'];
                   </div>
                 </div>
               </div>
+              <div class="col-12 col-lg-6">
+                <div class="map-wrapper pt-lg-5">
+                  <?php echo html_entity_decode(esc_html($contact_content['contact_gmap'] )) ;?>
+                </div>
+                <div class="mt-4 text-xl-start text-center">
 
-              <div id="col" class="col-12 col-lg-7 mx-auto text-center mt-5">
-                <span><i class="bi bi-geo-alt fs-1 text-primary"></i></span>
-                <div class="mt-4">
+                  <span><i class="bi bi-geo-alt fs-1 text-primary"></i></span>
                   <p class="lh-lg text-secondary mb-3"><?php echo esc_html($contact_content['contact_address']); ?></p>
                   <p><a class="text-secondary" href="mailto:<?php echo esc_attr($contact_content['contact_page_email']); ?>"><?php echo esc_html($contact_content['contact_page_email']); ?></a></p>
-                        <p><a href="tel:<?php echo esc_attr($contact_content['contact_page_phone']); ?>" class="text-secondary"><?php echo esc_html($contact_content['contact_page_phone']); ?></a></p>
+                  <p><a href="tel:<?php echo esc_attr($contact_content['contact_page_phone']); ?>" class="text-secondary"><?php echo esc_html($contact_content['contact_page_phone']); ?></a></p>
+
                 </div>
               </div>
             </div>
         </div>
       </section>
-
-    <?php endif; ?>
 
     <?php if(have_posts() && !empty($content)) : ?>
     <section id="team">

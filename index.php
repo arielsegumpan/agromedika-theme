@@ -24,57 +24,29 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
     </section>
     <?php  endif;?>
 
-
     <section id="blog">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-9 mb-5 mb-lg-0 pb-4 pb-lg-0">
-                    <div class="row row-cols-2 g-3 g-lg-5">
-                        <div class="col-12">
-                            <?php if(have_posts()) : while(have_posts()) : the_post() ;?>
-                                <?php get_template_part('template-parts/content/content') ?>
-                            <?php endwhile; endif;?>
+                <div class="col-12">
+                    <div class="row row-cols-1 row-cols-md-2  row-cols-lg-3 g-3 g-lg-5">
+                    <?php if(have_posts()) : while(have_posts()) : the_post() ;?>
+                        <div class="col">
+                            <?php get_template_part('template-parts/content/content') ?>
                         </div>
-                        <div class="col-12">
-                            <div class="d-flex flex-row justify-content-between align-items-center gap-3">
-                                <?php if (get_query_var('paged') > 1) : ?>
-                                    <?php previous_posts_link('<i class="bi bi-arrow-left me-2"></i>Previous'); ?>
-                                <?php endif; ?>
-                                <?php next_posts_link('Next<i class="bi bi-arrow-right ms-2"></i>'); ?>
-                            </div>
-                        </div>
+                    <?php endwhile; endif;?>
                     </div>
                 </div>
-
-
-                <div class="col-12 col-md-3">
-                  <div id="aside">
-                    <div id="featured_prod_aside" class="mb-5">
-                        <h5 class="fw-bold text-primary mb-4">Related Post</h5>
-                        <div class="row row-cols-3 row-cols-md-1 row-cols-lg-2 g-3">
-                        <?php get_template_part('template-parts/components/aside/aside', 'recent')?>
-                        </div>
+                <div class="col-12 mt-5">
+                    <div class="d-flex flex-row justify-content-between align-items-center gap-3">
+                        <?php if (get_query_var('paged') > 1) : ?>
+                            <?php previous_posts_link('<i class="bi bi-arrow-left me-2"></i>Previous'); ?>
+                        <?php endif; ?>
+                        <?php next_posts_link('Next<i class="bi bi-arrow-right ms-2"></i>'); ?>
                     </div>
-                    <div id="blog_archive" class="mb-5">
-                        <h5 class="fw-bold text-primary"><?php echo esc_html__( 'Archive', 'agromedika' ) ;?></h5>
-                        <?php get_template_part('template-parts/components/archive/archives')?>
-                   </div>
-                   <?php if($sidebar_socmed['sidebar_soc_med_content'][0]['sidebar_soc_med_link']) :?>
-                    <div id="soc_med">
-                        <h5 class="fw-bold text-primary mb-3">Follow us on</h5>
-                        <div class="d-flex flex-row gap-4 fs-4">
-                            <?php foreach($sidebar_socmed['sidebar_soc_med_content'] as $get_side_link): ?>
-                            <a href="<?php echo esc_url($get_side_link['sidebar_soc_med_link']) ;?>" target="_blank" class="text-decoration-none text-primary"><?php echo $get_side_link['sidebar_soc_med_icon'] ;?></a>
-                            <?php endforeach;?>
-                        </div>
-                    </div>
-                    <?php endif;?>
-                </div>
-                </div>
-                
+              </div>
             </div>
         </div>
-      </section>
+    </section>
 </main>
 
 <?php get_footer()?>

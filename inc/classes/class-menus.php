@@ -20,9 +20,10 @@ namespace AGROMEDIKA_THEME\Inc;
 
     public function register_menus(){
         register_nav_menus(
-           [
+           [ 
             'agromedika-header-menu' =>  esc_html__('Agromedika Header Menu', 'agromedika'),
-            'agromedika-footer-menu' =>  esc_html__('Agromedika Footer Menu', 'agromedika')
+            'agromedika-footer-menu' =>  esc_html__('Agromedika Footer Menu', 'agromedika'),
+            'agromedika-categories-menu' =>  esc_html__('Agromedika Categories Menu', 'agromedika')
            ]
         );
     }

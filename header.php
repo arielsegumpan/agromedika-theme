@@ -58,9 +58,7 @@
                   <div class="search-container me-2">
                     <?php get_search_form() ?>
                   </div> 
-                  <a href="#!" class="btn btn-primary text-white me-2"><i class="bi bi-whatsapp"></i></a>
-                  <a href="#!" class="btn btn-primary text-white"><i class="bi bi-person"></i></a>
-
+                  <a href="<?php echo esc_url(wp_login_url()); ?>" class="btn btn-primary text-white"><i class="bi bi-person"></i></a>
                 </div>
 
               </div>

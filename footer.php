@@ -47,6 +47,13 @@ $page_footer_google_map = $option_values['page_footer_google_map'];
                 <?php get_template_part('template-parts/footer/nav'); ?>
             </div>
 
+            <div class="col-12 col-lg-3 text-center text-lg-start mt-5 mt-lg-0">
+                <h6 class="fw-bold text-uppercase text-lteal ps-lg-5"><?php echo esc_html('Categories') ?></h6>
+                <?php if(has_nav_menu('agromedika-header-menu')):?>
+                    <?php get_template_part('template-parts/categories_nav/nav'); ?>
+                <?php endif; ?>
+            </div>
+
             <?php if (!empty($page_footer_address_and_contact['page_footer_address'])) : ?>
                 <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0 text-center text-lg-start">
                     <h6 class="fw-bold text-uppercase text-lteal mb-4"><?php echo esc_html_e('Address') ?></h6>
@@ -63,12 +70,7 @@ $page_footer_google_map = $option_values['page_footer_google_map'];
 
                 </div>
             <?php endif; ?>
-
-            <?php if (!empty($page_footer_google_map)) : ?>
-                <div class="col-12 col-lg-3 text-center text-lg-start mt-5 mt-lg-0">
-                    <?php echo wp_kses_decode_entities($page_footer_google_map); ?>
-                </div>
-            <?php endif; ?>
+                
         </div>
         <div class="row pb-2">
             <div class="d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-lg-center">

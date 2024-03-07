@@ -63,7 +63,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
     <?php endif; ?>
 
     <?php if (!empty($infrastructure_rnd['infrastructure_rnd_title'])) : ?>
-        <section id="rnd" class="bg-primary">
+        <section id="rnd" class="bg-lteal">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-6">
@@ -80,8 +80,8 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                         </div>
                     </div>
                     <div class="col-12 col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
-                        <h2 class="fw-bold text-lteal"><?php echo esc_html($infrastructure_rnd['infrastructure_rnd_title']) ?></h2>
-                        <div class="lh-lg text-lteal mt-5"><?php echo wp_kses_decode_entities($infrastructure_rnd['infrastructure_rnd_content']); ?></div>
+                        <h2 class="fw-bold text-black"><?php echo esc_html($infrastructure_rnd['infrastructure_rnd_title']) ?></h2>
+                        <div class="lh-lg text-secondary mt-5"><?php echo wp_kses_decode_entities($infrastructure_rnd['infrastructure_rnd_content']); ?></div>
                     </div>
                 </div>
             </div>

@@ -23,20 +23,32 @@ class Recentproductpost {
         $args = array(
             'post_type'      => 'herb',
             'post_status'    => 'publish',
-            'posts_per_page' => 4,
+            'posts_per_page' => 12,
         );
      
         $loop = new \WP_Query($args);
 
         if ($loop->have_posts()) :
             while ($loop->have_posts()) : $loop->the_post();
+                $scientific_name = get_acf_field('herb_single_contents');
                 ?>
 
                 <div class="col">
                  <a href="<?php echo esc_url(get_the_permalink()) ?>" class="text-decoration-none">
+                  <div class="card border-0 bg-transparent">
                     <div class="rounded-5">
-                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="rounded-5">
+                      <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="rounded-5">
                     </div>
+                    <div class="prod-title text-center mt-4">
+                      <h6 class="text-primary"><?php the_title()?></h6>
+                        <?php if ($scientific_name['herb_scientific_name']) : ?>
+                            <small class="text-secondary">
+                                <?php echo esc_html('(' . $scientific_name['herb_scientific_name'] . ')'); ?>
+                            </small>
+                        <?php endif; ?>
+
+                    </div>
+                  </div>
                  </a>
                 </div>
     
@@ -47,6 +59,7 @@ class Recentproductpost {
         <?php
         endif;
         wp_reset_postdata();
+        
     }
     
 }

@@ -7,11 +7,11 @@
  * @package agromedika
  */
 get_header();
-$medicinal_plant_galleries = get_acf_field('medicinal_plant_galleries');
-$get_file = esc_url($medicinal_plant_galleries['medicinal_plant_gallery_file_attachment']['url']);
+$product_catalogue_galleries = get_acf_field('product_catalogue_galleries');
+$get_file = esc_url($product_catalogue_galleries['product_catalogue_gallery_file_attachment']['url']);
 ?>
-
-
+ 
+ 
 <main>
     <section id="main-pdf" class="bg-lteal">
         <div class="container">
@@ -21,10 +21,10 @@ $get_file = esc_url($medicinal_plant_galleries['medicinal_plant_gallery_file_att
                 <div class="mb-5 pb-lg-4">
                 <div class="col-12 col-md-8 col-lg-10 mx-auto">
                     <h1><?php echo esc_html(the_title())?></h1> 
-                    <h6 class="text-secondary mt-4"><?php echo esc_html($medicinal_plant_galleries['medicinal_plant_heading_description']) ;?></h6> 
+                    <h6 class="text-secondary mt-4"><?php echo esc_html($product_catalogue_galleries['product_catalogue_heading_description']) ;?></h6> 
                 </div>
                 </div>
-                <object id="obj" data="<?php echo $get_file ?>" type="<?php echo esc_attr($medicinal_plant_galleries['medicinal_plant_gallery_file_attachment']['mime_type']) ?>" width="100%"></object> 
+                <object id="obj" data="<?php echo $get_file ?>" type="<?php echo esc_attr($product_catalogue_galleries['product_catalogue_gallery_file_attachment']['mime_type']) ?>" width="100%"></object> 
                 </center>
                   
                 <div class="dload-btn mt-5 pt-lg-4"></div>

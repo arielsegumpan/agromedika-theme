@@ -12,7 +12,7 @@ $sproduct_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_ima
 
 $herb_single_contents = get_acf_field('herb_single_contents');
 
-
+$herb_categories = get_the_terms(get_the_ID(), 'herb-category');
 ?>
 
     <main>
@@ -29,6 +29,19 @@ $herb_single_contents = get_acf_field('herb_single_contents');
                         <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
                         <h6 class="text-black"><small class="fst-italic"><?php echo esc_html($herb_single_contents['herb_scientific_name']) ;?></small></h6>
                         <?php endif ;?>
+
+                        <div class="herb-categories mt-4">
+                                <?php
+                                // Display herb categories
+                                if ($herb_categories && !is_wp_error($herb_categories)) {
+                                    echo '<p><small>';
+                                    foreach ($herb_categories as $category) {
+                                        echo '<span class="badge px-2 py-1 bg-primary rounded-3 text-lteal fst-italic">' . esc_html($category->name) . '</span> ';
+                                    }
+                                    echo '</small></p>';
+                                }
+                                ?>
+                            </div>
                       </div>
                       <div class="lh-lg text-secondary mt-4">
                         <?php echo wp_kses_post($herb_single_contents['herb_short_description']) ;?>

@@ -22,7 +22,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
             // Careercat::class,
             Shortcodes::class,
             Woofeat::class,
-            Recentproductpost::class,
+            RecentProductPost::class,
             // Getpost::class,
             Customlogin::class,
         ];

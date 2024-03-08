@@ -8,13 +8,8 @@ get_header();
 <main>
     <section id="blog">
         <div class="container">
-            <div class="row">
-                <div class="mt-5 pt-4 text-center pb-5">
-                    <h6 class="fw-bold text-uppercase"><?php echo esc_html('Archive Posts') ?></h6>
-                    <h2 class="fw-bold"><?php the_archive_title(); ?></h2>
-                </div>
-            </div>
-            <div class="row mt-md-4">
+
+            <div class="row mt-5 pt-4">
                 <div class="col-12">
                     <div class="row row-cols-1 row-cols-md-2  row-cols-lg-3 g-3 g-lg-5">
                     <?php if(have_posts()) : while(have_posts()) : the_post() ;?>

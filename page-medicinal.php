@@ -38,12 +38,12 @@ $medicinal_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_atta
                 <div class="col-12 col-md-4 col-lg-3">
                   <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo esc_html('Filter Options') ;?></h5>
                   <ul id="filter-menu-2" class="list-unstyled list-group list-group-flush">
-                    <button type="button" class="filter-item list-group-item list-group-item-action text-secondary" data-filter="all"><?php echo esc_html('All') ;?></button>
+                    <button type="button" class="filter-item list-group-item list-group-item-action text-secondary bg-transparent" data-filter="all"><?php echo esc_html('All') ;?></button>
                     <?php
                         // Get all certificate categories
                         $categories = get_terms('medicinal-category');
                         foreach ($categories as $category) {
-                            echo '<button type="button" class="filter-item list-group-item list-group-item-action text-secondary" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
+                            echo '<button type="button" class="filter-item list-group-item list-group-item-action text-secondary bg-transparent" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
                         }
                         ?>
                   </ul>
@@ -68,14 +68,14 @@ $medicinal_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_atta
                                     }
                                 }
                                 ?>
-                      <div class="card" data-id="fda">
+                      <div class="card" data-id="<?php echo esc_attr($data_id) ?>">
                         <div class="card-image position-relative">
                           <div class="card-header text-center bg-primary py-3">
                             <img src="<?php echo $med_plant_image_url ;?>" alt="<?php echo $image_alt ;?>" class="img-fluid">
                           </div>
                           <div class="card-body"> 
                             <a href="<?php echo esc_url(the_permalink()) ;?>" class="text-decoration-none">
-                                <h5 class="text-primary"><?php echo esc_html( substr( get_the_title(), 0, 35 ) ) . '...'; ?></h5>
+                                <h5 class="text-primary"><?php echo esc_html( substr( get_the_title(), 0, 30 ) ) . '...'; ?></h5>
                             </a>
                             <div class="d-flex flex-row justify-content-start align-items-center mt-3">
                               
@@ -105,8 +105,5 @@ $medicinal_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_atta
               </div>
             </div>
         </section>
-<pre>
-    <?php var_dump( $medicinal_plant_galleries['medicinal_plant_gallery_cover']) ;?>
-</pre>
     </main>
 <?php get_footer(); ?>

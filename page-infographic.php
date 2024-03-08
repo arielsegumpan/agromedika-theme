@@ -35,12 +35,12 @@ $infographic_images = get_field('infographic_images');
                 <div class="col-12 col-md-4 col-lg-3">
                     <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i>Filter Options</h5>
                     <ul id="filter-menu" class="list-unstyled list-group list-group-flush">
-                        <button type="button" class="filter-item list-group-item list-group-item-action text-secondary" data-filter="all">All</button>
+                        <button type="button" class="filter-item list-group-item list-group-item-action text-secondary  bg-transparent" data-filter="all">All</button>
                         <?php
                         // Get all certificate categories
                         $categories = get_terms('infographic-category');
                         foreach ($categories as $category) {
-                            echo '<button type="button" class="filter-item list-group-item list-group-item-action text-secondary" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
+                            echo '<button type="button" class="filter-item list-group-item list-group-item-action text-secondary  bg-transparent" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
                         }
                         ?>
                     </ul>

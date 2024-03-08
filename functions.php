@@ -146,3 +146,30 @@ function custom_breadcrumbs() {
         echo $delimiter . __('Search Results for...', 'agromedika') . ' "<em>' . esc_html(get_search_query()) . '</em>"';
     }
 }
+
+
+
+// Add custom columns to the admin table for the custom post type "herb"
+function custom_herb_columns($columns) {
+    // Add a new column for the ACF true/false field
+    $columns['is_post_featured'] = 'Is Post Featured?';
+    return $columns;
+}
+add_filter('manage_edit-herb_columns', 'custom_herb_columns');
+
+// Populate the custom column with data
+function custom_herb_column_content($column_name, $post_id) {
+    // Check if the current column is for the ACF true/false field
+    if ($column_name === 'is_post_featured') {
+        // Ensure ACF is loaded
+        if (function_exists('get_field')) {
+            // Get the value of the ACF true/false field for the current post
+            $is_featured = get_field('herb_single_contents_is_post_featured', $post_id);
+
+            // Display "Yes" if the field is true, otherwise display "No"
+            echo $is_featured ? 'Yes' : 'No';
+        }
+    }
+}
+add_action('manage_herb_posts_custom_column', 'custom_herb_column_content', 10, 2);
+

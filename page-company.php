@@ -11,7 +11,8 @@ $acf_field_names = array(
     'company_about',
     'company_timeline',
     'company_team',
-    'company_mission_and_vision'
+    'company_mission_and_vision',
+    'company_youtube'
 );
 
 $acf_fields = array();
@@ -143,19 +144,19 @@ foreach ($acf_field_names as $field_name) {
             </div>
           </section>
     <?php endif; ?>
-
+    <?php if(!empty($acf_fields['company_youtube']['company_youtube_link'])) :?>
         <section id="yt">
             <div class="container">
               <div class="row">
                 <div class="col-12">
                   <div class="ratio ratio-16x9">
-                    <iframe width="100%" class="rounded-5" src="https://www.youtube.com/embed/uvH8Plw0Y9Y?si=FV0LD5qwObrbC3lF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <?php echo html_entity_decode(esc_html($acf_fields['company_youtube']['company_youtube_link'])) ;?>
                   </div>
                 </div>
               </div>
             </div>
         </section>
-
+    <?php endif;?>
 
     <?php $content = get_the_content();
     if(have_posts( ) && !empty($content)) : ?>

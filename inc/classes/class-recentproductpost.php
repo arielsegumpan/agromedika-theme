@@ -31,20 +31,22 @@ class RecentProductPost {
         if ($loop->have_posts()) :
             while ($loop->have_posts()) : $loop->the_post(); 
                 $scientific_name = get_acf_field('herb_single_contents');
-                if ($scientific_name['is_post_featured']) :
+                if ($scientific_name['is_approved']['is_post_featured']) :
                     ?>
-                    <div class="col">
+                    <div class="col text-center">
                         <a href="<?php the_permalink(); ?>" class="text-decoration-none">
                             <div class="card border-0 bg-transparent">
-                                <div class="rounded-5">
+                                <div class="rounded-5 mx-auto">
                                     <?php if (has_post_thumbnail()) : ?>
                                         <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="rounded-5">
+                                    <?php else:?>
+                                        <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="rounded-5">
                                     <?php endif; ?>
                                 </div>
                                 <div class="prod-title text-center mt-4">
-                                    <h6 class="text-primary"><?php the_title(); ?></h6>
+                                    <h5 class="text-primary fw-bold"><?php the_title(); ?></h5>
                                     <?php if (!empty($scientific_name['herb_scientific_name'])) : ?>
-                                        <small class="text-secondary">
+                                        <small class="text-secondary fst-italic">
                                             <?php echo esc_html('(' . $scientific_name['herb_scientific_name'] . ')'); ?>
                                         </small>
                                     <?php endif; ?>

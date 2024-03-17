@@ -482,3 +482,292 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+/**
+ * Header menu
+ * @package agromedika
+ */
+
+ use AGROMEDIKA_THEME\Inc\Menus;
+
+ $menu_class = Menus::get_instance();
+ $header_menu_id = $menu_class->get_menu_id('agromedika-header-menu');
+  
+ $header_menus = wp_cache_get('header_menus', 'menu_cache');
+ 
+ if (false === $header_menus) {
+     $header_menus = wp_get_nav_menu_items($header_menu_id);
+     wp_cache_set('header_menus', $header_menus, 'menu_cache', 3600); // Cache for 1 hour
+ }
+ 
+ if (!empty($header_menus) && is_array($header_menus)) :
+     echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0 ps-3 ps-lg-auto">';
+     foreach ($header_menus as $menu_item) :
+         if (!$menu_item->menu_item_parent) :
+             $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
+             $has_children = !empty($child_menu_items) && is_array($child_menu_items);
+             if (!$has_children) :
+ ?>
+                 <li class="nav-item me-3 text-uppercase">
+                     <a class="nav-link" href="<?php echo esc_url($menu_item->url); ?>">
+                         <?php echo esc_html($menu_item->title); ?>
+                     </a>
+                 </li>
+ <?php
+             else :
+ ?>
+                 <li class="nav-item dropdown me-3">
+                     <a class="nav-link dropdown-toggle" href="<?php echo esc_url($menu_item->url); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         <?php echo esc_html($menu_item->title); ?><i class="bi bi-chevron-down ms-2"></i>
+                     </a>
+                     <ul class="dropdown-menu">
+                         <?php
+                         foreach ($child_menu_items as $child_menu_item) :
+                         ?>
+                             <li><a class="dropdown-item" href="<?php echo esc_url($child_menu_item->url); ?>"><?php echo esc_html($child_menu_item->title); ?></a></li>
+                         <?php endforeach; ?>
+                     </ul>
+                 </li>
+ <?php
+             endif;
+         endif;
+     endforeach;
+     echo '</ul>';
+ endif;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+    <!-- Certificate Section -->
+    <?php
+    if (!empty($acf_values['home_certificate']) && !empty($acf_values['home_certificate']['home_certificate_title'])) :
+    ?>
+      <section id="certificate" class="bg-lteal">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-lg-9 mx-auto text-center mb-5 mb-md-auto">
+              <div class="cert-wrap-cont">
+                <h2 class="fw-bold text-primary mb-5"><?php echo esc_html($acf_values['home_certificate']['home_certificate_title']); ?></h2>
+              </div>
+              <div class="certificates">
+                <div class="row row-cols-2 row-cols-md-4 g-lg-4 g-3 align-items-center">
+                  <?php foreach ($acf_values['home_certificate']['home_certificate_icons'] as $home_certificate_icon) : ?>
+                    <div class="col">
+                        <img src="<?php echo esc_url($home_certificate_icon['home_certificate_icon']['url']); ?>" alt="<?php echo esc_attr($home_certificate_icon['home_certificate_icon']['alt']); ?>">
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    <?php endif;?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php
+/**
+ * Header menu
+ * @package agromedika
+ */
+
+use AGROMEDIKA_THEME\Inc\Menus;
+
+$menu_class = Menus::get_instance();
+$header_menu_id = $menu_class->get_menu_id('agromedika-header-menu');
+
+$header_menus = wp_cache_get('header_menus', 'menu_cache');
+
+if (false === $header_menus) {
+    $header_menus = wp_get_nav_menu_items($header_menu_id);
+    wp_cache_set('header_menus', $header_menus, 'menu_cache', 3600); // Cache for 1 hour
+}
+
+if (!empty($header_menus) && is_array($header_menus)) :
+    echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0 ps-3 ps-lg-auto">';
+    foreach ($header_menus as $menu_item) :
+        if (!$menu_item->menu_item_parent) :
+            $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
+            $has_children = !empty($child_menu_items) && is_array($child_menu_items);
+            if (!$has_children) :
+?>
+                <li class="nav-item me-3 text-uppercase">
+                    <a class="nav-link" href="<?php echo esc_url($menu_item->url); ?>">
+                        <?php echo esc_html($menu_item->title); ?>
+                    </a>
+                </li>
+<?php
+            else :
+?>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle text-uppercase" href="<?php echo esc_url($menu_item->url); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php echo esc_html($menu_item->title); ?><i class="bi bi-chevron-down ms-2"></i>
+                    </a>
+                    <ul class="dropdown-menu drop-1">
+                        <?php
+                        foreach ($child_menu_items as $child_menu_item) :
+                            $sub_child_menu_items = $menu_class->get_child_menu_items($header_menus, $child_menu_item->ID);
+                        ?>
+                            <li><a class="dropdown-item text-uppercase" href="<?php echo esc_url($child_menu_item->url); ?>"><?php echo esc_html($child_menu_item->title); ?></a></li>
+                            <?php if (!empty($sub_child_menu_items)) : ?>
+                                <li class="nav-item dropend ps-3 ps-lg-0">
+                                    <a class="nav-link dropdown-toggle text-uppercase text-black fw-normal" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php echo esc_html($child_menu_item->title); ?><i class="bi bi-chevron-right"></i>
+                                    </a>
+                                    <ul class="dropdown-menu drop-2">
+                                        <?php foreach ($sub_child_menu_items as $sub_child_menu_item) : ?>
+                                            <li><a class="dropdown-item text-uppercase" href="<?php echo esc_url($sub_child_menu_item->url); ?>"><?php echo esc_html($sub_child_menu_item->title); ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+<?php
+            endif;
+        endif;
+    endforeach;
+    echo '</ul>';
+endif;
+?>
+
+
+
+correct MENU WITH 3RD LEVEL
+<?php
+/**
+ * Header menu
+ * @package agromedika
+ */
+
+use AGROMEDIKA_THEME\Inc\Menus;
+
+$menu_class = Menus::get_instance();
+$header_menu_id = $menu_class->get_menu_id('agromedika-header-menu');
+
+$header_menus = wp_cache_get('header_menus', 'menu_cache');
+
+if (false === $header_menus) {
+    $header_menus = wp_get_nav_menu_items($header_menu_id);
+    wp_cache_set('header_menus', $header_menus, 'menu_cache', 3600); // Cache for 1 hour
+}
+
+if (!empty($header_menus) && is_array($header_menus)) :
+    echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0 ps-3 ps-lg-auto">';
+    foreach ($header_menus as $menu_item) :
+        if (!$menu_item->menu_item_parent) :
+            $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
+            $has_children = !empty($child_menu_items) && is_array($child_menu_items);
+            if (!$has_children) :
+?>
+                <li class="nav-item me-3 text-uppercase">
+                    <a class="nav-link" href="<?php echo esc_url($menu_item->url); ?>">
+                        <?php echo esc_html($menu_item->title); ?>
+                    </a>
+                </li>
+<?php
+            else :
+?>
+                <li class="nav-item dropdown me-3">
+                    <a class="nav-link dropdown-toggle text-uppercase" href="<?php echo esc_url($menu_item->url); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php echo esc_html($menu_item->title); ?><i class="bi bi-chevron-down ms-2"></i>
+                    </a>
+                    <ul class="dropdown-menu drop-1">
+                        <?php foreach ($child_menu_items as $child_menu_item) : ?>
+                            <?php if ($child_menu_item->title === 'Customized Ingredients') : ?>
+                                <li class="nav-item dropdown dropend ps-3 ps-lg-0">
+                                    <a class="nav-link dropdown-toggle text-uppercase text-black fw-normal" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?php echo esc_html($child_menu_item->title); ?><i class="bi bi-chevron-right"></i>
+                                    </a>
+                                    <ul class="dropdown-menu drop-2">
+                                        <?php
+                                        $sub_child_menu_items = $menu_class->get_child_menu_items($header_menus, $child_menu_item->ID);
+                                        foreach ($sub_child_menu_items as $sub_child_menu_item) :
+                                        ?>
+                                            <li><a class="dropdown-item text-uppercase" href="<?php echo esc_url($sub_child_menu_item->url); ?>"><?php echo esc_html($sub_child_menu_item->title); ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </li>
+                            <?php else : ?>
+                                <li><a class="dropdown-item text-uppercase" href="<?php echo esc_url($child_menu_item->url); ?>"><?php echo esc_html($child_menu_item->title); ?></a></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+<?php
+            endif;
+        endif;
+    endforeach;
+    echo '</ul>';
+endif;
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="prod-img">
+    <img src="<?php echo esc_url($sproduct_image_url) ?>" alt="<?php echo esc_attr($sproduct_image_alt)?>" class="img-fluid rounded-5">
+</div>

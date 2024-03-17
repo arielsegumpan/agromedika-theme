@@ -18,8 +18,18 @@
      protected function setup_hooks() {
          add_action('wp_enqueue_scripts', [$this, 'register_styles']);
          add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
+         add_action('wp_enqueue_scripts', [$this, 'swiper_cdn']);
      } 
-  
+     public function swiper_cdn(){
+        if ( is_singular( 'herb' ) ) {
+            wp_register_style('swiper_style', AGROMEDIKA_DIR_URI . '//cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', [], false, 'all');
+            wp_enqueue_style('swiper_style');
+
+            wp_register_script('swiper_js', '//cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js', [], '11.0.7', true);
+            wp_enqueue_script('swiper_js');
+
+         }
+     }
      public function register_styles() {
          $theme_version = wp_get_theme()->get('Version');
 
@@ -32,6 +42,7 @@
          wp_enqueue_style('icons');
          wp_enqueue_style('fancybox_css');
          wp_enqueue_style('woo_style');
+         
      }
  
      public function register_scripts() {

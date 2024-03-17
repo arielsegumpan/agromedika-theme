@@ -17,14 +17,15 @@ if ($getProd->have_posts()) : while ($getProd->have_posts()) : $getProd->the_pos
     <div class="col text-center">
         <a href="<?php echo esc_url(get_permalink()) ?>" class="text-decoration-none">
             <div class="card border-0 rounded-0 bg-transparent">
-                <div class="img-wrap position-relative">
-                <img src="<?php echo esc_url($featured_image_url) ?>" alt="<?php echo esc_attr($featured_image_alt) ?>" class="rounded-5">
-                    
+                <?php if(!empty($featured_image_url)) : ?>
+                <div class="img-wrap position-relative mx-auto">
+                    <img src="<?php echo esc_url($featured_image_url) ?>" alt="<?php echo esc_attr($featured_image_alt) ?>" class="rounded-5">
                 </div>
+                <?php endif;?>
                 <div class="cont-prod mt-4 position-relative">
                     <h4 class="text-primary fw-bold"><?php echo esc_html(the_title()) ?></h4>
                     <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
-                    <h6 class="text-secondary"><small class="fst-italic"><?php echo esc_html( $herb_single_contents['herb_scientific_name'] ) ?></small></h6>
+                    <h6 class="text-secondary"><small class="fst-italic" style="font-size: .98em;"><?php echo esc_html( $herb_single_contents['herb_scientific_name'] ) ?></small></h6>
                     <?php endif;?>
                 </div>
             </div>

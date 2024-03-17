@@ -19,29 +19,24 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
         <section id="products-single" class="bg-lteal">
           <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-10 mx-auto text-center">
-                  <div class="prod-img">
-                    <img src="<?php echo esc_url($sproduct_image_url) ?>" alt="<?php echo esc_attr($sproduct_image_alt)?>" class="img-fluid rounded-5">
-                  </div>
+                <div class="col-12 text-center">
                   <div class="mt-5 pt-lg-3">
                       <div class="herb-wrap mb-5">
                         <h1 class="text-primary fw-bold"><?php the_title() ;?></h1> 
                         <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
                         <h6 class="text-black"><small class="fst-italic"><?php echo esc_html($herb_single_contents['herb_scientific_name']) ;?></small></h6>
                         <?php endif ;?>
-
-                        <div class="herb-categories mt-4">
-                                <?php
-                                // Display herb categories
-                                if ($herb_categories && !is_wp_error($herb_categories)) {
-                                    echo '<p><small>';
-                                    foreach ($herb_categories as $category) {
-                                        echo '<span class="badge px-2 py-1 bg-primary rounded-3 text-lteal fst-italic">' . esc_html($category->name) . '</span> ';
-                                    }
-                                    echo '</small></p>';
-                                }
-                                ?>
+                        <?php
+                          // Display herb categories
+                          if ($herb_categories && !is_wp_error($herb_categories)): ?>
+                            <div class="herb-categories mt-4">
+                               <p><small>
+                                <?php foreach ($herb_categories as $category): ?>
+                                    <span class="badge px-2 py-1 bg-primary rounded-3 text-lteal fst-italic"><?php echo esc_html($category->name);?></span>
+                                <?php endforeach;?>
+                                </small></p>
                             </div>
+                          <?php endif;?>
                       </div>
                       <div class="lh-lg text-secondary mt-4">
                         <?php echo wp_kses_post($herb_single_contents['herb_short_description']) ;?>
@@ -52,20 +47,52 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                     <nav>
                       <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
                         <button class="nav-link text-black text-uppercase active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true"><?php echo esc_html__( 'Product Overview', 'agromedika') ;?></button>
-                        <button class="nav-link text-black text-uppercase" id="nav-document-access-tab" data-bs-toggle="tab" data-bs-target="#nav-document-access" type="button" role="tab" aria-controls="nav-document-access" aria-selected="false"><?php echo esc_html__( 'Document Access', 'agromedika') ;?></button>
+                        <button class="nav-link text-black text-uppercase" id="nav-document-access-tab" data-bs-toggle="tab" data-bs-target="#nav-document-access" type="button" role="tab" aria-controls="nav-document-access" aria-selected="false"><?php echo esc_html__( 'Request Specifications', 'agromedika') ;?></button>
                         <button class="nav-link text-black text-uppercase" id="nav-buynow-tab" data-bs-toggle="tab" data-bs-target="#nav-buynow" type="button" role="tab" aria-controls="nav-buynow" aria-selected="false"><?php echo esc_html('Send Inquiry', 'agromedika') ?></button>
                       </div> 
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                      <div class="tab-pane fade show active pt-5 px-lg-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        <div class="lh-lg text-secondary">
-                          <?php the_content() ;?>
+                      <div class="tab-pane fade show active mt-5 pt-lg-5 px-xxl-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                        
+
+
+                        <div class="row align-items-center align-items-lg-start">
+                        <div class="col-12 col-lg-7 order-2 order-lg-1">
+                            <div class="lh-lg text-secondary text-center text-lg-start">
+                              <?php the_content() ;?>
+                            </div>
+                            <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
+                            <div class="mt-5">
+                              <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Products', 'agromedika' ) ?></a>
+                            </div>
+                            <?php endif; ?>
                         </div>
-                        <?php if(!empty($herb_single_contents['herb_overview']['herb_overview_page_link'])) :?>
-                        <div class="mt-5">
-                          <a href="<?php echo esc_url( $herb_single_contents['herb_overview']['herb_overview_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Products', 'agromedika' ) ?></a>
+                        <div class="col-12 col-lg-5 order-1 order-lg-2 mb-4 mb-lg-0 mt-5 mt-lg-0">
+                          <?php if(!empty(($herb_single_contents['herbs_gallery'][0]['herb_image']['url']))):?>
+                          <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper"
+                          thumbs-swiper=".mySwiper2" space-between="10" navigation="true"  zoom="true" >
+                            <?php foreach ($herb_single_contents['herbs_gallery'] as $herb_gal) :?>
+                            <swiper-slide>
+                              <div class="swiper-zoom-container rounded-5">
+                                <img src="<?php echo esc_url($herb_gal['herb_image']['url']) ;?>" loading="lazy" class="rounded-5" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom" title="<?php echo esc_attr('Double click to zoom in') ?>"/>
+                              </div>
+                            </swiper-slide>
+                            <?php endforeach ;?>
+                          </swiper-container>
+                      
+                          <swiper-container class="mySwiper2" space-between="10" slides-per-view="4" free-mode="true"
+                            watch-slides-progress="true">
+                            <?php foreach ($herb_single_contents['herbs_gallery'] as $herb_gal) :?>
+                            <swiper-slide>
+                              <img src="<?php echo esc_url($herb_gal['herb_image']['url']) ;?>" loading="lazy" class="rounded-4 rounded-lg-5" />
+                            </swiper-slide>
+                            <?php endforeach ;?>
+                          </swiper-container>
+                          <?php else:?>
+                            <h3 class="fw-bold text-center"><?php echo esc_html('No product gallery');?></h3>
+                          <?php endif;?>
                         </div>
-                        <?php endif; ?>
+                       </div>
                       </div>
                       <div class="tab-pane fade pt-5 px-lg-5" id="nav-document-access" role="tabpanel" aria-labelledby="nav-document-access-tab" tabindex="0">
                         <div class="card rounded-5 border-0 p-3 mt-5 mt-lg-3">
@@ -76,34 +103,37 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                             </div>
                          
                             <form action="#!">
-                            <div class="row mb-md-4">
-                              <div class="col-12 mb-4">
-                                <div class="form-floating mb-3">
-                                  <input type="text" class="form-control" id="name" placeholder="Name*">
-                                  <label for="name">Name <span class="text-danger">*</span></label>
+                              <div class="row mb-md-4">
+                                <div class="col-12 mb-4">
+                                  <div class="form-floating">
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                                      <option selected disabled></option>
+                                      <option value="1">Product Data Sheet</option>
+                                      <option value="2">Technical Data Sheet</option>
+                                      <option value="3">Safety Data Sheet</option>
+                                      <option value="4">Certificate of Analysis</option>
+                                      <option value="5">Certificate of Conformity</option>
+                                    </select>
+                                    <label for="floatingSelect">Select Product Sheet</label>
+                                  </div>
+                                </div>
+                                <div class="col-12 mb-4">
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="name" placeholder="Name*">
+                                    <label for="name">Name <span class="text-danger">*</span></label>
+                                  </div>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="email" placeholder="Email*">
+                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                  </div>
                                 </div>
                               </div>
-                              <div class="col-12 mb-4">
-                                <div class="form-floating mb-3">
-                                  <input type="email" class="form-control" id="email" placeholder="Email*">
-                                  <label for="email">Email<span class="text-danger">*</span></label>
-                                </div>
+
+                              <div class="mt-5 pt-4 mx-auto text-center">
+                                <button class="btn btn-black px-5 py-3"><i class="bi bi-send me-2"></i>Send Request</button>
                               </div>
-                              <div class="col-12">
-                                <div class="form-floating">
-                                  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                    <option selected disabled></option>
-                                    <option value="1">Safety Data Sheet</option>
-                                    <option value="2">Technical Data Sheet</option>
-                                    <option value="3">Analysis and Conformity</option>
-                                  </select>
-                                  <label for="floatingSelect">Select Product Sheet</label>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="mt-5 pt-4 mx-auto text-center">
-                              <button class="btn btn-black px-5 py-3"><i class="bi bi-send me-2"></i>Send Request</button>
-                            </div>
                           </form>
 
 

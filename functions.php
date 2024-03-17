@@ -147,29 +147,50 @@ function custom_breadcrumbs() {
     }
 }
 
-
-
 // Add custom columns to the admin table for the custom post type "herb"
 function custom_herb_columns($columns) {
-    // Add a new column for the ACF true/false field
+    // Add a new column for the ACF true/false fields
     $columns['is_post_featured'] = 'Is Post Featured?';
+    $columns['is_approved_by_the_doh'] = 'Is Approved by DOH?';
     return $columns;
 }
 add_filter('manage_edit-herb_columns', 'custom_herb_columns');
 
-// Populate the custom column with data
+// Populate the custom columns with data
 function custom_herb_column_content($column_name, $post_id) {
-    // Check if the current column is for the ACF true/false field
-    if ($column_name === 'is_post_featured') {
-        // Ensure ACF is loaded
-        if (function_exists('get_field')) {
-            // Get the value of the ACF true/false field for the current post
-            $is_featured = get_field('herb_single_contents_is_post_featured', $post_id);
+    // Ensure ACF is loaded
+    if (function_exists('get_field')) {
+        // Initialize flags
+        $is_featured = false;
+        $is_approved = false;
 
-            // Display "Yes" if the field is true, otherwise display "No"
-            echo $is_featured ? 'Yes' : 'No';
+        // Get the value of the ACF true/false fields for the current post
+        $herb_single_contents = get_field('herb_single_contents', $post_id);
+        if (isset($herb_single_contents['is_approved']['is_post_featured']) && $herb_single_contents['is_approved']['is_post_featured']) {
+            $is_featured = true;
+        }
+        if (isset($herb_single_contents['is_approved']['is_approved_by_the_doh']) && $herb_single_contents['is_approved']['is_approved_by_the_doh']) {
+            $is_approved = true;
+        }
+
+        // Display "Yes" if the field is true, otherwise display "No"
+        if (($column_name === 'is_post_featured' && $is_featured) || ($column_name === 'is_approved_by_the_doh' && $is_approved)) {
+            echo 'Yes';
+        } else {
+            echo 'No';
         }
     }
 }
 add_action('manage_herb_posts_custom_column', 'custom_herb_column_content', 10, 2);
 
+
+function custom_format_wysiwyg_content($value, $post_id, $field)
+{
+    // Check if the field is a WYSIWYG field
+    if ($field['type'] === 'wysiwyg') {
+        // Add a CSS class to the <em> tags for italic formatting
+        $value = str_replace('<em>', '<em class="fst-italic">', $value);
+    }
+    return $value;
+}
+add_filter('acf/format_value/type=wysiwyg', 'custom_format_wysiwyg_content', 10, 3);

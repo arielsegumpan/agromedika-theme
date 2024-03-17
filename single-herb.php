@@ -53,9 +53,6 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                       <div class="tab-pane fade show active mt-5 pt-lg-5 px-xxl-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                        
-
-
                         <div class="row align-items-center align-items-lg-start">
                         <div class="col-12 col-lg-7 order-2 order-lg-1">
                             <div class="lh-lg text-secondary text-center text-lg-start">

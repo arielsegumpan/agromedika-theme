@@ -17,7 +17,8 @@ namespace AGROMEDIKA_THEME\Inc;
 
     protected function setup_hooks(){
         add_shortcode('social_share_buttons', array($this, 'social_share_buttons_shortcode'));
-        // add_shortcode('get_recent_front_page_post', array($this, 'get_recent_front_page_posts'));
+        add_shortcode('get_prod_menu_catalogue', [$this,'get_prod_menu_catalogue_shortcode']);
+        add_shortcode('agromedika_get_approve_doh_product', [$this, 'agromedika_get_approve_doh_products']);
     }
 
     public function social_share_buttons_shortcode($atts) {
@@ -64,9 +65,111 @@ namespace AGROMEDIKA_THEME\Inc;
         return $output;
     }
 
-    // function get_recent_front_page_posts(){
-    //     ob_start();
-    //     get_template_part('template-parts/components/blog/recent','post');
-    //     return ob_get_clean();
-    // }
+    function get_prod_menu_catalogue_shortcode() {
+        $categories = get_terms(array(
+            'taxonomy' => 'herb-category',
+            'hide_empty' => false,
+        ));
+    
+        $output = '';
+    
+        foreach ($categories as $category) {
+            $args = array(
+                'post_type'      => 'herb',
+                'posts_per_page' => -1,
+                'tax_query'      => array(
+                    array(
+                        'taxonomy' => 'herb-category',
+                        'field'    => 'slug',
+                        'terms'    => sanitize_text_field($category->slug), // Sanitize the term slug
+                    ),
+                ),
+            );
+    
+            $query = new \WP_Query($args);
+    
+            if ($query->have_posts()) {
+                $output .= '<div class="row mb-5 pb-lg-3">';
+                $output .= '<div class="col-12">';
+                $output .= '<h4>' . esc_html($category->name) . '</h4>';
+                $output .= '<div style="overflow-x:auto;">';
+                $output .= '<table class="table table-striped table-borderless mt-4">';
+                $output .= '<tbody>';
+                $output .= '<tr>';
+    
+                $count = 0;
+                while ($query->have_posts()) {
+                    $query->the_post();
+                    $output .= '<td class="w-25">';
+                    $output .= '<a href="' . esc_url(get_permalink()) . '" class="text-primary text-decoration-none">';
+                    $output .= esc_html(get_the_title());
+                    $output .= '</a>';
+                    $output .= '</td>';
+    
+                    $count++;
+                    if ($count % 4 == 0) {
+                        $output .= '</tr><tr>';
+                    }
+                }
+    
+                $output .= '</tbody>';
+                $output .= '</table>';
+                $output .= '</div>';
+                $output .= '</div>';
+                $output .= '</div>';
+            }
+    
+            wp_reset_postdata();
+        }
+    
+        return $output;
+    }
+
+    //Get herb doh approved
+    function agromedika_get_approve_doh_products() {
+        $args = array(
+            'post_type'      => 'herb',
+            'post_status'    => 'publish',
+            'posts_per_page' => 12,
+        );
+     
+        $loop = new \WP_Query($args);
+
+        if ($loop->have_posts()) :
+            while ($loop->have_posts()) : $loop->the_post(); 
+                $scientific_name = get_acf_field('herb_single_contents');
+                if ($scientific_name['is_approved']['is_approved_by_the_doh']) :
+                    ?>
+                    <div class="col">
+                        <a href="<?php the_permalink(); ?>" class="text-decoration-none">
+                            <div class="card mb-3 border-0 bg-transparent">
+                                <div class="row g-0 align-items-center">
+                                    <div class="col-12 col-xl-4 text-center">
+                                    <?php if (has_post_thumbnail()) : ?>
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="img-fluid rounded-4">
+                                    <?php else:?>
+                                        <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="img-fluid rounded-4">
+                                    <?php endif; ?>
+                                    </div>
+                                    <div class="col-12 col-xl-8 text-center text-xl-start mt-3 mt-xl-0">
+                                        <div class="card-body ps-2 pt-xl-4">
+                                            <h6 class="fw-bold text-primary"><?php the_title(); ?></h6>
+                                        <?php if (!empty($scientific_name['herb_scientific_name'])) : ?>
+                                            <small class="text-secondary fst-italic">
+                                                <?php echo esc_html('(' . $scientific_name['herb_scientific_name'] . ')'); ?>
+                                            </small>
+                                        <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <?php endif; ?>
+            <?php endwhile;
+            wp_reset_postdata();
+        else : ?>
+            <p class="text-center"><?php esc_html_e('No herb-approved display.', 'agromedika'); ?></p>
+        <?php endif;
+    }
  }

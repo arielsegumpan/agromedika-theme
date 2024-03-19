@@ -30,7 +30,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                           // Display herb categories
                           if ($herb_categories && !is_wp_error($herb_categories)): ?>
                             <div class="herb-categories mt-4">
-                               <p><small>
+                               <p><small style="font-size:11px">
                                 <?php foreach ($herb_categories as $category): ?>
                                     <span class="badge px-2 py-1 bg-primary rounded-3 text-lteal fst-italic"><?php echo esc_html($category->name);?></span>
                                 <?php endforeach;?>
@@ -94,24 +94,34 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                       <div class="tab-pane fade pt-5 px-lg-5" id="nav-document-access" role="tabpanel" aria-labelledby="nav-document-access-tab" tabindex="0">
                         <div class="card rounded-5 border-0 p-3 mt-5 mt-lg-3">
                           <div class="px-3 py-4 py-lg-5 p-lg-5">
-                            <div class="mb-5">
+                            <div class="mb-5 px-lg-5">
                               <h2><?php echo esc_html($herb_single_contents['safety_data_sheet']['safety_data_sheet_heading'] ) ;?></h2>
                               <p class="text-secondary mt-4"><?php echo nl2br(esc_textarea($herb_single_contents['safety_data_sheet']['safety_data_sheet_sub_heading'] )) ;?></p>
                             </div>
                          
                             <form action="#!">
                               <div class="row mb-md-4">
-                                <div class="col-12 mb-4">
-                                  <div class="form-floating">
-                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                      <option selected disabled></option>
-                                      <option value="1">Product Data Sheet</option>
-                                      <option value="2">Technical Data Sheet</option>
-                                      <option value="3">Safety Data Sheet</option>
-                                      <option value="4">Certificate of Analysis</option>
-                                      <option value="5">Certificate of Conformity</option>
-                                    </select>
-                                    <label for="floatingSelect">Select Product Sheet</label>
+                                <div class="col-12 mb-3 mt-4">
+                                  <h6 class="text-secondary mb-4 text-center"><small class="fst-italic ">Please check any data sheet to download.</small></h6>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox1">Product Data Sheet</label>
+                                  </div>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox2">Techinical Data Sheet</label>
+                                  </div>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox3" value="option3">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox3">Safety Data Sheet</label>
+                                  </div>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox4" value="option4">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox4">Certificate of Analysis</label>
+                                  </div>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox5" value="option5">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox5">Certificate of Conformity</label>
                                   </div>
                                 </div>
                                 <div class="col-12 mb-4">
@@ -128,8 +138,8 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                                 </div>
                               </div>
 
-                              <div class="mt-5 pt-4 mx-auto text-center">
-                                <button class="btn btn-black px-5 py-3"><i class="bi bi-send me-2"></i>Send Request</button>
+                              <div class="mt-5 pt-3 mx-auto text-center">
+                                <button class="btn btn-black px-5 py-4 rounded-4"><i class="bi bi-send me-2"></i>Send Request</button>
                               </div>
                           </form>
 

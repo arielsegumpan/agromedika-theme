@@ -54,21 +54,31 @@ $certificate_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_at
                                 $query->the_post(); 
                                 $certificate_gallery = get_field('certificate_gallery');
                                 $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
-                                $cert_image_url = isset($certificate_gallery['certificate_gallery_image']['url']) ? esc_url($certificate_gallery['certificate_gallery_image']['url']) : esc_url($thumbnail_url);
-                                $image_alt = isset($certificate_gallery['certificate_gallery_image']['alt']) ? esc_attr($certificate_gallery['certificate_gallery_image']['alt']) : esc_attr($certificate_featured_image_alt);
+                                $cert_image_url = !empty($thumbnail_url) ? esc_url($thumbnail_url) : esc_url($certificate_gallery['certificate_gallery_image']['url']);
                                 $caption = esc_attr(get_the_title());
                                 $data_id = '';
                                 $categories = get_the_terms(get_the_ID(), 'certificates-category');
                                 if ($categories) {
                                     foreach ($categories as $category) {
                                         $data_id .= $category->slug;
-                                    }
+                                    } 
                                 }
                                 ?>
                                 <div class="card border-0 bg-transparent rounded-4">
                                     <div class="card-image position-relative rounded-4">
                                         <a href="<?php echo $cert_image_url; ?>" class="text-decoration-none text-black" data-fancybox="gallery" data-id="<?php echo esc_attr($data_id); ?>" data-caption="<?php echo $caption; ?>">
-                                            <img src="<?php echo $cert_image_url; ?>" alt="<?php echo $image_alt; ?>" class="rounded-4">
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <?php $featured_image_id = get_post_thumbnail_id();
+                                                    echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'gallery_img', false, array('class' => 'rounded-5'))));
+                                                ?>
+                                            <?php else:?> 
+                                                <?php
+                                                    $gall_cert_id =  $certificate_gallery['certificate_gallery_image']['id'];
+                                                    echo html_entity_decode(esc_html(
+                                                    wp_get_attachment_image($gall_cert_id, 'gallery_img', false, array('class' => 'rounded-4'))
+                                                ));?>
+                                            <?php endif; ?>
+
                                         </a>
                                     </div>
                                 </div>

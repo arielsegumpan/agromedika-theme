@@ -19,6 +19,7 @@
          add_action('wp_enqueue_scripts', [$this, 'register_styles']);
          add_action('wp_enqueue_scripts', [$this, 'register_scripts']);
          add_action('wp_enqueue_scripts', [$this, 'swiper_cdn']);
+         add_action( 'after_setup_theme', [$this,'image_sizes'] );
      } 
      public function swiper_cdn(){
         if ( is_singular( 'herb' ) ) {
@@ -44,7 +45,6 @@
          wp_enqueue_style('woo_style');
          
      }
- 
      public function register_scripts() {
          $theme_version = wp_get_theme()->get('Version');
          wp_deregister_script('jquery');
@@ -58,4 +58,32 @@
          wp_enqueue_script('owl_carousel_js');
          wp_enqueue_script('fancybox_js');
      }
+
+     public function image_sizes(){ 
+        add_image_size( 'jumbotron', 1905, 560, true );
+        add_image_size( 'sg_img', 650, 430, true );
+        add_image_size( 'product_img', 240, 250, true );
+        add_image_size( 'prod_carousel_img', 1080, 510, true );
+        add_image_size( 'grow_img', 1910, 510, true );
+        add_image_size( 'info_img', 100, 100, true);
+        add_image_size( 'news_update_img', 400, 300, true );
+        add_image_size( 'footer_logo', 120, 120, true );
+        add_image_size( 'foot_main_logo', 200, 143, true );
+        add_image_size( 'gallery_img', 200, 200, true );
+        add_image_size( 'blog_img_size', 340, 220, true );
+        add_image_size( 'recent_thumbnails', 145, 150, true );
+        add_image_size( 'logo_thumbnails', 126, 90, true );
+        add_image_size( 'blog_thumbnail', 1903, 756, true );
+        add_image_size( 'doh_thumbnail', 70, 70, true );
+        add_image_size( 'qual_info_thumbnail', 60, 60, true );
+        add_image_size( 'herb_thumbnail', 486 , 450 ,true );
+        add_image_size( 'herb_sm_thumbnail', 114 , 110 ,true );
+        add_image_size( 'company_thumbnail', 636 , 681 ,true );
+        add_image_size( 'company_team_thumbnail', 1296 , 406 ,true );
+        add_image_size( 'rnd_thumbnail', 306 , 250 ,true );
+        add_image_size( 'rnd_gall_thumbnail', 306 , 230 ,true );
+        add_image_size( 'quality_assurance_thumbnail', 416 , 500 ,true );
+        add_image_size( 'single_herb_thumbnail', 300 , 280 ,true );
+        add_image_size( 'company_jumbotron', 1400 , 933 ,true );
+    } 
  }

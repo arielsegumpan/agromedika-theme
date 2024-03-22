@@ -1,6 +1,5 @@
 <?php if(have_posts()): while(have_posts()) : the_post(); ?>
     <?php 
-    $dietary_supplements_block_4 = get_acf_field('dietary_supplements_block_4');
     $dietary_supplements_page_link = get_acf_field('dietary_supplements_page_link');
     ?>
 
@@ -13,8 +12,12 @@
                     </h2>
                 </div>
             </div> 
-            <div class="row row-cols-2 row-cols-md-3 g-3 row-cols-md-4 g-lg-5 justify-content-center align-items-center">
-                <?php echo do_shortcode('[agromedika_get_approve_doh_product]'); ?>  
+            <div class="row">
+
+                <div class="col-12 col-lg-8 mx-auto">
+                <?php echo shortcode_exists('get_supplements_prod_cat_display') ? do_shortcode('[get_supplements_prod_cat_display]') : ''; ?> 
+                </div>
+
             </div>
 
             <?php if (!empty($dietary_supplements_page_link)) : ?>
@@ -26,20 +29,6 @@
                 </div>
             </div>
             <?php endif; ?>
-        </div>
-    </section>
-
-    <section id="prod_cat_pharm">
-        <div class="container">
-            <?php if(!empty($dietary_supplements_block_4['dietary_supplements_block_4_title']) && !empty($dietary_supplements_block_4['dietary_supplements_block_4_content']))  :?>
-            <div class="row mb-5 pb-4">
-                <div class="col-12 col-lg-8 mx-auto text-center">
-                <h2 class="fw-bold"><?php echo esc_html($dietary_supplements_block_4['dietary_supplements_block_4_title']);?></h2>
-                <p class="lh-lg text-secondary mt-4"><?php echo html_entity_decode(esc_textarea($dietary_supplements_block_4['dietary_supplements_block_4_content']));?></p>
-                </div>
-            </div>
-            <?php endif;?>
-            <?php echo do_shortcode('[get_prod_menu_catalogue]'); ?>
         </div>
     </section>
 

@@ -29,7 +29,17 @@ $page_title = get_the_title();
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <img src="<?php echo esc_url($dietary_supplements_block_1['dietary_supplements_block_1_image']['url']) ?>" alt="<?php echo esc_attr($dietary_supplements_block_1['dietary_supplements_block_1_image']['alt']) ?>" class="img-fluid rounded-5 cust-img" >
+                <?php if (has_post_thumbnail()) : ?>
+                    <?php $featured_image_id = get_post_thumbnail_id();
+                        echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'sg_img', false, array('class' => 'img-fluid rounded-5 cust-img'))));
+                    ?>
+                <?php else:?>
+                    <?php
+                    $dietary_id = $dietary_supplements_block_1['dietary_supplements_block_1_image']['id'];
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($dietary_id, 'sg_img', false, array('class' => 'img-fluid rounded-5 cust-img'))
+                    )); ;?>
+                <?php endif;?>
                 </div>
                 <div class="col-12 col-lg-6 mt-5 mt-lg-0 text-center text-lg-start">
                     <div class="lh-lg text-secondary">
@@ -50,20 +60,29 @@ $page_title = get_the_title();
                 </div>
                 <div class="col-12 px-lg-5">
                     <div id="infographic" class="row px-lg-4">
-                        <?php foreach($dietary_supplements_block_2['dietary_supplements_block_2_icons'] as $get_supp_icon) : ?>
-                        <div class="col-12 col-md-6 col-xl-3 text-center text-lg-start mb-5 mb-xl-0">
+                    <?php foreach($dietary_supplements_block_2['dietary_supplements_block_2_icons'] as $get_supp_icon) : ?>
+                        <div class="col-12 col-md-4 text-center text-lg-start mb-5 mb-xl-0">
+                            <a href="<?php echo esc_url(!empty($get_supp_icon['dietary_supplements_block_2_page_link']) ? $get_supp_icon['dietary_supplements_block_2_page_link'] : '#!'); ?>" class="text-decoration-none">
                             <div class="card border-0 bg-transparent text-center">
                                 <div class="card-body">
-                                    <div class="num-wrap">
-                                        <img src="<?php echo esc_url($get_supp_icon['dietary_supplements_block_2_icon']['url']) ;?>" alt="<?php echo esc_attr($get_supp_icon['dietary_supplements_block_2_icon']['alt']) ;?>">
+                                    <div class="num-wrap"> 
+                                    <?php
+                                        $get_supp_id = $get_supp_icon['dietary_supplements_block_2_icon']['id'];
+                                        echo html_entity_decode(esc_html(
+                                        wp_get_attachment_image($get_supp_id, 'info_img', false,[])
+                                    ));?>
                                     </div>
-                                    <div class="cont mt-4 pt-3">
+                                    <div class="cont mt-4 pt-1">
+                                        <div class="mb-3">
+                                            <span class="fw-bold fs-4 text-primary"><?php echo esc_html($get_supp_icon['dietary_supplements_block_2_title']); ?></span>
+                                        </div>
                                         <div class="text-secondary">
-                                            <?php echo !empty($get_supp_icon['dietary_supplements_block_2_icon_content']) ? html_entity_decode(esc_html($get_supp_icon['dietary_supplements_block_2_icon_content'])) : ''; ?>
+                                        <?php echo !empty($get_supp_icon['dietary_supplements_block_2_icon_content']) ? html_entity_decode(esc_html($get_supp_icon['dietary_supplements_block_2_icon_content'])) : ''; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            </a>
                         </div>
                         <?php endforeach; ?>
                     </div>

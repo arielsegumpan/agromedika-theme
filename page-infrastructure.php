@@ -29,19 +29,28 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
 ?>  
 <main>
     <?php if (!empty($infrastructure_jumbotron['infrastructure_hero_title'])) : ?>
-        <section id="jumbotron-2" style="background-image: url('<?php echo esc_url($infrastructure_jumbotron['infrastructure_hero_image']['url']); ?>');">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-lg-8 mx-auto my-auto text-center">
-                        <h1 class="fw-bold text-black"><?php echo esc_html($infrastructure_jumbotron['infrastructure_hero_title']); ?></h1>
-                        <h5 class="text-black mt-4">
-                            <?php echo nl2br(esc_textarea($infrastructure_jumbotron['infrastructure_hero_sub_title'])); ?>
-                        </h5>
+        <section id="blog_jumb" class="position-relative overflow-hidden">
+        <div class="container-fluid px-0">
+          <div class="row">
+            <div class="position-relative">
+              <?php
+                $about_thumb_id = $infrastructure_jumbotron['infrastructure_hero_image']['id'];
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($about_thumb_id, 'blog_thumbnail', false, array('class' => 'single-blog-img w-100'))
+                )); ;?>
+                <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
+                  <div class="row"> 
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
+                      <h1 class="fw-bold text-black"><?php echo esc_html($infrastructure_jumbotron['infrastructure_hero_title']); ?></h1>
+                      <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($infrastructure_jumbotron['infrastructure_hero_sub_title'])); ?></h5>
                     </div>
-                </div>
+                  </div>
+                </div> 
             </div>
-            <div class="jumb-overlay"></div>
-        </section>
+          </div>
+        </div>
+        <div class="jumb-overlay"></div>
+      </section>
     <?php endif; ?>
 
     <?php if (!empty($infrastructure_facility['infrastructure_title']) && !empty($infrastructure_facility['infrastructure_image']['url'])) : ?>
@@ -55,8 +64,12 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                   </p>
               </div>
               <div class="col-12 col-lg-5">
-                <img src="<?php echo esc_url($infrastructure_facility['infrastructure_image']['url'])  ;?>" alt="<?php echo esc_attr($infrastructure_facility['infrastructure_image']['alt'])  ;?>" class="img-fluid rounded-4">
-              </div>
+                <?php
+                $infras_fac_id = $infrastructure_facility['infrastructure_image']['id'];
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($infras_fac_id, 'sg_img', false, array('class' => 'img-fluid rounded-5'))
+                ));?>
+                </div>
             </div>
         </div>
     </section>
@@ -73,7 +86,12 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                                 foreach ($infrastructure_rnd['infrastructure_rnd_images'] as $index => $rnd_img_gallery) :
                                     $col_class = ($index > 0) ? 'col' : 'col-12'; ?>
                                     <div class="<?php echo esc_attr($col_class); ?>">
-                                        <img src="<?php echo esc_url($rnd_img_gallery['infrastructure_rnd_image']['url']); ?>" alt="<?php echo esc_attr($rnd_img_gallery['infrastructure_rnd_image']['alt']); ?>" class="img-fluid rounded-4">
+                                        <?php
+                                            $rnd_img_id = $rnd_img_gallery['infrastructure_rnd_image']['id'];
+                                            echo html_entity_decode(esc_html(
+                                            wp_get_attachment_image($rnd_img_id, $index > 0 ? 'rnd_thumbnail' : 'company_thumbnail', false, array('class' => 'img-fluid rounded-5'))
+                                        )); ;?>
+                                    
                                     </div>
                                 <?php endforeach;
                             endif; ?>
@@ -103,7 +121,12 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                                 <?php
                                 foreach ($infrastructure_organic['infrastructure_organic_carousel'] as $key => $organic_carousel) : ?>
                                     <div class="carousel-item <?php echo esc_attr($key === 0 ? 'active' : ''); ?>">
-                                        <img src="<?php echo esc_url($organic_carousel['organic_carousel_image']['url']); ?>" alt="<?php echo esc_attr($organic_carousel['organic_carousel_image']['alt']); ?>" class="d-block w-100 rounded-4">
+                                        <?php
+                                        $org_id = $organic_carousel['organic_carousel_image']['id'];
+                                            echo html_entity_decode(esc_html(
+                                            wp_get_attachment_image($org_id, 'sg_img', false, array('class' => 'd-block w-100 rounded-5'))
+                                        )); ;?>
+                                        
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5><?php echo esc_html($organic_carousel['organic_carousel_title']); ?></h5>
                                             <p><?php echo nl2br(esc_textarea($organic_carousel['organic_carousel_content'])); ?></p>
@@ -129,7 +152,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
     <?php endif; ?>
     <?php if (!empty($infrastructure_gallery['infrastructure_gallery_title'])) : ?>   
         <section id="infras-gallery" class="bg-lteal">
-          <div class="container">
+          <div class="container"> 
             <div class="row">
               <div class="col-12 col-lg-9 mx-auto text-center mb-5">
                 <h2 class="fw-bold text-black mb-4"><?php echo esc_html($infrastructure_gallery['infrastructure_gallery_title']) ?></h2>
@@ -142,7 +165,11 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                     <div class="card border-0 bg-transparent">
                       <div class="card-image position-relative rounded-4">
                         <a href="<?php echo esc_url($infras_img['infrastructure_gallery_image']['url']) ;?>" class="text-decoration-none text-black" data-fancybox="gallery" data-caption="<?php echo esc_attr($infras_img['infrastructure_gallery_caption']) ;?>">
-                          <img src="<?php echo esc_url($infras_img['infrastructure_gallery_image']['url']) ;?>" alt="<?php echo esc_attr($infras_img['infrastructure_gallery_image']['alt']) ;?>" class="rounded-4">
+                          <?php
+                            $org_gall_id = $infras_img['infrastructure_gallery_image']['id'];
+                                echo html_entity_decode(esc_html(
+                                wp_get_attachment_image($org_gall_id, 'rnd_gall_thumbnail', false, array('class' => 'rounded-4'))
+                            )); ;?>
                         </a>
                       </div>
                     </div>

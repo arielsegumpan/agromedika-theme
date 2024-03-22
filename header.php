@@ -27,12 +27,16 @@
             <div class="container">
               <?php
                 $custom_logo_id = get_theme_mod('custom_logo');
-                $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
+                $logo_image = wp_get_attachment_image($custom_logo_id, 'logo_thumbnails', false, ['class' => 'mt-2']);
+                $logo_url = home_url('/'); // Link to the home page
                 if (has_custom_logo()) {
-                    echo '<a class="navbar-brand" href="' . esc_url(home_url('/')) . '"><img src="' . esc_url($logo[0]) . '" alt="' . get_bloginfo('name') . '"></a>';
+                  echo '<a href="' . esc_url($logo_url) . '">' . html_entity_decode(esc_html($logo_image)) . '</a>';
                 } else {
                     echo '<a class="navbar-brand text-white" href="' . esc_url(home_url('/')) . '">' . get_bloginfo('name') . '</a>';
                 }
+
+                
+
               ;?>
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 

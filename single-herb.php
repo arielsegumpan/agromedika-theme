@@ -19,25 +19,47 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
         <section id="products-single" class="bg-lteal">
           <div class="container">
             <div class="row">
-                <div class="col-12 text-center">
-                  <div class="mt-5 pt-lg-3">
-                      <div class="herb-wrap mb-5">
-                        <h1 class="text-primary fw-bold"><?php the_title() ;?></h1> 
-                        <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
-                        <h6 class="text-black"><small class="fst-italic"><?php echo esc_html($herb_single_contents['herb_scientific_name']) ;?></small></h6>
-                        <?php endif ;?>
-                        <?php
+              <div class="col-12">
+              <div class="d-flex flex-column flex-md-row justify-content-center jsutify-content-md-start gap-4 align-items-center">
+                <div class="prod-img">
+                  <?php
+                    if (has_post_thumbnail()) {
+                        $thumbnail_id = get_post_thumbnail_id();
+                        $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
+                        echo get_the_post_thumbnail($thumbnail_id, 'single_herb_thumbnail', array('class' => 'img-fluid rounded-5', 'alt' => $thumbnail_alt));
+                    } else {
+                        $single_content_id = $herb_single_contents['herbs_gallery'][0]['herb_image']['id'];
+                        echo wp_get_attachment_image($single_content_id, 'single_herb_thumbnail', false, array('class' => 'img-fluid rounded-5'));
+                    }
+                  ?>
+                </div>
+                <div>
+                  <div class="herb-wrap text-center text-md-start px-4 px-lg-0">
+                    <h1 class="text-primary fw-bold"><?php the_title() ;?></h1> 
+                    <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
+                    <h6 class="text-black"><small class="fst-italic"><?php echo esc_html($herb_single_contents['herb_scientific_name']) ;?></small></h6>
+                    <?php endif ;?>
+                    <?php
                           // Display herb categories
-                          if ($herb_categories && !is_wp_error($herb_categories)): ?>
-                            <div class="herb-categories mt-4">
-                               <p><small style="font-size:11px">
-                                <?php foreach ($herb_categories as $category): ?>
-                                    <span class="badge px-2 py-1 bg-primary rounded-3 text-lteal fst-italic"><?php echo esc_html($category->name);?></span>
-                                <?php endforeach;?>
-                                </small></p>
-                            </div>
-                          <?php endif;?>
+                    if ($herb_categories && !is_wp_error($herb_categories)): ?>
+                      <div class="herb-categories mt-4">
+                          <p><small class="d-flex flex-wrap justify-content-center justify-content-md-start gap-1" style="font-size:11px">
+                          <?php foreach ($herb_categories as $category): ?>
+                              <span class="badge px-2 py-1 bg-primary rounded-3 text-lteal fst-italic"><?php echo esc_html($category->name);?></span>
+                          <?php endforeach;?>
+                          </small></p>
                       </div>
+                    <?php endif;?>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-12 mx-auto text-center">
+                 
+                  <div class="mt-4 pt-lg-3 text-start">
                       <div class="lh-lg text-secondary mt-4">
                         <?php echo wp_kses_post($herb_single_contents['herb_short_description']) ;?>
                       </div>
@@ -62,18 +84,33 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                             <div class="mt-5">
                               <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Products', 'agromedika' ) ?></a>
                             </div>
-                            <?php endif; ?>
+                            <?php endif; ?> 
                         </div>
                         <div class="col-12 col-lg-5 order-1 order-lg-2 mb-4 mb-lg-0 mt-5 mt-lg-0">
                           <?php if(!empty(($herb_single_contents['herbs_gallery'][0]['herb_image']['url']))):?>
                           <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper"
                           thumbs-swiper=".mySwiper2" space-between="10" navigation="true"  zoom="true" >
                             <?php foreach ($herb_single_contents['herbs_gallery'] as $herb_gal) :?>
+
                             <swiper-slide>
                               <div class="swiper-zoom-container rounded-5">
-                                <img src="<?php echo esc_url($herb_gal['herb_image']['url']) ;?>" loading="lazy" class="rounded-5" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Tooltip on bottom" title="<?php echo esc_attr('Double click to zoom in') ?>"/>
+
+                                <figure class="w-100">
+                                  <?php
+                                    $hrb_img_id = $herb_gal['herb_image']['id'];
+                                    $image_caption = wp_get_attachment_caption($hrb_img_id);
+                                    echo html_entity_decode(esc_html(
+                                    wp_get_attachment_image($hrb_img_id, 'herb_thumbnail', false, array('class' => 'rounded-5', 'title' => 'Double click to zoom in'))
+                                  ));?>
+
+                                  <?php if (!empty($image_caption)): ?>
+                                    <figcaption><?php echo esc_html($image_caption) ;?></figcaption>
+                                  <?php endif;?>
+                                </figure>
+
                               </div>
                             </swiper-slide>
+
                             <?php endforeach ;?>
                           </swiper-container>
                       
@@ -81,7 +118,11 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                             watch-slides-progress="true">
                             <?php foreach ($herb_single_contents['herbs_gallery'] as $herb_gal) :?>
                             <swiper-slide>
-                              <img src="<?php echo esc_url($herb_gal['herb_image']['url']) ;?>" loading="lazy" class="rounded-4 rounded-lg-5" />
+                              <?php
+                                  $herb_gal_id =  $herb_gal['herb_image']['id'];
+                                  echo html_entity_decode(esc_html(
+                                  wp_get_attachment_image($herb_gal_id, 'herb_sm_thumbnail', false, array('class' => 'rounded-4 rounded-lg-5'))
+                                ));?>
                             </swiper-slide>
                             <?php endforeach ;?>
                           </swiper-container>
@@ -115,14 +156,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                                     <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox3" value="option3">
                                     <label class="form-check-label fw-bold" for="inlineCheckbox3">Safety Data Sheet</label>
                                   </div>
-                                  <div class="form-check form-check-inline me-3 mb-3">
-                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox4" value="option4">
-                                    <label class="form-check-label fw-bold" for="inlineCheckbox4">Certificate of Analysis</label>
-                                  </div>
-                                  <div class="form-check form-check-inline me-3 mb-3">
-                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox5" value="option5">
-                                    <label class="form-check-label fw-bold" for="inlineCheckbox5">Certificate of Conformity</label>
-                                  </div>
+                                  
                                 </div>
                                 <div class="col-12 mb-4">
                                   <div class="form-floating mb-3">

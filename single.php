@@ -5,27 +5,36 @@
 get_header();
 $post_id = get_the_ID();
 $image_id = get_post_thumbnail_id($post_id);
-$alt_text = get_post_meta($image_id, '_wp_attachment_image_alt', true);
 ?>
 <main>
     <?php if(has_post_thumbnail()):?>
-    <section id="jumbotron-2" style="background: url('<?php echo esc_url(get_the_post_thumbnail_url($post_id));?>') center/cover no-repeat;">
-        <div class="container">
+    <section id="blog_jumb" class="position-relative overflow-hidden">
+        <div class="container-fluid px-0">
           <div class="row">
-            <div class="col-12 col-lg-8 mx-auto my-auto text-center">
-            <?php if (is_single() && !is_front_page()) : ?>
-                <h2 class="fw-bold text-black"><?php single_post_title(); ?></h2>
-                <?php endif; ?>
-                <?php if (shortcode_exists('post_categories')) : ?>
+            <div class="position-relative">
+              <?php
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($image_id, 'blog_thumbnail', false, array('class' => 'single-blog-img w-100'))
+                )); ;?>
+                <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
+                  <div class="row"> 
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
+                    <?php if (is_single() && !is_front_page()) : ?>
+                    <h2 class="fw-bold text-black"><?php single_post_title(); ?></h2>
+                    <?php endif; ?>
+                    <?php if (shortcode_exists('post_categories')) : ?>
                     <div class="d-flex flex-wrap flex-row text-center g-5 text-md-start mt-4 justify-content-center align-items-start">
                         <?php echo do_shortcode('[post_categories]'); ?>
                     </div>
-                <?php endif ?>
+                    <?php endif ?>
+                    </div>
+                  </div>
+                </div> 
             </div>
           </div>
         </div>
         <div class="jumb-overlay"></div>
-    </section>
+      </section>
     <?php endif;?>
     <section id="blog" class="single_blog">
         <div class="container">

@@ -15,7 +15,7 @@
 $query = new WP_Query($args);
 
 $infographic_content = get_acf_field('infographic_content');
-$infographic_images = get_field('infographic_images');
+// $infographic_images = get_field('infographic_images');
 ?>
 <main>
     <section id="no-jumbotron" class="bg-lteal">
@@ -52,9 +52,10 @@ $infographic_images = get_field('infographic_images');
                             while ($query->have_posts()) :
                                 $query->the_post(); 
 
-                                $infographic_images = get_field('infographic_images');
-                                $cert_image_url = esc_url($infographic_images['infographic_image']['url']);
-                                $image_alt = esc_attr($infographic_images['infographic_image']['alt']) ;
+                                $infographic_images = get_acf_field('infographic_images');
+
+                                $thumbnail_url = get_the_post_thumbnail_url(get_the_ID());
+                                $cert_image_url = !empty($thumbnail_url) ? esc_url($thumbnail_url) : esc_url($infographic_images['infographic_image']['url']);
                                 $caption = esc_attr(get_the_title());
                                 $data_id = '';
                                 $categories = get_the_terms(get_the_ID(), 'infographic-category');
@@ -68,7 +69,20 @@ $infographic_images = get_field('infographic_images');
                                 <div class="card border-0 bg-transparent rounded-4">
                                     <div class="card-image position-relative rounded-4">
                                         <a href="<?php echo $cert_image_url; ?>" class="text-decoration-none text-black" data-fancybox="gallery" data-id="<?php echo esc_attr($data_id); ?>" data-caption="<?php echo $caption; ?>">
-                                            <img src="<?php echo $cert_image_url; ?>" alt="<?php echo $image_alt; ?>" class="rounded-4">
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <?php $featured_image_id = get_post_thumbnail_id();
+                                                    echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'gallery_img', false, array('class' => 'rounded-4'))));
+                                                ?>
+                                            <?php else:?> 
+                                                <?php
+                                                    $gall_cert_id = $infographic_images['infographic_image']['id'];
+                                                    echo html_entity_decode(esc_html(
+                                                    wp_get_attachment_image($gall_cert_id, 'gallery_img', false, array('class' => 'rounded-4'))
+                                                ));?>
+                                            <?php endif; ?>
+                                        
+                                        
+                                        
                                         </a>
                                     </div>
                                 </div>

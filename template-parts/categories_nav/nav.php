@@ -17,7 +17,7 @@ if (false === $footer_menus_categories) {
 }
 
 if (!empty($footer_menus_categories) && is_array($footer_menus_categories)) :
-    echo '<ul class="nav flex-column mt-4 ps-lg-5">';
+    echo '<ul class="nav flex-column mt-4 ps-lg-3">';
     foreach ($footer_menus_categories as $menu_item) :
         if (!$menu_item->menu_item_parent) :
             $child_menu_items = $menu_class->get_child_menu_items($footer_menus_categories, $menu_item->ID);

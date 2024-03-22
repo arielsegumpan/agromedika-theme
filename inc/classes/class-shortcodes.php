@@ -19,6 +19,7 @@ namespace AGROMEDIKA_THEME\Inc;
         add_shortcode('social_share_buttons', array($this, 'social_share_buttons_shortcode'));
         add_shortcode('get_prod_menu_catalogue', [$this,'get_prod_menu_catalogue_shortcode']);
         add_shortcode('agromedika_get_approve_doh_product', [$this, 'agromedika_get_approve_doh_products']);
+        add_shortcode('get_supplements_prod_cat_display', [$this, 'get_supplements_prod_cat']);
     }
 
     public function social_share_buttons_shortcode($atts) {
@@ -70,24 +71,24 @@ namespace AGROMEDIKA_THEME\Inc;
             'taxonomy' => 'herb-category',
             'hide_empty' => false,
         ));
-    
+        
         $output = '';
-    
+        
         foreach ($categories as $category) {
             $args = array(
-                'post_type'      => 'herb',
+                'post_type' => 'herb',
                 'posts_per_page' => -1,
-                'tax_query'      => array(
+                'tax_query' => array(
                     array(
                         'taxonomy' => 'herb-category',
-                        'field'    => 'slug',
-                        'terms'    => sanitize_text_field($category->slug), // Sanitize the term slug
+                        'field' => 'slug',
+                        'terms' => $category->slug, // Sanitization not required, WordPress function get_terms already returns sanitized values
                     ),
                 ),
             );
-    
+        
             $query = new \WP_Query($args);
-    
+        
             if ($query->have_posts()) {
                 $output .= '<div class="row mb-5 pb-lg-3">';
                 $output .= '<div class="col-12">';
@@ -96,7 +97,7 @@ namespace AGROMEDIKA_THEME\Inc;
                 $output .= '<table class="table table-striped table-borderless mt-4">';
                 $output .= '<tbody>';
                 $output .= '<tr>';
-    
+        
                 $count = 0;
                 while ($query->have_posts()) {
                     $query->the_post();
@@ -105,26 +106,106 @@ namespace AGROMEDIKA_THEME\Inc;
                     $output .= esc_html(get_the_title());
                     $output .= '</a>';
                     $output .= '</td>';
-    
+        
                     $count++;
                     if ($count % 4 == 0) {
                         $output .= '</tr><tr>';
                     }
                 }
-    
+        
                 $output .= '</tbody>';
                 $output .= '</table>';
                 $output .= '</div>';
                 $output .= '</div>';
                 $output .= '</div>';
             }
-    
+        
             wp_reset_postdata();
         }
-    
+        
         return $output;
+        
+    }
+    
+    function get_supplements_prod_cat(){
+    
+      // Define an array of possible spellings and cases
+        $possible_names = array('Dietary Supplements', 'Dietary Supplement', 'Supplements', 'Supplement', 'Dietary', 'dietary supplements', 'dietary supplement', 'supplements', 'supplement', 'dietary');
+
+        // Initialize the term variable
+        $dietary_supplements_term = false;
+
+        // Find the correct term
+        foreach ($possible_names as $name) {
+            $term = get_term_by('name', $name, 'application-category');
+            if ($term && !is_wp_error($term)) {
+                $dietary_supplements_term = $term;
+                break;
+            }
+        }
+
+        if ($dietary_supplements_term) {
+            // Get all the child terms of the "Dietary Supplements" category
+            $child_terms = get_term_children($dietary_supplements_term->term_id, 'application-category');
+
+            // Initialize an array to store the child categories
+            $child_categories = array();
+
+            // Output Bootstrap table header
+            echo '<div class="table-responsive"><table class="table table-md table-striped align-middle">';
+            echo '<thead><tr><th>Products</th>';
+            foreach ($child_terms as $child_term_id) {
+                $child_term = get_term($child_term_id, 'application-category');
+                $child_categories[$child_term_id] = $child_term->name;
+                echo '<th>' . esc_html($child_term->name) . '</th>';
+            }
+            echo '</tr></thead>';
+            echo '<tbody class="table-group-divider">';
+
+            // Loop through each post
+            $args = array(
+                'post_type' => 'herb',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'application-category',
+                        'field' => 'term_id',
+                        'terms' => $child_terms,
+                    ),
+                ),
+            );
+
+            $query = new \WP_Query($args);
+
+            if ($query->have_posts()) {
+                while ($query->have_posts()) {
+                    $query->the_post();
+                    $post_id = get_the_ID();
+                    echo '<tr><td><a href="' . esc_url(get_permalink($post_id)) . '" class="text-decoration-none text-primary">' . esc_html(get_the_title($post_id)) . '</a></td>';
+                    foreach ($child_terms as $child_term_id) {
+                        $has_post = has_term($child_term_id, 'application-category', $post_id);
+                        echo '<td>' . ($has_post ? '<i class="bi bi-check-circle text-primary"></i>' : '<i class="bi bi-x-circle text-danger"></i>') . '</td>';
+                    }
+                    echo '</tr>';
+                }
+            }
+
+            wp_reset_postdata();
+
+            echo '</tbody>';
+            echo '</table></div>';
+        } else {
+            // Handle case where the term does not exist
+            echo 'The term does not exist.';
+        }
+
+
+
+
+
     }
 
+    
     //Get herb doh approved
     function agromedika_get_approve_doh_products() {
         $args = array(
@@ -146,9 +227,15 @@ namespace AGROMEDIKA_THEME\Inc;
                                 <div class="row g-0 align-items-center">
                                     <div class="col-12 col-xl-4 text-center">
                                     <?php if (has_post_thumbnail()) : ?>
-                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="img-fluid rounded-4">
+                                        <?php $featured_image_id = get_post_thumbnail_id();
+                                            echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'doh_thumbnail', false, array('class' => 'img-fluid rounded-4'))));
+                                        ?>
                                     <?php else:?>
-                                        <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="img-fluid rounded-4">
+                                        <?php
+                                            $scientific_name_id = $scientific_name['herbs_gallery'][0]['herb_image']['id'];
+                                            echo html_entity_decode(esc_html(
+                                            wp_get_attachment_image($scientific_name_id, 'doh_thumbnail', false,['class' => 'img-fluid rounded-4'])
+                                        ));?>
                                     <?php endif; ?>
                                     </div>
                                     <div class="col-12 col-xl-8 text-center text-xl-start mt-3 mt-xl-0">

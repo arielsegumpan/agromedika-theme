@@ -37,19 +37,25 @@ class RecentProductPost {
                         <a href="<?php the_permalink(); ?>" class="text-decoration-none">
                             <div class="card border-0 bg-transparent">
                                 <div class="rounded-5 mx-auto">
-                                    <?php if (has_post_thumbnail()) : ?>
-                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true)) ?>" class="rounded-5">
-                                    <?php else:?>
-                                        <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="rounded-5">
-                                    <?php endif; ?>
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php $featured_image_id = get_post_thumbnail_id();
+                                        echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'product_img', false, array('class' => 'rounded-5'))));
+                                    ?>
+                                <?php else:?>
+                                    <?php
+                                        $prod_hm_id =  $scientific_name['herbs_gallery'][0]['herb_image']['id'];
+                                        echo html_entity_decode(esc_html(
+                                        wp_get_attachment_image($prod_hm_id, 'product_img', false, array('class' => 'd-block w-100'))
+                                    ));?>
+                                <?php endif; ?>
                                 </div>
                                 <div class="prod-title text-center mt-4">
-                                    <h5 class="text-primary fw-bold"><?php the_title(); ?></h5>
-                                    <?php if (!empty($scientific_name['herb_scientific_name'])) : ?>
-                                        <small class="text-secondary fst-italic">
-                                            <?php echo esc_html('(' . $scientific_name['herb_scientific_name'] . ')'); ?>
-                                        </small>
-                                    <?php endif; ?>
+                                    <h6 class="text-primary"><?php the_title();?></h6>
+                                <?php if (!empty($scientific_name['herb_scientific_name'])) : ?>
+                                    <small class="text-secondary fst-italic">
+                                        <?php echo esc_html('(' . $scientific_name['herb_scientific_name'] . ')'); ?>
+                                    </small>
+                                <?php endif; ?>
                                 </div>
                             </div>
                         </a>

@@ -24,7 +24,7 @@ $extract_list_jumbotron = get_acf_field('extract_list_jumbotron');
      <section id="main" class="bg-lteal">
          <div class="container">
              <div class="row">
-                 <div class="col-12 col-md-8 col-lg-9 mt-5 mt-lg-0 mx-auto">
+                 <div class="col-12 mx-auto">
                      <div class="cont-img">
                         <?php if(have_posts( ) && !empty(get_the_content())) : while(have_posts(  )) : the_post() ; ?>
                           <?php the_content() ?>

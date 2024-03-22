@@ -14,7 +14,9 @@ if ($getPost->have_posts()) :
     <div class="col">
         <a href="<?php echo esc_url(get_permalink()); ?>" class="text-decoration-none">
             <?php if (has_post_thumbnail()) : ?>
-                <img src="<?php echo esc_url(get_the_post_thumbnail_url(get_the_ID())); ?>" alt="<?php echo esc_attr(get_the_title()); ?>" class="img-fluid object-fit-cover rounded-4">
+                <?php $recent_thumb = get_post_thumbnail_id();
+                    echo html_entity_decode(esc_html(wp_get_attachment_image($recent_thumb, 'recent_thumbnails', false, array('class' => 'img-fluid object-fit-cover rounded-4'))));
+                ?>
             <?php endif; ?>
         </a>
     </div>

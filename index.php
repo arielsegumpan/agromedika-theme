@@ -11,17 +11,28 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
 ?>
 <main>
     <?php if(!empty($blog_jumbotron['blog_hero_title'])) :?>
-    <section id="jumbotron-2" style="background-image: url('<?php  echo esc_url($blog_jumbotron['blog_hero_image']['url']);?>');">
-        <div class="container">
+    <section class="bg-lteal" id="blog_jumb" class="position-relative overflow-hidden">
+        <div class="container-fluid px-0">
           <div class="row">
-            <div class="col-12 col-lg-8 mx-auto my-auto text-center">
-              <h1 class="fw-bold text-black"><?php echo esc_html($blog_jumbotron['blog_hero_title']) ;?></h1>
-              <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($blog_jumbotron['blog_hero_sub_title'])) ;?></h5>
+            <div class="position-relative">
+              <?php
+                $about_thumb_id = $blog_jumbotron['blog_hero_image']['id'];
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($about_thumb_id, 'blog_thumbnail', false, array('class' => 'single-blog-img w-100'))
+                )); ;?>
+                <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
+                  <div class="row"> 
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
+                      <h1 class="fw-bold text-black"><?php echo esc_html($blog_jumbotron['blog_hero_title']) ;?></h1>
+                      <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($blog_jumbotron['blog_hero_sub_title'])) ;?></h5>
+                    </div>
+                  </div>
+                </div> 
             </div>
           </div>
         </div>
         <div class="jumb-overlay"></div>
-    </section>
+      </section>
     <?php  endif;?>
 
     <section id="blog">

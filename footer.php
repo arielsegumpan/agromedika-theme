@@ -37,10 +37,20 @@ $page_footer_certificate_icons = $option_values['page_footer_certificate']['page
                 <div class="col-12 col-lg-3 text-center text-lg-start">
                     <div class="footer-logo">
                         <a href="<?php echo esc_url($page_footer_about['page_about_page_link']); ?>" class="text-decoration-none">
-                            <img src="<?php echo esc_url($page_footer_about['page_about_logo_icon']['url']); ?>" alt="<?php echo esc_html($page_footer_about['page_about_logo_icon']['alt']); ?>">
+                            <?php
+                                $foot_img_id = $page_footer_about['page_about_logo_icon']['id'];
+                                echo html_entity_decode(esc_html(
+                                wp_get_attachment_image($foot_img_id, 'foot_main_logo', false, array())
+                            )); ;?>
                         </a>
                         <p class="text-lteal mt-4">
-                            <?php echo nl2br(esc_textarea($page_footer_about['page_about_content'])); ?>
+                            <a href="<?php echo esc_url($page_footer_about['page_company_link']) ?>" class="text-decoration-none text-lteal">
+                                <?php
+                                $page_about_content = $page_footer_about['page_about_content'];
+                                $trimmed_content = wp_trim_words(esc_textarea($page_about_content), 40);
+                                echo nl2br($trimmed_content);
+                                ?>
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -51,7 +61,7 @@ $page_footer_certificate_icons = $option_values['page_footer_certificate']['page
             </div>
 
             <div class="col-12 col-lg-3 text-center text-lg-start mt-5 mt-lg-0">
-                <h6 class="fw-bold text-uppercase text-lteal ps-lg-5"><?php echo esc_html('Product Indications') ?></h6>
+                <h6 class="fw-bold text-uppercase text-lteal ps-lg-3"><?php echo esc_html('Product Indications') ?></h6>
                 <?php if(has_nav_menu('agromedika-header-menu')):?>
                     <?php get_template_part('template-parts/categories_nav/nav'); ?>
                 <?php endif; ?>
@@ -59,7 +69,7 @@ $page_footer_certificate_icons = $option_values['page_footer_certificate']['page
 
             <?php if (!empty($page_footer_address_and_contact['page_footer_address'])) : ?>
                 <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0 text-center text-lg-start">
-                    <h6 class="fw-bold text-uppercase text-lteal mb-4"><?php echo esc_html_e('Address') ?></h6>
+                    <h6 class="fw-bold text-uppercase text-lteal mb-4"><?php echo esc_html_e('Contact Us') ?></h6>
 
                     <p class="text-lteal mb-4"><i class="bi bi-geo-alt text-lteal fs-6 me-2"></i><?php echo esc_html($page_footer_address_and_contact['page_footer_address']); ?></p>
                     <?php if (!empty($page_footer_contacts)) : ?>
@@ -84,11 +94,16 @@ $page_footer_certificate_icons = $option_values['page_footer_certificate']['page
         </div>
         <div class="row pb-2">
          <div class="col-12 col-lg-6 mx-auto">
-          <div id="cert_logo" class="order-1 order-lg-2 row row-cols-2 row-cols-sm-4 row-cols-lg-4 g-4 mb-lg-2 text-center">
+          <div id="cert_logo" class="d-flex flex-row justify-content-center -align-items-center">
             <?php if(!empty($page_footer_certificate_icons[0]['page_footer_certificate_icon']['url'])) :?>
             <?php foreach ($page_footer_certificate_icons as $get_cert_icon):?>
-            <div class="col">
-                <img src="<?php echo esc_url($get_cert_icon['page_footer_certificate_icon']['url']) ?>" alt="<?php echo esc_attr($get_cert_icon['page_footer_certificate_icon']['alt']) ?>">
+            <div class="col text-center">
+                <?php
+                $foot_id = $get_cert_icon['page_footer_certificate_icon']['id'];
+                echo html_entity_decode(esc_html(
+                  wp_get_attachment_image($foot_id, 'footer_logo', false, array())
+                )); ;?>
+
             </div>
             <?php endforeach;?>
             <?php endif;?>

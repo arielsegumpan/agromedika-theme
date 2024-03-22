@@ -5,7 +5,7 @@
  */
 get_header();
 ?>
-<main>
+<main class="bg-lteal">
     <section id="blog">
         <div class="container">
 

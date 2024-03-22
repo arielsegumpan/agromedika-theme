@@ -27,17 +27,28 @@ get_header();
 
 <main>
     <?php if(!empty($quality_jumbotron['quality_hero_title']) && !empty($quality_jumbotron['quality_hero_image']['url'])) :?>
-    <section id="jumbotron-2" style="background-image: url('<?php echo esc_url($quality_jumbotron['quality_hero_image']['url']) ?>');">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-8 mx-auto my-auto text-center">
-                  <h1 class="fw-bold text-black"><?php echo esc_html($quality_jumbotron['quality_hero_title']) ;?></h1>
-                  <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea( $quality_jumbotron['quality_hero_sub_title'] )) ;?></h5>
-                </div>
-              </div>
+    <section id="blog_jumb" class="position-relative overflow-hidden">
+        <div class="container-fluid px-0">
+          <div class="row">
+            <div class="position-relative">
+              <?php
+                $qual_thumb_id = $quality_jumbotron['quality_hero_image']['id'];
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($qual_thumb_id, 'blog_thumbnail', false, array('class' => 'single-blog-img w-100'))
+                )); ;?>
+                <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
+                  <div class="row"> 
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
+                      <h1 class="fw-bold text-black"><?php echo esc_html($quality_jumbotron['quality_hero_title']) ;?></h1>
+                      <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea( $quality_jumbotron['quality_hero_sub_title'] )) ;?></h5>
+                    </div>
+                  </div>
+                </div> 
             </div>
+          </div>
+        </div>
         <div class="jumb-overlay"></div>
-    </section>
+      </section>
     <?php endif ;?>
     <?php if(!empty($quality_control['quality_control_title']) && !empty($quality_control['quality_control_content'])) :?>
     <section id="quality_control">
@@ -48,7 +59,11 @@ get_header();
                   <p class="lh-lg text-secondary mt-4"><?php echo nl2br(esc_textarea($quality_control['quality_control_content']));?></p>
                 </div>
                 <div class="col-12 mt-4">
-                  <img src="<?php echo esc_url($quality_control['quality_control_image']['url']) ;?>" alt="<?php echo esc_attr($quality_control['quality_control_image']['alt']) ;?>" class="qa-img-1 img-fluid rounded-4">
+                  <?php
+                  $qual_control_id = $quality_control['quality_control_image']['id'];
+                      echo html_entity_decode(esc_html(
+                      wp_get_attachment_image($qual_control_id, 'company_team_thumbnail', false, array('class' => 'qa-img-1 img-fluid rounded-5'))
+                  ));?>
                 </div>
               </div>
               
@@ -65,7 +80,12 @@ get_header();
                       <div class="col">
                         <div class="d-flex">
                           <div class="flex-shrink-0">
-                            <img src="<?php echo esc_url($qa_card['quality_assurance_card_image']['url']) ;?>" alt="<?php echo esc_attr($qa_card['quality_assurance_card_image']['alt']) ;?>">
+                            <?php
+                            $qa_card_id = $qa_card['quality_assurance_card_image']['id'];
+                                echo html_entity_decode(esc_html(
+                                wp_get_attachment_image($qa_card_id, 'qual_info_thumbnail', false,[])
+                            ));?>
+                          
                           </div>
                           <div class="flex-grow-1 ms-3 text-secondary">
                             <?php echo esc_html($qa_card['quality_assurance_card_content']);?>
@@ -79,7 +99,13 @@ get_header();
                 </div>
                 <?php if(!empty($quality_assurance['quality_assurance_image']['url'])) :?>
                 <div class="col-12 col-lg-4 mt-5 mt-lg-0">
-                  <img src="<?php echo esc_url($quality_assurance['quality_assurance_image']['url']) ;?>" alt="<?php echo esc_url($quality_assurance['quality_assurance_image']['alt']);?>" class="qa-img-2 img-fluid rounded-4">
+               
+                  <?php
+                    $qual_assur_id = $quality_assurance['quality_assurance_image']['id'];
+                    echo html_entity_decode(esc_html(
+                    wp_get_attachment_image($qual_assur_id, 'quality_assurance_thumbnail', false,['class' => 'qa-img-2 img-fluid rounded-5'])
+                  ));?>
+                
                 </div>
                 <?php endif ;?>
             </div>

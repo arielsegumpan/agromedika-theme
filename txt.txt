@@ -771,3 +771,39 @@ endif;
 <div class="prod-img">
     <img src="<?php echo esc_url($sproduct_image_url) ?>" alt="<?php echo esc_attr($sproduct_image_alt)?>" class="img-fluid rounded-5">
 </div>
+
+
+
+
+
+
+
+
+
+
+
+          <div id="cert_logo" class="order-1 order-lg-2 row row-cols-sm-4 row-cols-lg-4 g-lg-4 mb-lg-2 text-center">
+            <?php if(!empty($page_footer_certificate_icons[0]['page_footer_certificate_icon']['url'])) :?>
+            <?php foreach ($page_footer_certificate_icons as $get_cert_icon):?>
+            <div class="col">
+                <img src="<?php echo esc_url($get_cert_icon['page_footer_certificate_icon']['url']) ?>" alt="<?php echo esc_attr($get_cert_icon['page_footer_certificate_icon']['alt']) ?>">
+            </div>
+            <?php endforeach;?>
+            <?php endif;?>
+          </div>
+
+
+
+
+
+
+
+ <img src="<?php echo esc_url($background_image); ?>" alt="<?php echo esc_attr($acf_values['home_jumbotron']['home_jumbotron_image']['alt']) ;?>" class="object-fit-cover">
+
+
+<img id="home-about-img" src="<?php echo esc_url($home_about_image['home_about_image']['url']); ?>" alt="<?php echo esc_attr($home_about_image['home_about_image']['alt']) ?>" class="rounded-5 object-fit-cover">
+
+<img src="<?php echo esc_url($get_prod_carous['home_page_carousel_image']['url']) ;?>" class="d-block w-100" alt="<?php echo esc_attr($get_prod_carous['home_page_carousel_image']['alt']) ;?>">
+
+
+ <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="rounded-5">

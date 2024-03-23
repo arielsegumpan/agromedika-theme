@@ -85,5 +85,6 @@
         add_image_size( 'quality_assurance_thumbnail', 416 , 500 ,true );
         add_image_size( 'single_herb_thumbnail', 300 , 280 ,true );
         add_image_size( 'company_jumbotron', 1400 , 933 ,true );
+        add_image_size( 'cust_img_thumb', 30 , 30 ,true );
     } 
  }

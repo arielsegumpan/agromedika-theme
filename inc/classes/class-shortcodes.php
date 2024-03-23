@@ -20,6 +20,10 @@ namespace AGROMEDIKA_THEME\Inc;
         add_shortcode('get_prod_menu_catalogue', [$this,'get_prod_menu_catalogue_shortcode']);
         add_shortcode('agromedika_get_approve_doh_product', [$this, 'agromedika_get_approve_doh_products']);
         add_shortcode('get_supplements_prod_cat_display', [$this, 'get_supplements_prod_cat']);
+        add_shortcode('get_oil_prod_categories', [$this, 'get_oils_prod_categories']);
+        add_shortcode('get_food_prod_categories', [$this, 'get_foods_prod_categories']);
+        add_shortcode('get_personal_cosmetic_categories', [$this, 'get_personal_cosmetics_categories']);
+        add_shortcode('get_animal_nutrition_categories', [$this, 'get_animal_nutritions_categories']);
     }
 
     public function social_share_buttons_shortcode($atts) {
@@ -204,8 +208,6 @@ namespace AGROMEDIKA_THEME\Inc;
 
 
     }
-
-    
     //Get herb doh approved
     function agromedika_get_approve_doh_products() {
         $args = array(
@@ -228,13 +230,13 @@ namespace AGROMEDIKA_THEME\Inc;
                                     <div class="col-12 col-xl-4 text-center">
                                     <?php if (has_post_thumbnail()) : ?>
                                         <?php $featured_image_id = get_post_thumbnail_id();
-                                            echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'doh_thumbnail', false, array('class' => 'img-fluid rounded-4'))));
+                                            echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'cust_img_thumb', false, array('class' => 'img-fluid rounded-4'))));
                                         ?>
                                     <?php else:?>
                                         <?php
                                             $scientific_name_id = $scientific_name['herbs_gallery'][0]['herb_image']['id'];
                                             echo html_entity_decode(esc_html(
-                                            wp_get_attachment_image($scientific_name_id, 'doh_thumbnail', false,['class' => 'img-fluid rounded-4'])
+                                            wp_get_attachment_image($scientific_name_id, 'cust_img_thumb', false,['class' => 'img-fluid rounded-4'])
                                         ));?>
                                     <?php endif; ?>
                                     </div>
@@ -259,4 +261,348 @@ namespace AGROMEDIKA_THEME\Inc;
             <p class="text-center"><?php esc_html_e('No herb-approved display.', 'agromedika'); ?></p>
         <?php endif;
     }
+
+    function get_oils_prod_categories(){
+       // Initialize output variable
+        $output = '';
+        $essential_oils_term = '';
+
+        $possible_names = array('Essential Oils', 'Essential Oil', 'Essential', 'Oils', 'essential oils', 'essential oil', 'essential', 'oils', 'essential oil');
+
+        // Find the correct term
+        foreach ($possible_names as $name) {
+            $term = get_term_by('name', $name, 'application-category');
+            if ($term && !is_wp_error($term)) {
+                $essential_oils_term = $term;
+                break;
+            }
+        }
+
+        $essential_oils_term;
+
+        // Check if the term exists
+        if ($essential_oils_term) {
+            // Query posts using WP_Query
+            $args = array(
+                'post_type' => 'herb',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'application-category',
+                        'field' => 'term_id',
+                        'terms' => $essential_oils_term->term_id,
+                    ),
+                ),
+            );
+
+            $query = new \WP_Query($args);
+
+            // Check if posts are found
+            if ($query->have_posts()) {
+                $output .= '<div class="row mb-5 pb-lg-3">'. "\n";
+                $output .= '<div class="col-12 table-responsive">';
+                $output .= '<table class="table table-md table-striped align-middle">';
+                $output .= '<tbody>';
+                $output .= '<tr>';
+
+                $count = 0;
+                while ($query->have_posts()) {
+                    $query->the_post();
+                    $herb_single_contents = get_acf_field('herb_single_contents');
+
+                    $output .= '<td class="w-25">';
+                    $output .= '<a href="' . esc_url(get_permalink()) . '" class="text-primary text-decoration-none">';
+                    // Output the thumbnail
+                    $output .= '<div class="thumbnail d-flex flex-row g-2 align-items-center">';
+                    $output .= has_post_thumbnail() ? wp_get_attachment_image(get_post_thumbnail_id(), 'cust_img_thumb', false,['class' => 'rounded-4']) : wp_get_attachment_image($herb_single_contents['herbs_gallery'][0]['herb_image']['id'], 'cust_img_thumb', false,['class' => 'rounded-4']);
+                    $output .= '<span class="ms-3">' . esc_html(get_the_title()) . '</span>';
+                    $output .= '</div>';
+                    $output .= '</a>';
+                    $output .= '</td>';
+
+
+                    $count++;
+                    if ($count % 4 == 0) {
+                        $output .= '</tr><tr>';
+                    } 
+                }
+
+                $output .= '</tbody>';
+                $output .= '</table>';
+                $output .= '</div>';
+                $output .= '</div>';
+            } else {
+                // Handle case when no posts are found
+                $output .= '<p>No herb posts found for Essential Oils.</p>';
+            }
+
+            // Reset post data
+            wp_reset_postdata();
+        } else {
+            // Handle case when term is not found
+            $output .= '<p>Term "Essential Oils" not found in application-category taxonomy.</p>';
+        }
+
+        // Return output
+        return $output;
+    }
+
+
+    function get_foods_prod_categories(){
+        // Initialize output variable
+         $output = '';
+         $essential_oils_term = '';
+ 
+         $possible_names = array('Functional Foods', 'Functional Food', 'Functional', 'Food', 'functional food', 'functional', 'food', 'functional foods');
+ 
+         // Find the correct term
+         foreach ($possible_names as $name) {
+             $term = get_term_by('name', $name, 'application-category');
+             if ($term && !is_wp_error($term)) {
+                 $essential_oils_term = $term;
+                 break;
+             }
+         }
+ 
+         $essential_oils_term;
+ 
+         // Check if the term exists
+         if ($essential_oils_term) {
+             // Query posts using WP_Query
+             $args = array(
+                 'post_type' => 'herb',
+                 'posts_per_page' => -1,
+                 'tax_query' => array(
+                     array(
+                         'taxonomy' => 'application-category',
+                         'field' => 'term_id',
+                         'terms' => $essential_oils_term->term_id,
+                     ),
+                 ),
+             );
+ 
+             $query = new \WP_Query($args);
+ 
+             // Check if posts are found
+             if ($query->have_posts()) {
+                 $output .= '<div class="row mb-5 pb-lg-3">'. "\n";
+                 $output .= '<div class="col-12 table-responsive">';
+                 $output .= '<table class="table table-md table-striped align-middle">';
+                 $output .= '<tbody>';
+                 $output .= '<tr>';
+ 
+                 $count = 0;
+                 while ($query->have_posts()) {
+                     $query->the_post();
+                     $herb_single_contents = get_acf_field('herb_single_contents');
+ 
+                     $output .= '<td class="w-25">';
+                     $output .= '<a href="' . esc_url(get_permalink()) . '" class="text-primary text-decoration-none">';
+                     // Output the thumbnail
+                     $output .= '<div class="thumbnail d-flex flex-row g-2 align-items-center">';
+                     $output .= has_post_thumbnail() ? wp_get_attachment_image(get_post_thumbnail_id(), 'cust_img_thumb', false,['class' => 'rounded-4']) : wp_get_attachment_image($herb_single_contents['herbs_gallery'][0]['herb_image']['id'], 'cust_img_thumb', false,['class' => 'rounded-4']);
+                     $output .= '<span class="ms-3">' . esc_html(get_the_title()) . '</span>';
+                     $output .= '</div>';
+                     $output .= '</a>';
+                     $output .= '</td>';
+ 
+ 
+                     $count++;
+                     if ($count % 4 == 0) {
+                         $output .= '</tr><tr>';
+                     } 
+                 }
+ 
+                 $output .= '</tbody>';
+                 $output .= '</table>';
+                 $output .= '</div>';
+                 $output .= '</div>';
+             } else {
+                 // Handle case when no posts are found
+                 $output .= '<p>No herb posts found for Functional Food.</p>';
+             }
+ 
+             // Reset post data
+             wp_reset_postdata();
+         } else {
+             // Handle case when term is not found
+             $output .= '<p>Term "Functional Food" not found.</p>';
+         }
+ 
+         // Return output
+         return $output;
+    }
+
+    function get_personal_cosmetics_categories(){
+        // Initialize output variable
+         $output = '';
+         $personal_cosmetics_term = '';
+ 
+         $possible_names = array('Personal Care/Cosmetic', 'personal care/cosmetic', 'Personal Care Cosmetics', 'Personal Care Cosmetic', 'Personal Care', 'Personal', 'Cosmetics', 'Care Cosmetics', 'Personal Cosmetics', 'personal care cosmetics');
+ 
+         // Find the correct term
+         foreach ($possible_names as $name) {
+             $term = get_term_by('name', $name, 'application-category');
+             if ($term && !is_wp_error($term)) {
+                 $personal_cosmetics_term = $term;
+                 break;
+             }
+         }
+ 
+         $personal_cosmetics_term;
+ 
+         // Check if the term exists
+         if ($personal_cosmetics_term) {
+             // Query posts using WP_Query
+             $args = array(
+                 'post_type' => 'herb',
+                 'posts_per_page' => -1,
+                 'tax_query' => array(
+                     array(
+                         'taxonomy' => 'application-category',
+                         'field' => 'term_id',
+                         'terms' => $personal_cosmetics_term->term_id,
+                     ),
+                 ),
+             );
+ 
+             $query = new \WP_Query($args);
+ 
+             // Check if posts are found
+             if ($query->have_posts()) {
+                 $output .= '<div class="row mb-5 pb-lg-3">'. "\n";
+                 $output .= '<div class="col-12 table-responsive">';
+                 $output .= '<table class="table table-md table-striped align-middle">';
+                 $output .= '<tbody>';
+                 $output .= '<tr>';
+ 
+                 $count = 0;
+                 while ($query->have_posts()) {
+                     $query->the_post();
+                     $herb_single_contents = get_acf_field('herb_single_contents');
+ 
+                     $output .= '<td class="w-25">';
+                     $output .= '<a href="' . esc_url(get_permalink()) . '" class="text-primary text-decoration-none">';
+                     // Output the thumbnail
+                     $output .= '<div class="thumbnail d-flex flex-row g-2 align-items-center">';
+                     $output .= has_post_thumbnail() ? wp_get_attachment_image(get_post_thumbnail_id(), 'cust_img_thumb', false,['class' => 'rounded-4']) : wp_get_attachment_image($herb_single_contents['herbs_gallery'][0]['herb_image']['id'], 'cust_img_thumb', false,['class' => 'rounded-4']);
+                     $output .= '<span class="ms-3">' . esc_html(get_the_title()) . '</span>';
+                     $output .= '</div>';
+                     $output .= '</a>';
+                     $output .= '</td>';
+ 
+ 
+                     $count++;
+                     if ($count % 4 == 0) {
+                         $output .= '</tr><tr>';
+                     } 
+                 }
+ 
+                 $output .= '</tbody>';
+                 $output .= '</table>';
+                 $output .= '</div>';
+                 $output .= '</div>';
+             } else {
+                 // Handle case when no posts are found
+                 $output .= '<p>No herb posts found for Personal Care Cosmetics.</p>';
+             }
+ 
+             // Reset post data
+             wp_reset_postdata();
+         } else {
+             // Handle case when term is not found
+             $output .= '<p>Term "Personal Care Cosmetics" not found.</p>';
+         }
+ 
+         // Return output
+         return $output;
+    }
+
+
+    function get_animal_nutritions_categories(){
+        // Initialize output variable
+         $output = '';
+         $anim_nut_term = '';
+ 
+         $possible_names = array('Animal Nutritions', 'Animal Nutrition', 'Animal', 'Nutritions', 'animal nutritions', 'animal nutrition', 'animal', 'nutrition', 'animals');
+ 
+         // Find the correct term
+         foreach ($possible_names as $name) {
+             $term = get_term_by('name', $name, 'application-category');
+             if ($term && !is_wp_error($term)) {
+                 $anim_nut_term = $term;
+                 break;
+             }
+         }
+ 
+         $anim_nut_term;
+ 
+         // Check if the term exists
+         if ($anim_nut_term) {
+             // Query posts using WP_Query
+             $args = array(
+                 'post_type' => 'herb',
+                 'posts_per_page' => -1,
+                 'tax_query' => array(
+                     array(
+                         'taxonomy' => 'application-category',
+                         'field' => 'term_id',
+                         'terms' => $anim_nut_term->term_id,
+                     ),
+                 ),
+             );
+ 
+             $query = new \WP_Query($args);
+ 
+             // Check if posts are found
+             if ($query->have_posts()) {
+                 $output .= '<div class="row mb-5 pb-lg-3">'. "\n";
+                 $output .= '<div class="col-12 table-responsive">';
+                 $output .= '<table class="table table-md table-striped align-middle">';
+                 $output .= '<tbody>';
+                 $output .= '<tr>';
+ 
+                 $count = 0;
+                 while ($query->have_posts()) {
+                     $query->the_post();
+                     $herb_single_contents = get_acf_field('herb_single_contents');
+ 
+                     $output .= '<td class="w-25">';
+                     $output .= '<a href="' . esc_url(get_permalink()) . '" class="text-primary text-decoration-none">';
+                     // Output the thumbnail
+                     $output .= '<div class="thumbnail d-flex flex-row g-2 align-items-center">';
+                     $output .= has_post_thumbnail() ? wp_get_attachment_image(get_post_thumbnail_id(), 'cust_img_thumb', false,['class' => 'rounded-4']) : wp_get_attachment_image($herb_single_contents['herbs_gallery'][0]['herb_image']['id'], 'cust_img_thumb', false,['class' => 'rounded-4']);
+                     $output .= '<span class="ms-3">' . esc_html(get_the_title()) . '</span>';
+                     $output .= '</div>';
+                     $output .= '</a>';
+                     $output .= '</td>';
+ 
+ 
+                     $count++;
+                     if ($count % 4 == 0) {
+                         $output .= '</tr><tr>';
+                     } 
+                 }
+ 
+                 $output .= '</tbody>';
+                 $output .= '</table>';
+                 $output .= '</div>';
+                 $output .= '</div>';
+             } else {
+                 // Handle case when no posts are found
+                 $output .= '<p>No herb posts found for Essential Oils.</p>';
+             }
+ 
+             // Reset post data
+             wp_reset_postdata();
+         } else {
+             // Handle case when term is not found
+             $output .= '<p>Term "Essential Oils" not found in application-category taxonomy.</p>';
+         }
+ 
+         // Return output
+         return $output;
+    }
+    
+    
  }

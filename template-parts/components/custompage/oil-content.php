@@ -12,10 +12,9 @@
                     </h2>
                 </div>
             </div>
-            <div class="row row-cols-2 row-cols-md-3 g-3 row-cols-md-4 g-lg-5 justify-content-center align-items-center">
-                <?php echo shortcode_exists('agromedika_get_approve_doh_product') ? do_shortcode('[agromedika_get_approve_doh_product]') : ''; ?>  
-            </div>
-
+            
+            <?php echo shortcode_exists('get_oil_prod_categories') ? do_shortcode('[get_oil_prod_categories]') : ''; ?> 
+ 
             <?php if (!empty($essential_oil_page_link)) : ?>
             <div class="row mt-5 pt-lg-4">
                 <div class="col-6 mx-auto text-center">

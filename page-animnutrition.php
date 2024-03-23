@@ -91,6 +91,7 @@ $page_title = get_the_title();
     </section>
     <?php endif; ?>
    <?php get_template_part('template-parts/components/custompage/animalnutrition', 'content');?>
+   <?php get_template_part('template-parts/components/custompage/page', 'content');?>
     
 </main>
 

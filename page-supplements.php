@@ -94,7 +94,7 @@ $page_title = get_the_title();
 
     
     <?php get_template_part('template-parts/components/custompage/supplements', 'content');?>
-    
+    <?php get_template_part('template-parts/components/custompage/page', 'content');?>
 </main>
 
 <?php get_footer(); ?>

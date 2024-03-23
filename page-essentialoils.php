@@ -52,7 +52,6 @@ $page_title = get_the_title();
     <?php endif; ?>
 
     <?php if (!empty($essential_oil_block_2['essential_oil_block_2_title']) && !empty($essential_oil_block_2['essential_oil_block_2_icons'][0]['essential_oil_block_2_icon']['url'])): ?>
-
     <section id="infographics">
         <div class="container-fluid">
             <div class="row">
@@ -95,7 +94,9 @@ $page_title = get_the_title();
 
     
    <?php get_template_part('template-parts/components/custompage/oil', 'content');?>
+   <?php get_template_part('template-parts/components/custompage/page', 'content');?>
     
+   
 </main>
 
 <?php get_footer(); ?>

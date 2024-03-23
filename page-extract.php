@@ -15,7 +15,7 @@ $extract_list_jumbotron = get_acf_field('extract_list_jumbotron');
              <div class="row">
                 <div class="col-12 col-lg-8 mx-auto my-auto text-center">
                      <h1 class="fw-bold text-black"><?php echo esc_html($extract_list_jumbotron['extract_list_heading']);?></h1>
-                     <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($extract_list_jumbotron['extract_list_sub_heading']));?></h5>
+                     <h6 class="text-secondary mt-4"><?php echo nl2br(esc_textarea($extract_list_jumbotron['extract_list_sub_heading']));?></h6>
                  </div>
              </div>
          </div>

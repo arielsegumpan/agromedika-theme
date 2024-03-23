@@ -91,7 +91,8 @@ $page_title = get_the_title();
         </div>
     </section>
     <?php endif; ?>
-   <?php get_template_part('template-parts/components/custompage/pharm', 'content');?>
+    
+   <?php get_template_part('template-parts/components/custompage/food', 'content');?>
     
 </main>
 

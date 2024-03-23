@@ -229,6 +229,5 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
         </div>
       </section>
     <?php endif; ?>
-
 </main>
 <?php get_footer(); ?>

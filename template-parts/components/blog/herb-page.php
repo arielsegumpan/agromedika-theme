@@ -13,26 +13,21 @@ $getProd = new WP_Query($args);
     <div class="col-12">
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 g-lg-5">
 
-        <?php
-        if ($getProd->have_posts()) : while ($getProd->have_posts()) : $getProd->the_post();
+        <?php if ($getProd->have_posts()) : while ($getProd->have_posts()) : $getProd->the_post();
             $herb_single_contents = get_acf_field('herb_single_contents');?>
             <div class="col text-center">
                 <a href="<?php echo esc_url(get_permalink()) ?>" class="text-decoration-none">
                     <div class="card border-0 rounded-0 bg-transparent">
                         <?php if(has_post_thumbnail() || !empty($herb_single_contents['herbs_gallery'][0]['herb_image']['url']) ) : ?>
                         <div class="img-wrap position-relative mx-auto"> 
-                        <?php if (has_post_thumbnail()) : ?>
-                            <?php
+                        <?php if (has_post_thumbnail()) : 
                                 $thumbnail_id = get_post_thumbnail_id();
                                 $thumbnail_alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true);
                                 echo get_the_post_thumbnail($thumbnail_id, 'product_img', array('class' => 'rounded-5', 'alt' => $thumbnail_alt));
-                            ?>
-                        <?php else:?>
-                            <?php
+                           else:
                                 $single_content_id =  $herb_single_contents['herbs_gallery'][0]['herb_image']['id'];
                                 echo wp_get_attachment_image($single_content_id, 'product_img', false, array('class' => 'rounded-5'));?>
                         <?php endif; ?>
-                        
                         </div> 
                         <?php endif;?>
                         <div class="cont-prod mt-4 position-relative">

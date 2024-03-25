@@ -11,7 +11,7 @@ get_header();
     <section id="contact" class="bg-lteal">
         <div class="container">
             <div class="row">
-              <div class="col-12  mt-5 pt-lg-4">
+              <div class="col-12 col-md-10 mx-auto mt-5 pt-lg-4">
                 <?php if(have_posts()): while(have_posts()): the_post();?>
                 <div class="mb-5">
                     <h1><?php the_title() ?></h1>

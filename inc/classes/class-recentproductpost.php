@@ -18,7 +18,6 @@ class RecentProductPost {
         add_shortcode('agromedika_recent_product', [$this, 'agromedika_recent_products']);
     }
 
-    // Create shortcode to get recent products displayed on the front page
     public function agromedika_recent_products() {
         $args = array(
             'post_type'      => 'herb',

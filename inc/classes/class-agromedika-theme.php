@@ -12,7 +12,6 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
  class AGROMEDIKA_THEME{
     use Singleton;
     protected function __construct() {
-        // Define an array of classes to initialize
         $classes = [
             // Restriction::class,
             // Namespacecpt::class,

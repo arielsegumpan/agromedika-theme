@@ -5,11 +5,10 @@
     $archives = wp_get_archives(array(
         'type'            => 'monthly',
         'format'          => 'html',
-        'show_post_count' => true, // Show the number of posts for each month
-        'echo'            => false, // Return the archive links instead of echoing them
+        'show_post_count' => true,
+        'echo'            => false, 
     ));
 
-    // Parse the HTML and extract month and year
     $doc = new DOMDocument();
     $doc->loadHTML($archives);
     $options = $doc->getElementsByTagName('a');

@@ -13,7 +13,7 @@ $header_menus = wp_cache_get('header_menus', 'menu_cache');
 
 if (false === $header_menus) {
     $header_menus = wp_get_nav_menu_items($header_menu_id);
-    wp_cache_set('header_menus', $header_menus, 'menu_cache', 3600); // Cache for 1 hour
+    wp_cache_set('header_menus', $header_menus, 'menu_cache', 3600); // Cache ang menu
 }
 
 if (!empty($header_menus) && is_array($header_menus)) :
@@ -22,16 +22,13 @@ if (!empty($header_menus) && is_array($header_menus)) :
         if (!$menu_item->menu_item_parent) :
             $child_menu_items = $menu_class->get_child_menu_items($header_menus, $menu_item->ID);
             $has_children = !empty($child_menu_items) && is_array($child_menu_items);
-            if (!$has_children) :
-?>
+            if (!$has_children) :?>
                 <li class="nav-item me-3 text-uppercase">
                     <a class="nav-link" href="<?php echo esc_url($menu_item->url); ?>">
                         <?php echo esc_html($menu_item->title); ?>
                     </a>
                 </li>
-<?php
-            else :
-?>
+<?php else : ?>
                 <li class="nav-item dropdown me-3">
                     <a class="nav-link dropdown-toggle text-uppercase" href="<?php echo esc_url($menu_item->url); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php echo esc_html($menu_item->title); ?><i class="bi bi-chevron-down ms-2"></i>

@@ -8,8 +8,7 @@ $args = array(
 $recent_posts_query = new WP_Query($args);
 if ($recent_posts_query->have_posts()) :
         while ($recent_posts_query->have_posts()) :
-            $recent_posts_query->the_post();
-            ?>
+            $recent_posts_query->the_post();?>
             <div class="col">
                 <a href="<?php the_permalink(); ?>" class="text-decoration-none">
                 <div class="card border-0 p-0 mb-4 mb-lg-0">
@@ -29,8 +28,8 @@ if ($recent_posts_query->have_posts()) :
                 </div>
                 </a>
             </div>
-            <?php
-        endwhile;
+        <?php
+    endwhile;
 endif;
 wp_reset_postdata();
 ?>

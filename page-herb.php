@@ -29,28 +29,7 @@ $herb_page_main_section = get_acf_field('herb_page_main_section');
     <?php if($herb_page_main_section['herb_page_title']) : ?>
     <section id="products-main" >
           <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4 g-lg-5">
-                  <?php get_template_part('template-parts/components/blog/herb', 'page');?>
-                </div>
-              </div>
-              <div class="col-12"> 
-                    <div class="d-flex flex-row justify-content-center align-items-center gap-3">
-                        <?php
-                        $prev_post = get_previous_post(true, '', 'herb');
-                        if (!empty($prev_post)) {
-                            echo '<a href="' . esc_url(get_permalink($prev_post->ID)) . '" class="btn btn-primary px-4 py-3">Previous<i class="bi bi-arrow-left ms-2"></i></a>';
-                        }
-
-                        $next_post = get_next_post(true, '', 'herb');
-                        if (!empty($next_post)) {
-                            echo '<a href="' . esc_url(get_permalink($next_post->ID)) . '" class="btn btn-primary px-4 py-3"><i class="bi bi-arrow-right me-2"></i>Next</a>';
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
+          <?php get_template_part('template-parts/components/blog/herb', 'page');?>
           </div>
         </section>
     <?php endif; ?>
@@ -65,6 +44,7 @@ $herb_page_main_section = get_acf_field('herb_page_main_section');
                 </div>
             </div>
             <?php endif;?>
+
             <?php echo shortcode_exists('get_prod_menu_catalogue') ? do_shortcode('[get_prod_menu_catalogue]') : ''; ?>
         </div>
     </section>

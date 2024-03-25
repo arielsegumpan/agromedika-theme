@@ -11,7 +11,7 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
 ?>
 <main>
     <?php if(!empty($blog_jumbotron['blog_hero_title'])) :?>
-    <section class="bg-lteal" id="blog_jumb" class="position-relative overflow-hidden">
+      <section id="blog_jumb" class="position-relative overflow-hidden">
         <div class="container-fluid px-0">
           <div class="row">
             <div class="position-relative">
@@ -23,7 +23,7 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
                 <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
                   <div class="row"> 
                     <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
-                      <h1 class="fw-bold text-black"><?php echo esc_html($blog_jumbotron['blog_hero_title']) ;?></h1>
+                    <h1 class="fw-bold text-black"><?php echo esc_html($blog_jumbotron['blog_hero_title']) ;?></h1>
                       <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($blog_jumbotron['blog_hero_sub_title'])) ;?></h5>
                     </div>
                   </div>
@@ -47,12 +47,13 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
                     <?php endwhile; endif;?>
                     </div>
                 </div>
-                <div class="col-12 mt-5">
-                    <div class="d-flex flex-row justify-content-between align-items-center gap-3">
+                <div class="col-12 mt-5 text-center">
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-4">
                         <?php if (get_query_var('paged') > 1) : ?>
                             <?php previous_posts_link('<i class="bi bi-arrow-left me-2"></i>Previous'); ?>
                         <?php endif; ?>
                         <?php next_posts_link('Next<i class="bi bi-arrow-right ms-2"></i>'); ?>
+
                     </div>
               </div>
             </div>

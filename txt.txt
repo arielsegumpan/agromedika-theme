@@ -806,4 +806,64 @@ endif;
 <img src="<?php echo esc_url($get_prod_carous['home_page_carousel_image']['url']) ;?>" class="d-block w-100" alt="<?php echo esc_attr($get_prod_carous['home_page_carousel_image']['alt']) ;?>">
 
 
- <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="rounded-5">
+ <img src="<?php echo esc_url($scientific_name['herbs_gallery'][0]['herb_image']['url']) ?>" alt="<?php echo esc_attr($scientific_name['herbs_gallery'][0]['herb_image']['alt']) ?>" class="rounded-5">\
+
+
+
+
+
+
+
+  <?php echo shortcode_exists('get_prod_menu_catalogue') ? do_shortcode('[get_prod_menu_catalogue]') : ''; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                         
+                            <!-- <form action="#!">
+                              <div class="row mb-md-4">
+                                <div class="col-12 mb-3 mt-4">
+                                  <h6 class="text-secondary mb-4 text-center"><small class="fst-italic ">Please check any data sheet to download.</small></h6>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox1" value="option1">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox1">Product Data Sheet</label>
+                                  </div>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox2" value="option2">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox2">Techinical Data Sheet</label>
+                                  </div>
+                                  <div class="form-check form-check-inline me-3 mb-3">
+                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox3" value="option3">
+                                    <label class="form-check-label fw-bold" for="inlineCheckbox3">Safety Data Sheet</label>
+                                  </div>
+                                  
+                                </div>
+                                <div class="col-12 mb-4">
+                                  <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="name" placeholder="Name*">
+                                    <label for="name">Name <span class="text-danger">*</span></label>
+                                  </div>
+                                </div>
+                                <div class="col-12">
+                                  <div class="form-floating mb-3">
+                                    <input type="email" class="form-control" id="email" placeholder="Email*">
+                                    <label for="email">Email<span class="text-danger">*</span></label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="mt-5 pt-3 mx-auto text-center">
+                                <button class="btn btn-black px-5 py-4 rounded-4"><i class="bi bi-send me-2"></i>Send Request</button>
+                              </div>
+                            </form> -->

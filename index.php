@@ -9,7 +9,7 @@ $blog_jumbotron = get_acf_option_field('blog_jumbotron');
 $sidebar_socmed = get_acf_option_field('sidebar_socmed');
 
 ?>
-<main>
+<main class="bg-lteal">
     <?php if(!empty($blog_jumbotron['blog_hero_title'])) :?>
       <section id="blog_jumb" class="position-relative overflow-hidden">
         <div class="container-fluid px-0">
@@ -47,15 +47,20 @@ $sidebar_socmed = get_acf_option_field('sidebar_socmed');
                     <?php endwhile; endif;?>
                     </div>
                 </div>
-                <div class="col-12 mt-5 text-center">
-                    <div class="d-flex flex-row justify-content-center align-items-center gap-4">
-                        <?php if (get_query_var('paged') > 1) : ?>
-                            <?php previous_posts_link('<i class="bi bi-arrow-left me-2"></i>Previous'); ?>
-                        <?php endif; ?>
-                        <?php next_posts_link('Next<i class="bi bi-arrow-right ms-2"></i>'); ?>
+                <?php if (get_query_var('paged') > 1 || get_next_posts_link() || get_previous_posts_link()) : ?>
+                    <div class="col-12 mt-5 text-center">
+                        <div class="d-flex flex-row justify-content-center align-items-center gap-4">
+                            <?php if (get_query_var('paged') > 1 && get_previous_posts_link()) : ?>
+                                <a href="<?php echo previous_posts(); ?>" class="btn btn-primary text-lteal px-4 py-3 rounded-4"><i class="bi bi-arrow-left me-2"></i><?php echo esc_html('Previous') ?></a>
+                            <?php endif; ?>
 
+                            <?php if (get_next_posts_link()) : ?>
+                                <a href="<?php echo next_posts(); ?>" class="btn btn-primary text-lteal px-4 py-3 rounded-4"><?php echo esc_html('Next') ?><i class="bi bi-arrow-right ms-2"></i></a>
+                            <?php endif; ?>
+                        </div>
                     </div>
-              </div>
+                <?php endif; ?>
+
             </div>
         </div>
     </section>

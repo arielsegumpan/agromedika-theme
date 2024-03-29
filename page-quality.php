@@ -25,7 +25,7 @@ get_header();
 
 ?>
 
-<main>
+<main class="bg-lteal">
     <?php if(!empty($quality_jumbotron['quality_hero_title']) && !empty($quality_jumbotron['quality_hero_image']['url'])) :?>
     <section id="blog_jumb" class="position-relative overflow-hidden">
         <div class="container-fluid px-0">

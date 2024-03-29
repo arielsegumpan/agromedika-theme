@@ -234,36 +234,44 @@ function create_category_page($term_id, $tt_id, $taxonomy) {
 
 
                 // Prepare the template content
-                $template_content = '<?php'. "\n";
+                $template_content = '<?php' . "\n";
                 $template_content .= "/**\n";
                 $template_content .= " * Template Name: " . $term->name . "\n";
                 $template_content .= " * @package agromedika\n";
                 $template_content .= " */\n";
                 $template_content .= "get_header(); ?>\n\n";
-                $template_content .= '<?php if(have_posts()): while(have_posts()) : the_post(); ?>';
-                $template_content .= '<?php';
-                $template_content .= '$term_id = get_queried_object_id();';
-                $template_content .= '$get_category_data = get_term_by( "id", $term_id, "application-category");';
-                $template_content .= '$term_slug = $get_category_data->slug;';
-                $template_content .= '$get_custom_page_title = get_acf_field($term_slug . "_page_title");';
-                $template_content .= '?>';
-                $template_content .= '<section id="jumb_custom_ing" class="bg-lteal">'; 
-                $template_content .= '<div class="container">';
-                $template_content .= '<div class="row">';
-                $template_content .= '<div class="col-12 col-lg-8 mx-auto my-auto text-center">';
-                $template_content .= '<h1 class="fw-bold text-black"><?php echo !empty($get_custom_page_title) ? esc_html($get_custom_page_title) : esc_html($term->name); ?></h1>';
-                $template_content .= '</div>';
-                $template_content .= '</div>';
-                $template_content .= '</div>';
-                $template_content .= '</section>';
-                $template_content .= '<?php endwhile; endif; ?>';
-                $template_content .= '<pre> <?php echo var_dump($term_slug); </pre>';
-                $template_content .= '<?php get_footer(); ?>';
+                $template_content .= '<main class="bg-lteal">' . "\n";
+                $template_content .= '<section id="blog">' . "\n";
+                $template_content .= '    <div class="container">' . "\n";
+                $template_content .= '        <div class="row">' . "\n";
+                $template_content .= '            <div class="col-12 col-lg-10 mx-auto">' . "\n";
+                $template_content .= '                <?php if(have_posts()) : while(have_posts()) : the_post() ;?>' . "\n";
+                $template_content .= '                <?php the_content();?>' . "\n";
+                $template_content .= '                <?php endwhile; endif;?>' . "\n";
+                $template_content .= '            </div>' . "\n";
+                $template_content .= '            <?php if (get_query_var(\'paged\') > 1 || get_next_posts_link() || get_previous_posts_link()) : ?>' . "\n";
+                $template_content .= '                <div class="col-12 mt-5 text-center">' . "\n";
+                $template_content .= '                    <div class="d-flex flex-row justify-content-center align-items-center gap-4">' . "\n";
+                $template_content .= '                        <?php if (get_query_var(\'paged\') > 1 && get_previous_posts_link()) : ?>' . "\n";
+                $template_content .= '                            <a href="<?php echo previous_posts(); ?>" class="btn btn-primary text-lteal px-4 py-3 rounded-4"><i class="bi bi-arrow-left me-2"></i><?php echo esc_html(\'Previous\') ?></a>' . "\n";
+                $template_content .= '                        <?php endif; ?>' . "\n";
+                $template_content .= '                        <?php if (get_next_posts_link()) : ?>' . "\n";
+                $template_content .= '                            <a href="<?php echo next_posts(); ?>" class="btn btn-primary text-lteal px-4 py-3 rounded-4"><?php echo esc_html(\'Next\') ?><i class="bi bi-arrow-right ms-2"></i></a>' . "\n";
+                $template_content .= '                        <?php endif; ?>' . "\n";
+                $template_content .= '                    </div>' . "\n";
+                $template_content .= '                </div>' . "\n";
+                $template_content .= '            <?php endif; ?>' . "\n";
+                $template_content .= '        </div>' . "\n";
+                $template_content .= '    </div>' . "\n";
+                $template_content .= '</section>' . "\n";
+                $template_content .= '</main>' . "\n";
+                $template_content .= '<?php get_footer() ?>' . "\n";
 
                 // Save the template content to a new file
                 $file_path = get_template_directory() . '/page-' . $template_slug . '.php';
                 file_put_contents($file_path, $template_content);
-                create_acf($term, $template_slug);
+
+                // create_acf($term, $template_slug);
             }
 
         }
@@ -273,401 +281,401 @@ function create_category_page($term_id, $tt_id, $taxonomy) {
 
 
 
-// Create ACF Field
-function create_acf($term, $template_slug){
-add_action( 'acf/include_fields', function() use ($term, $template_slug) {
-    if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-        return;
-    }
+// // Create ACF Field
+// function create_acf($term, $template_slug){
+// add_action( 'acf/include_fields', function() use ($term, $template_slug) {
+//     if ( ! function_exists( 'acf_add_local_field_group' ) ) {
+//         return;
+//     }
 
-    acf_add_local_field_group( array(
-        'key' => 'group_'. $term_slug .'_afdc7ae',
-        'title' => $term->name,
-        'fields' => array(
-            array(
-                'key' => 'field_'. $term_slug .'_afdfa58',
-                'label' => $term->name . 'Page Title',
-                'name' => $term_slug . '_page_title',
-                'aria-label' => '',
-                'type' => 'text',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'default_value' => '',
-                'maxlength' => '',
-                'placeholder' => '',
-                'prepend' => '',
-                'append' => '',
-            ),
-            array(
-                'key' => 'field_'. $term_slug .'_afe23b2',
-                'label' => $term->name . ' Block 1',
-                'name' => $term_slug . '_block_1',
-                'aria-label' => '',
-                'type' => 'group',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'layout' => 'block',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_'. $term_slug .'_aff282d',
-                        'label' => $term->name . ' Block 1 Image',
-                        'name' => $term_slug . '_block_1_image',
-                        'aria-label' => '',
-                        'type' => 'image',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'return_format' => 'array',
-                        'library' => 'all',
-                        'default_value' => '',
-                        'min_width' => '',
-                        'min_height' => '',
-                        'min_size' => '',
-                        'max_width' => '',
-                        'max_height' => '',
-                        'max_size' => '',
-                        'mime_types' => '',
-                        'preview_size' => 'medium',
-                    ),
-                    array(
-                        'key' => 'field_'. $term_slug .'_b00051f',
-                        'label' => $term->name . ' Block 1 Content',
-                        'name' => $term_slug . '_block_1_content',
-                        'aria-label' => '',
-                        'type' => 'wysiwyg',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => '',
-                        'tabs' => 'visual',
-                        'toolbar' => 'full',
-                        'media_upload' => 1,
-                        'delay' => 0,
-                    ),
-                ),
-            ),
-            array(
-                'key' => 'field_'. $term_slug .'_afe432c',
-                'label' => $term->name . ' Block 2',
-                'name' => $term_slug . '_block_2',
-                'aria-label' => '',
-                'type' => 'group',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'layout' => 'block',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_'. $term_slug .'_b008586',
-                        'label' => $term->name . ' Block 2 Title',
-                        'name' => $term_slug . '_block_2_title',
-                        'aria-label' => '',
-                        'type' => 'text',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => 'Pure and Natural',
-                        'maxlength' => '',
-                        'placeholder' => '',
-                        'prepend' => '',
-                        'append' => '',
-                    ),
-                    array(
-                        'key' => 'field_'. $term_slug .'_b00a877',
-                        'label' => $term->name . ' Block 2 Icons',
-                        'name' => $term_slug . '_block_2_icons',
-                        'aria-label' => '',
-                        'type' => 'repeater',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'layout' => 'table',
-                        'pagination' => 0,
-                        'min' => 0,
-                        'max' => 3,
-                        'collapsed' => '',
-                        'button_label' => 'Add Icon',
-                        'rows_per_page' => 20,
-                        'sub_fields' => array(
-                            array(
-                                'key' => 'field_'. $term_slug .'_b00e6f9',
-                                'label' => $term->name . ' Block 2 Icon',
-                                'name' => $term_slug . '_block_2_icon',
-                                'aria-label' => '',
-                                'type' => 'image',
-                                'instructions' => '',
-                                'required' => 0,
-                                'conditional_logic' => 0,
-                                'wrapper' => array(
-                                    'width' => '',
-                                    'class' => '',
-                                    'id' => '',
-                                ),
-                                'return_format' => 'array',
-                                'library' => 'all',
-                                'default_value' => '',
-                                'min_width' => '',
-                                'min_height' => '',
-                                'min_size' => '',
-                                'max_width' => '',
-                                'max_height' => '',
-                                'max_size' => '',
-                                'mime_types' => '',
-                                'preview_size' => 'thumbnail',
-                                'parent_repeater' => 'field_'. $term_slug .'_b00a877',
-                            ),
-                            array(
-                                'key' => 'field_'. $term_slug .'_6dbd5ec',
-                                'label' => $term->name . ' Block 2 Title',
-                                'name' => $term_slug . '_block_2_title',
-                                'aria-label' => '',
-                                'type' => 'text',
-                                'instructions' => '',
-                                'required' => 0,
-                                'conditional_logic' => 0,
-                                'wrapper' => array(
-                                    'width' => '',
-                                    'class' => '',
-                                    'id' => '',
-                                ),
-                                'default_value' => '',
-                                'maxlength' => '',
-                                'placeholder' => '',
-                                'prepend' => '',
-                                'append' => '',
-                                'parent_repeater' => 'field_'. $term_slug .'_b00a877',
-                            ),
-                            array(
-                                'key' => 'field_'. $term_slug .'_b01053e',
-                                'label' => $term->name . ' Block 2 Icon Content',
-                                'name' => $term_slug . '_block_2_icon_content',
-                                'aria-label' => '',
-                                'type' => 'textarea',
-                                'instructions' => '',
-                                'required' => 0,
-                                'conditional_logic' => 0,
-                                'wrapper' => array(
-                                    'width' => '',
-                                    'class' => '',
-                                    'id' => '',
-                                ),
-                                'default_value' => '',
-                                'maxlength' => '',
-                                'rows' => '',
-                                'placeholder' => '',
-                                'new_lines' => '',
-                                'parent_repeater' => 'field_'. $term_slug .'_b00a877',
-                            ),
-                            array(
-                                'key' => 'field_'. $term_slug .'_98634f6',
-                                'label' => $term->name . ' Block 2 Page Link',
-                                'name' => $term_slug . '_block_2_page_link',
-                                'aria-label' => '',
-                                'type' => 'page_link',
-                                'instructions' => '',
-                                'required' => 0,
-                                'conditional_logic' => 0,
-                                'wrapper' => array(
-                                    'width' => '',
-                                    'class' => '',
-                                    'id' => '',
-                                ),
-                                'post_type' => array(
-                                    0 => 'page',
-                                ),
-                                'post_status' => array(
-                                    0 => 'publish',
-                                ),
-                                'taxonomy' => '',
-                                'allow_archives' => 0,
-                                'multiple' => 0,
-                                'allow_null' => 0,
-                                'parent_repeater' => 'field_'. $term_slug .'_b00a877',
-                            ),
-                        ),
-                    ),
-                ),
-            ),
-            array(
-                'key' => 'field_'. $term_slug .'_afe625f',
-                'label' => $term->name . ' Block 3',
-                'name' => $term_slug . '_block_3',
-                'aria-label' => '',
-                'type' => 'group',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'layout' => 'block',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_'. $term_slug .'_b018a72',
-                        'label' => $term->name . ' Block 3 Title',
-                        'name' => $term_slug . '_block_3_title',
-                        'aria-label' => '',
-                        'type' => 'text',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => 'Product Menu',
-                        'maxlength' => '',
-                        'placeholder' => '',
-                        'prepend' => '',
-                        'append' => '',
-                    ),
-                ),
-            ),
-            array(
-                'key' => 'field_'. $term_slug .'_afea019',
-                'label' => $term->name . ' Block 4',
-                'name' => $term_slug . '_block_4',
-                'aria-label' => '',
-                'type' => 'group',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'layout' => 'block',
-                'sub_fields' => array(
-                    array(
-                        'key' => 'field_'. $term_slug .'_b01c88b',
-                        'label' => $term->name . ' Block 4 Title',
-                        'name' => $term_slug . '_block_4_title',
-                        'aria-label' => '',
-                        'type' => 'text',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => 'Product Indications',
-                        'maxlength' => '',
-                        'placeholder' => '',
-                        'prepend' => '',
-                        'append' => '',
-                    ),
-                    array(
-                        'key' => 'field_'. $term_slug .'_b01e8e7',
-                        'label' => $term->name . ' Block 4 Content',
-                        'name' => $term_slug . '_block_4_content',
-                        'aria-label' => '',
-                        'type' => 'textarea',
-                        'instructions' => '',
-                        'required' => 0,
-                        'conditional_logic' => 0,
-                        'wrapper' => array(
-                            'width' => '',
-                            'class' => '',
-                            'id' => '',
-                        ),
-                        'default_value' => '',
-                        'maxlength' => '',
-                        'rows' => '',
-                        'placeholder' => '',
-                        'new_lines' => '',
-                    ),
-                ),
-            ),
-            array(
-                'key' => 'field_'. $term_slug .'_afebf26',
-                'label' => $term->name . ' Page Link',
-                'name' => $term_slug . '_page_link',
-                'aria-label' => '',
-                'type' => 'page_link',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array(
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'post_type' => array(
-                    0 => 'page',
-                ),
-                'post_status' => array(
-                    0 => 'publish',
-                ),
-                'taxonomy' => '',
-                'allow_archives' => 0,
-                'multiple' => 0,
-                'allow_null' => 0,
-            ),
-        ),
-        'location' => array(
-            array(
-                array(
-                    'param' => 'page_template',
-                    'operator' => '==',
-                    'value' => 'page-' . $template_slug . '.php',
-                ),
-            ),
-        ),
-        'menu_order' => 0,
-        'position' => 'normal',
-        'style' => 'default',
-        'label_placement' => 'top',
-        'instruction_placement' => 'label',
-        'hide_on_screen' => '',
-        'active' => true,
-        'description' => '',
-        'show_in_rest' => 0,
-    ) );
-} );
-}
+//     acf_add_local_field_group( array(
+//         'key' => 'group_'. $term_slug .'_afdc7ae',
+//         'title' => $term->name,
+//         'fields' => array(
+//             array(
+//                 'key' => 'field_'. $term_slug .'_afdfa58',
+//                 'label' => $term->name . 'Page Title',
+//                 'name' => $term_slug . '_page_title',
+//                 'aria-label' => '',
+//                 'type' => 'text',
+//                 'instructions' => '',
+//                 'required' => 0,
+//                 'conditional_logic' => 0,
+//                 'wrapper' => array(
+//                     'width' => '',
+//                     'class' => '',
+//                     'id' => '',
+//                 ),
+//                 'default_value' => '',
+//                 'maxlength' => '',
+//                 'placeholder' => '',
+//                 'prepend' => '',
+//                 'append' => '',
+//             ),
+//             array(
+//                 'key' => 'field_'. $term_slug .'_afe23b2',
+//                 'label' => $term->name . ' Block 1',
+//                 'name' => $term_slug . '_block_1',
+//                 'aria-label' => '',
+//                 'type' => 'group',
+//                 'instructions' => '',
+//                 'required' => 0,
+//                 'conditional_logic' => 0,
+//                 'wrapper' => array(
+//                     'width' => '',
+//                     'class' => '',
+//                     'id' => '',
+//                 ),
+//                 'layout' => 'block',
+//                 'sub_fields' => array(
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_aff282d',
+//                         'label' => $term->name . ' Block 1 Image',
+//                         'name' => $term_slug . '_block_1_image',
+//                         'aria-label' => '',
+//                         'type' => 'image',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'return_format' => 'array',
+//                         'library' => 'all',
+//                         'default_value' => '',
+//                         'min_width' => '',
+//                         'min_height' => '',
+//                         'min_size' => '',
+//                         'max_width' => '',
+//                         'max_height' => '',
+//                         'max_size' => '',
+//                         'mime_types' => '',
+//                         'preview_size' => 'medium',
+//                     ),
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_b00051f',
+//                         'label' => $term->name . ' Block 1 Content',
+//                         'name' => $term_slug . '_block_1_content',
+//                         'aria-label' => '',
+//                         'type' => 'wysiwyg',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'default_value' => '',
+//                         'tabs' => 'visual',
+//                         'toolbar' => 'full',
+//                         'media_upload' => 1,
+//                         'delay' => 0,
+//                     ),
+//                 ),
+//             ),
+//             array(
+//                 'key' => 'field_'. $term_slug .'_afe432c',
+//                 'label' => $term->name . ' Block 2',
+//                 'name' => $term_slug . '_block_2',
+//                 'aria-label' => '',
+//                 'type' => 'group',
+//                 'instructions' => '',
+//                 'required' => 0,
+//                 'conditional_logic' => 0,
+//                 'wrapper' => array(
+//                     'width' => '',
+//                     'class' => '',
+//                     'id' => '',
+//                 ),
+//                 'layout' => 'block',
+//                 'sub_fields' => array(
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_b008586',
+//                         'label' => $term->name . ' Block 2 Title',
+//                         'name' => $term_slug . '_block_2_title',
+//                         'aria-label' => '',
+//                         'type' => 'text',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'default_value' => 'Pure and Natural',
+//                         'maxlength' => '',
+//                         'placeholder' => '',
+//                         'prepend' => '',
+//                         'append' => '',
+//                     ),
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_b00a877',
+//                         'label' => $term->name . ' Block 2 Icons',
+//                         'name' => $term_slug . '_block_2_icons',
+//                         'aria-label' => '',
+//                         'type' => 'repeater',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'layout' => 'table',
+//                         'pagination' => 0,
+//                         'min' => 0,
+//                         'max' => 3,
+//                         'collapsed' => '',
+//                         'button_label' => 'Add Icon',
+//                         'rows_per_page' => 20,
+//                         'sub_fields' => array(
+//                             array(
+//                                 'key' => 'field_'. $term_slug .'_b00e6f9',
+//                                 'label' => $term->name . ' Block 2 Icon',
+//                                 'name' => $term_slug . '_block_2_icon',
+//                                 'aria-label' => '',
+//                                 'type' => 'image',
+//                                 'instructions' => '',
+//                                 'required' => 0,
+//                                 'conditional_logic' => 0,
+//                                 'wrapper' => array(
+//                                     'width' => '',
+//                                     'class' => '',
+//                                     'id' => '',
+//                                 ),
+//                                 'return_format' => 'array',
+//                                 'library' => 'all',
+//                                 'default_value' => '',
+//                                 'min_width' => '',
+//                                 'min_height' => '',
+//                                 'min_size' => '',
+//                                 'max_width' => '',
+//                                 'max_height' => '',
+//                                 'max_size' => '',
+//                                 'mime_types' => '',
+//                                 'preview_size' => 'thumbnail',
+//                                 'parent_repeater' => 'field_'. $term_slug .'_b00a877',
+//                             ),
+//                             array(
+//                                 'key' => 'field_'. $term_slug .'_6dbd5ec',
+//                                 'label' => $term->name . ' Block 2 Title',
+//                                 'name' => $term_slug . '_block_2_title',
+//                                 'aria-label' => '',
+//                                 'type' => 'text',
+//                                 'instructions' => '',
+//                                 'required' => 0,
+//                                 'conditional_logic' => 0,
+//                                 'wrapper' => array(
+//                                     'width' => '',
+//                                     'class' => '',
+//                                     'id' => '',
+//                                 ),
+//                                 'default_value' => '',
+//                                 'maxlength' => '',
+//                                 'placeholder' => '',
+//                                 'prepend' => '',
+//                                 'append' => '',
+//                                 'parent_repeater' => 'field_'. $term_slug .'_b00a877',
+//                             ),
+//                             array(
+//                                 'key' => 'field_'. $term_slug .'_b01053e',
+//                                 'label' => $term->name . ' Block 2 Icon Content',
+//                                 'name' => $term_slug . '_block_2_icon_content',
+//                                 'aria-label' => '',
+//                                 'type' => 'textarea',
+//                                 'instructions' => '',
+//                                 'required' => 0,
+//                                 'conditional_logic' => 0,
+//                                 'wrapper' => array(
+//                                     'width' => '',
+//                                     'class' => '',
+//                                     'id' => '',
+//                                 ),
+//                                 'default_value' => '',
+//                                 'maxlength' => '',
+//                                 'rows' => '',
+//                                 'placeholder' => '',
+//                                 'new_lines' => '',
+//                                 'parent_repeater' => 'field_'. $term_slug .'_b00a877',
+//                             ),
+//                             array(
+//                                 'key' => 'field_'. $term_slug .'_98634f6',
+//                                 'label' => $term->name . ' Block 2 Page Link',
+//                                 'name' => $term_slug . '_block_2_page_link',
+//                                 'aria-label' => '',
+//                                 'type' => 'page_link',
+//                                 'instructions' => '',
+//                                 'required' => 0,
+//                                 'conditional_logic' => 0,
+//                                 'wrapper' => array(
+//                                     'width' => '',
+//                                     'class' => '',
+//                                     'id' => '',
+//                                 ),
+//                                 'post_type' => array(
+//                                     0 => 'page',
+//                                 ),
+//                                 'post_status' => array(
+//                                     0 => 'publish',
+//                                 ),
+//                                 'taxonomy' => '',
+//                                 'allow_archives' => 0,
+//                                 'multiple' => 0,
+//                                 'allow_null' => 0,
+//                                 'parent_repeater' => 'field_'. $term_slug .'_b00a877',
+//                             ),
+//                         ),
+//                     ),
+//                 ),
+//             ),
+//             array(
+//                 'key' => 'field_'. $term_slug .'_afe625f',
+//                 'label' => $term->name . ' Block 3',
+//                 'name' => $term_slug . '_block_3',
+//                 'aria-label' => '',
+//                 'type' => 'group',
+//                 'instructions' => '',
+//                 'required' => 0,
+//                 'conditional_logic' => 0,
+//                 'wrapper' => array(
+//                     'width' => '',
+//                     'class' => '',
+//                     'id' => '',
+//                 ),
+//                 'layout' => 'block',
+//                 'sub_fields' => array(
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_b018a72',
+//                         'label' => $term->name . ' Block 3 Title',
+//                         'name' => $term_slug . '_block_3_title',
+//                         'aria-label' => '',
+//                         'type' => 'text',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'default_value' => 'Product Menu',
+//                         'maxlength' => '',
+//                         'placeholder' => '',
+//                         'prepend' => '',
+//                         'append' => '',
+//                     ),
+//                 ),
+//             ),
+//             array(
+//                 'key' => 'field_'. $term_slug .'_afea019',
+//                 'label' => $term->name . ' Block 4',
+//                 'name' => $term_slug . '_block_4',
+//                 'aria-label' => '',
+//                 'type' => 'group',
+//                 'instructions' => '',
+//                 'required' => 0,
+//                 'conditional_logic' => 0,
+//                 'wrapper' => array(
+//                     'width' => '',
+//                     'class' => '',
+//                     'id' => '',
+//                 ),
+//                 'layout' => 'block',
+//                 'sub_fields' => array(
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_b01c88b',
+//                         'label' => $term->name . ' Block 4 Title',
+//                         'name' => $term_slug . '_block_4_title',
+//                         'aria-label' => '',
+//                         'type' => 'text',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'default_value' => 'Product Indications',
+//                         'maxlength' => '',
+//                         'placeholder' => '',
+//                         'prepend' => '',
+//                         'append' => '',
+//                     ),
+//                     array(
+//                         'key' => 'field_'. $term_slug .'_b01e8e7',
+//                         'label' => $term->name . ' Block 4 Content',
+//                         'name' => $term_slug . '_block_4_content',
+//                         'aria-label' => '',
+//                         'type' => 'textarea',
+//                         'instructions' => '',
+//                         'required' => 0,
+//                         'conditional_logic' => 0,
+//                         'wrapper' => array(
+//                             'width' => '',
+//                             'class' => '',
+//                             'id' => '',
+//                         ),
+//                         'default_value' => '',
+//                         'maxlength' => '',
+//                         'rows' => '',
+//                         'placeholder' => '',
+//                         'new_lines' => '',
+//                     ),
+//                 ),
+//             ),
+//             array(
+//                 'key' => 'field_'. $term_slug .'_afebf26',
+//                 'label' => $term->name . ' Page Link',
+//                 'name' => $term_slug . '_page_link',
+//                 'aria-label' => '',
+//                 'type' => 'page_link',
+//                 'instructions' => '',
+//                 'required' => 0,
+//                 'conditional_logic' => 0,
+//                 'wrapper' => array(
+//                     'width' => '',
+//                     'class' => '',
+//                     'id' => '',
+//                 ),
+//                 'post_type' => array(
+//                     0 => 'page',
+//                 ),
+//                 'post_status' => array(
+//                     0 => 'publish',
+//                 ),
+//                 'taxonomy' => '',
+//                 'allow_archives' => 0,
+//                 'multiple' => 0,
+//                 'allow_null' => 0,
+//             ),
+//         ),
+//         'location' => array(
+//             array(
+//                 array(
+//                     'param' => 'page_template',
+//                     'operator' => '==',
+//                     'value' => 'page-' . $template_slug . '.php',
+//                 ),
+//             ),
+//         ),
+//         'menu_order' => 0,
+//         'position' => 'normal',
+//         'style' => 'default',
+//         'label_placement' => 'top',
+//         'instruction_placement' => 'label',
+//         'hide_on_screen' => '',
+//         'active' => true,
+//         'description' => '',
+//         'show_in_rest' => 0,
+//     ) );
+// } );
+// }
 
 
 
@@ -678,3 +686,32 @@ add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 function posts_link_attributes() {
   return 'class="text-decoration-none text-primary"';
 }
+
+
+
+
+add_action('wpcf7_init', 'custom_acf_file_url_form_tag');
+
+function custom_acf_file_url_form_tag(){
+    wpcf7_add_form_tag('acf_file_url', 'custom_acf_file_url_form_tag_handler');
+}
+
+function custom_acf_file_url_form_tag_handler($tag){
+    global $post;
+    // Get the URL of the ACF file field named 'product_data_sheet_file'
+    $acf_field = get_field('product_data_sheet_file', $post_id);
+    $url = isset($acf_field['url']) ? $acf_field['url'] : '';
+
+    // Return the URL if available, otherwise return empty string
+    return $url;
+}
+
+
+
+// remove CF7 P and SPAN
+add_filter('wpcf7_autop_or_not', '__return_false');
+add_filter('wpcf7_form_elements', function($content) {
+    $content = preg_replace('/<(span).*?class="\s*(?:.*\s)?wpcf7-form-control-wrap(?:\s[^"]+)?\s*"[^\>]*>(.*)<\/\1>/i', '\2', $content);
+    $content = str_replace('<br />', '', $content);
+    return $content;
+});

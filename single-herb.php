@@ -77,7 +77,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                       <div class="tab-pane fade show active mt-5 pt-lg-5 px-xxl-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                         <div class="row align-items-center align-items-lg-start">
                         <div class="col-12 col-lg-7 order-2 order-lg-1">
-                            <div class="lh-lg text-secondary text-center text-lg-start">
+                            <div class="lh-lg text-secondary text-lg-start">
                               <?php the_content() ;?>
                             </div>
                             <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
@@ -135,50 +135,13 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                       <div class="tab-pane fade pt-5 px-lg-5" id="nav-document-access" role="tabpanel" aria-labelledby="nav-document-access-tab" tabindex="0">
                         <div class="card rounded-5 border-0 p-3 mt-5 mt-lg-3">
                           <div class="px-3 py-4 py-lg-5 p-lg-5">
+                            <?php if(!empty($herb_single_contents['data_sheet_files']['data_sheet_heading'])) :?>
                             <div class="mb-5 px-lg-5">
-                              <h2><?php echo esc_html($herb_single_contents['safety_data_sheet']['safety_data_sheet_heading'] ) ;?></h2>
-                              <p class="text-secondary mt-4"><?php echo nl2br(esc_textarea($herb_single_contents['safety_data_sheet']['safety_data_sheet_sub_heading'] )) ;?></p>
+                              <h2><?php echo esc_html($herb_single_contents['data_sheet_files']['data_sheet_heading'] ) ;?></h2>
+                              <p class="text-secondary mt-4"><?php echo nl2br(esc_textarea($herb_single_contents['data_sheet_files']['data_sheet_sub_heading'] )) ;?></p>
                             </div>
-                         
-                            <form action="#!">
-                              <div class="row mb-md-4">
-                                <div class="col-12 mb-3 mt-4">
-                                  <h6 class="text-secondary mb-4 text-center"><small class="fst-italic ">Please check any data sheet to download.</small></h6>
-                                  <div class="form-check form-check-inline me-3 mb-3">
-                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox1" value="option1">
-                                    <label class="form-check-label fw-bold" for="inlineCheckbox1">Product Data Sheet</label>
-                                  </div>
-                                  <div class="form-check form-check-inline me-3 mb-3">
-                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox2" value="option2">
-                                    <label class="form-check-label fw-bold" for="inlineCheckbox2">Techinical Data Sheet</label>
-                                  </div>
-                                  <div class="form-check form-check-inline me-3 mb-3">
-                                    <input class="form-check-input border border-primary" type="checkbox" id="inlineCheckbox3" value="option3">
-                                    <label class="form-check-label fw-bold" for="inlineCheckbox3">Safety Data Sheet</label>
-                                  </div>
-                                  
-                                </div>
-                                <div class="col-12 mb-4">
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="name" placeholder="Name*">
-                                    <label for="name">Name <span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                                <div class="col-12">
-                                  <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email" placeholder="Email*">
-                                    <label for="email">Email<span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div class="mt-5 pt-3 mx-auto text-center">
-                                <button class="btn btn-black px-5 py-4 rounded-4"><i class="bi bi-send me-2"></i>Send Request</button>
-                              </div>
-                          </form>
-
-
-
+                            <?php endif; ?>
+                            <?php echo !empty($herb_single_contents['data_sheet_files']['data_sheet_shortcode']) ? $herb_single_contents['data_sheet_files']['data_sheet_shortcode'] : '';?>
 
                           </div>
                         </div>
@@ -250,5 +213,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
           </div>
         </section>
     </main>
+
+
 
 <?php get_footer(); ?>

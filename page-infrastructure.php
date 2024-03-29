@@ -27,7 +27,7 @@ $infrastructure_organic = $acf_fields['infrastructure_organic'];
 $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
 
 ?>  
-<main>
+<main class="bg-lteal">
     <?php if (!empty($infrastructure_jumbotron['infrastructure_hero_title'])) : ?>
         <section id="blog_jumb" class="position-relative overflow-hidden">
         <div class="container-fluid px-0">

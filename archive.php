@@ -8,10 +8,9 @@ get_header();
 <main class="bg-lteal">
     <section id="blog">
         <div class="container">
-
             <div class="row mt-5 pt-4">
                 <div class="col-12">
-                    <div class="row row-cols-1 row-cols-md-2  row-cols-lg-3 g-3 g-lg-5">
+                    <div class="row row-cols-1 row-cols-md-2 <?php echo esc_attr( is_post_type_archive( 'herb' ) || is_tax( 'herb-category' ) ? 'row-cols-lg-4' : 'row-cols-lg-3' ); ?> g-3 g-lg-5">
                     <?php
                     if(have_posts()) : while(have_posts()) : the_post() ;?>
                         <div class="col">

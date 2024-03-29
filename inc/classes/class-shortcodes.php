@@ -89,7 +89,7 @@ namespace AGROMEDIKA_THEME\Inc;
                         'terms' => $category->slug, // Sanitization not required, WordPress function get_terms already returns sanitized values
                     ),
                 ),
-            );
+            ); 
         
             $query = new \WP_Query($args);
         

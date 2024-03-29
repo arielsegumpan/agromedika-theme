@@ -16,7 +16,6 @@ get_header();
                     <h3 class="fw-bold "><?php echo esc_html('Search Results') ?></h3>
                 </div>
             </div>
-
             <div class="row mt-md-4">
                 <div class="col-12">
                         <?php if (have_posts()) : ?>

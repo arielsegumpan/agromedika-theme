@@ -77,9 +77,9 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                       </div> 
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                      <div class="tab-pane fade show active mt-5 pt-lg-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                      <div class="tab-pane fade show active mt-5 pt-lg-5 p-xxl-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                         <div class="row align-items-center align-items-lg-start">
-                        <div class="col-12 col-lg-5 mb-4 mb-lg-0 mt-5 mt-lg-0">
+                        <div class="col-12 col-lg-5 mb-4 mb-lg-0 mt-5 mt-lg-0 px-lg-5">
                           <?php if(!empty(($herb_single_contents['herbs_gallery'][0]['herb_image']['url']))):?>
                           <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper"
                           thumbs-swiper=".mySwiper2" space-between="10" navigation="true"  zoom="true" >
@@ -112,10 +112,12 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                             <?php foreach ($herb_single_contents['herbs_gallery'] as $herb_gal) :?>
                             <swiper-slide>
                               <?php
+                              if(!empty($herb_gal['herb_image']['url'])){
                                   $herb_gal_id =  $herb_gal['herb_image']['id'];
                                   echo html_entity_decode(esc_html(
                                   wp_get_attachment_image($herb_gal_id, 'herb_sm_thumbnail', false, array('class' => 'rounded-4 rounded-lg-5'))
-                                ));?>
+                                  ));
+                              };?>
                             </swiper-slide>
                             <?php endforeach ;?>
                           </swiper-container>
@@ -130,12 +132,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                             <?php echo !empty($herb_single_contents['herb_long_description']) ? html_entity_decode(wp_kses_post($herb_single_contents['herb_long_description'])) : esc_html('No long description') ;?>
                             
                           </div>
-
-                          <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
-                          <div class="mt-5">
-                            <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Herbs', 'agromedika' ) ?></a>
-                          </div>
-                          <?php endif; ?> 
+                          
                         </div>
                        </div>
                       </div>
@@ -174,6 +171,16 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                 <?php the_content() ;?>
               </div>
             </div>
+
+            <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
+            <div class="row text-center">
+              <div class="mt-5 pt-md-3 pt-lg-4">
+                <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Herbs', 'agromedika' ) ?></a>
+              </div>
+            </div>
+            <?php endif; ?>
+              
+            
           </div>
         </section>
     </main>

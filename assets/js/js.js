@@ -109,6 +109,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+
   let container = $('.container-img-pdf');
   let cards = $('.card');
 

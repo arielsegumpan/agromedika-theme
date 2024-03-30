@@ -88,11 +88,33 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         add_editor_style();
 
         add_theme_support( 'wp-block-styles' );
+        add_theme_support( 'editor-styles' );
         add_theme_support( 'align-wide' );
-
-        add_theme_support( 'wc-product-gallery-zoom' );
-        add_theme_support( 'wc-product-gallery-lightbox' );
-        add_theme_support( 'wc-product-gallery-slider' );
+        add_theme_support( 'appearance-tools' );
+        add_theme_support( 'border' );
+        add_theme_support( 'responsive-embeds' );
+        add_theme_support( 'editor-color-palette', array(
+            array(
+                'name'  => esc_attr__( 'agro green', 'agromedika' ),
+                'slug'  => 'agro-green',
+                'color' => '#009245',
+            ),
+            array(
+                'name'  => esc_attr__( 'agro light', 'agromedika' ),
+                'slug'  => 'agro-light',
+                'color' => '#F3FFF8',
+            ),
+            array(
+                'name'  => esc_attr__( 'agro light teal', 'agromedika' ),
+                'slug'  => 'agro-light-teak',
+                'color' => '#EEFFF5',
+            ),
+            array(
+                'name'  => esc_attr__( 'agro gray', 'agromedika' ),
+                'slug'  => 'agro-gray',
+                'color' => '#5B5B5B',
+            ),
+        ) );
     }
 
     public function image_sizes(){ 

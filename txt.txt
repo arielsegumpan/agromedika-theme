@@ -867,3 +867,14 @@ endif;
                                 <button class="btn btn-black px-5 py-4 rounded-4"><i class="bi bi-send me-2"></i>Send Request</button>
                               </div>
                             </form> -->
+
+
+
+
+
+
+
+
+
+
+ <?php echo !empty($herb_single_contents['herb_long_description']) ? html_entity_decode(wp_kses_post($herb_single_contents['herb_long_description'])) : esc_html('No long description') ;?>

@@ -715,3 +715,7 @@ add_filter('wpcf7_form_elements', function($content) {
     $content = str_replace('<br />', '', $content);
     return $content;
 });
+
+
+
+

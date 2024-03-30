@@ -4,6 +4,8 @@ $args = [
     'post_type'      => 'herb',
     'post_status'    => 'publish',
     'posts_per_page' => 12,
+    'orderby'        => 'title',
+    'order'          => 'ASC',
     'paged'          => get_query_var('paged') ? get_query_var('paged') : 1
 ];
  

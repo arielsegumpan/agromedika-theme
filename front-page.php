@@ -95,10 +95,9 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
             <div class="col-12 img-prod-front mt-5">
               <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 prod-display g-4 g-lg-5">
                 <?php 
-                if(shortcode_exists('agromedika_recent_product')){
-                echo do_shortcode('[agromedika_recent_product]'); 
-                }
-                ?>  
+                  if(shortcode_exists('agromedika_recent_product')){
+                    echo do_shortcode('[agromedika_recent_product]'); 
+                  }?>  
               </div>
             </div>
           </div> 
@@ -106,6 +105,7 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
           <div class="row">
             <div class="col-12 col-lg-10 mx-auto">
               <div id="carous_product">
+                  <h2 class="text-center mb-5 pb-lg-3"><?php echo esc_html($acf_values['home_products']['home_page_carousel_main_title']) ?></h2>
                 <div id="prod-carouselAutoPlaying" class="carousel slide position-relative" data-bs-ride="carousel">
                   <div class="carousel-inner rounded-5">
 
@@ -214,7 +214,7 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
             </div>
  
             <div class="col-12">
-              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 g-xl-5 blog-display">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 g-xl-5 blog-display">
 
                 <?php get_template_part('template-parts/components/blog/recent','front_post');?>
 

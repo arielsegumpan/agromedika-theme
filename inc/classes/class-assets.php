@@ -37,11 +37,14 @@
          wp_register_style('style', get_stylesheet_uri(), [], $theme_version, 'all');
          wp_register_style('icons', '//cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css', [], false, 'all');
          wp_register_style('fancybox_css', '//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css', [], false, 'all');
+        //  wp_register_style('googe_open_font', '//fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,600;1,600&display=swap', [], false, 'all');
+
          wp_register_style('woo_style', AGROMEDIKA_DIR_URI . '/assets/css/woo-style.css', [], false, 'all');
 
          wp_enqueue_style('style');
          wp_enqueue_style('icons');
          wp_enqueue_style('fancybox_css');
+        //  wp_enqueue_style('googe_open_font');
          wp_enqueue_style('woo_style');
          
      }

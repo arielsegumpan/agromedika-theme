@@ -3,7 +3,7 @@
 $args = array(
     'post_type'      => 'post',
     'post_status'    => 'publish',
-    'posts_per_page' => 3,
+    'posts_per_page' => 4,
 );
 $recent_posts_query = new WP_Query($args);
 if ($recent_posts_query->have_posts()) :

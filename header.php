@@ -3,10 +3,6 @@
  * Header Template
  * @package agromedika
  */
-
-// $shop_page_id = wc_get_page_id('shop'); // Get the shop page ID
-// $shop_page = get_post($shop_page_id); // Get the shop page object
-// $shop_page && $shop_page->post_title !== 'Shop' ? $shop_url = esc_url(get_permalink($shop_page)) : $shop_url = esc_url(wc_get_page_permalink('shop'));
 ?>
 <!doctype html>
 <html <?php wp_kses_decode_entities(language_attributes()) ?>>
@@ -14,6 +10,8 @@
     <meta charset="<?php bloginfo('charset');?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo esc_html_e(get_bloginfo('name'));?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <?php wp_head()?>
   </head>
   <body <?php body_class();?>>

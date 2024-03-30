@@ -76,17 +76,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                     <div class="tab-content" id="nav-tabContent">
                       <div class="tab-pane fade show active mt-5 pt-lg-5 px-xxl-5 text-start" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
                         <div class="row align-items-center align-items-lg-start">
-                        <div class="col-12 col-lg-7 order-2 order-lg-1">
-                            <div class="lh-lg text-secondary text-lg-start">
-                              <?php the_content() ;?>
-                            </div>
-                            <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
-                            <div class="mt-5">
-                              <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Products', 'agromedika' ) ?></a>
-                            </div>
-                            <?php endif; ?> 
-                        </div>
-                        <div class="col-12 col-lg-5 order-1 order-lg-2 mb-4 mb-lg-0 mt-5 mt-lg-0">
+                        <div class="col-12 col-lg-5 mb-4 mb-lg-0 mt-5 mt-lg-0">
                           <?php if(!empty(($herb_single_contents['herbs_gallery'][0]['herb_image']['url']))):?>
                           <swiper-container style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="mySwiper"
                           thumbs-swiper=".mySwiper2" space-between="10" navigation="true"  zoom="true" >
@@ -130,6 +120,16 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                             <h3 class="fw-bold text-center"><?php echo esc_html('No product gallery');?></h3>
                           <?php endif;?>
                         </div>
+                        <div class="col-12 col-lg-7 pt-3">
+                            <div class="lh-lg text-secondary text-lg-start">
+                              <?php the_content() ;?>
+                            </div>
+                            <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
+                            <div class="mt-5">
+                              <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Products', 'agromedika' ) ?></a>
+                            </div>
+                            <?php endif; ?> 
+                        </div>
                        </div>
                       </div>
                       <div class="tab-pane fade pt-5 px-lg-5" id="nav-document-access" role="tabpanel" aria-labelledby="nav-document-access-tab" tabindex="0">
@@ -149,58 +149,10 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                       <div class="tab-pane fade pt-5 px-lg-5" id="nav-buynow" role="tabpanel" aria-labelledby="nav-buynow-tab" tabindex="0">
                         <div class="card rounded-5 border-0 p-3 mt-5 mt-lg-3">
                           <div class="mt-5">
-                            <h2>Enquire Now</h2>
+                            <h2><?php echo !empty($herb_single_contents['send_inquirybuy_product']['send_inquirybuy_product_title']) ? esc_html($herb_single_contents['send_inquirybuy_product']['send_inquirybuy_product_title']) : esc_hmtl('Enquire Now');?></h2>
                           </div>
                           <div class="px-3 py-4 py-lg-5 p-lg-5">
-                            <form action="#!">
-                              <div class="row mb-md-4">
-                                <div class="col-12 col-md-6">
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="name" placeholder="Name*">
-                                    <label for="name">Name <span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                  <div class="form-floating mb-3">
-                                    <input type="phone" class="form-control" id="phone" placeholder="Phone*">
-                                    <label for="phone">Phone<span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row mb-md-4">
-                                <div class="col-12 col-md-6">
-                                  <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="email" placeholder="youremail@gmail.com">
-                                    <label for="email">Email Address<span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                                <div class="col-12 col-md-6">
-                                  <div class="form-floating mb-3">
-                                    <input type="phone" class="form-control" id="phone" placeholder="Phone*">
-                                    <label for="phone">Phone Number<span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row mb-md-4">
-                                <div class="col-12">
-                                  <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject*">
-                                    <label for="subject">Subject <span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-12">
-                                  <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-                                    <label for="floatingTextarea">Message<span class="text-danger">*</span></label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="mt-5 mx-auto text-center">
-                                <button class="btn btn-black px-5 py-3"><i class="bi bi-send me-2"></i>Submit</button>
-                              </div>
-                            </form>
+                            <?php echo !empty($herb_single_contents['send_inquirybuy_product']['send_inquirybuy_product_content']) ? $herb_single_contents['send_inquirybuy_product']['send_inquirybuy_product_content'] : '';?>
                           </div>
                         </div>
                       </div>

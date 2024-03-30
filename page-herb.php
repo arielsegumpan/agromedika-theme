@@ -11,23 +11,20 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
 
 ?>
 
-<main class="bg-lteal">
-    
-    <section id="jumbotron-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-9 mx-auto my-auto text-center mt-5 pt-lg-5 pt-xl-0 mt-xl-3">
-                    <h1 class="fw-bold text-black"><?php echo !empty($herb_page_main_section['herb_page_title']) ? esc_html($herb_page_main_section['herb_page_title']) : esc_html('Our Herbs') ;?></h1>
-                    <p class="text-secondary mt-4"><?php echo !empty($herb_page_main_section['herb_page_content']) ? nl2br(esc_textarea($herb_page_main_section['herb_page_content'])) : esc_html('No post content') ;?></p>
-                </div>
-            </div>
-        </div>
+<main>
+    <section id="prod_jumbotron" class="bg-lteal">  
         <div class="jumb-overlay"></div>
     </section>
 
     <?php if($herb_page_main_section['herb_page_title']) : ?>
     <section id="products-main">
         <div class="container">
+            <div class="row">
+              <div class="col-12 col-lg-8 mx-auto my-auto text-center mb-5 pb-3 pb-md-4 pb-lg-5">
+              <h1 class="fw-bold text-black"><?php echo !empty($herb_page_main_section['herb_page_title']) ? esc_html($herb_page_main_section['herb_page_title']) : esc_html('Our Herbs') ;?></h1>
+                    <p class="text-secondary mt-4"><?php echo !empty($herb_page_main_section['herb_page_content']) ? nl2br(esc_textarea($herb_page_main_section['herb_page_content'])) : esc_html('No post content') ;?></p>
+              </div>
+            </div>
             <?php get_template_part('template-parts/components/blog/herb', 'page');?>
         </div>
     </section>
@@ -85,7 +82,7 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
                     if ($query->have_posts()) {
                         $output .= '<div class="row mb-5 pb-lg-3">';
                         $output .= '<div class="col-12">';
-                        $output .= '<h4>' . esc_html($category->name) . '</h4>';
+                        $output .= '<h4 class="text-center mx-auto">' . esc_html($category->name) . '</h4>';
                         $output .= '<div class="table-responsive">';
                         $output .= '<table class="table table-striped table-borderless mt-4 align-middle">';
                         $output .= '<tbody>';

@@ -5,10 +5,20 @@
  */
 get_header();
 ?>
-<main class="bg-lteal">
+<main>
+    <section id="prod_jumbotron" class="bg-lteal">
+        <div class="jumb-overlay"></div>
+      </section>
     <section id="blog">
         <div class="container">
-            <div class="row mt-5 pt-4">
+            <div class="row">
+                <?php $category = get_queried_object();
+                if(!empty($category) && is_tax('herb-category')):?>
+                <div class="col-12 col-lg-8 mx-auto text-center mb-5 pb-lg-4">
+                    <h1><?php echo $category->name; ?></h1>
+                    <div class="category-description"><?php echo category_description($category->term_id); ?></div>
+                </div>
+                <?php endif; ?>
                 <div class="col-12">
                     <div class="row row-cols-1 row-cols-md-2 <?php echo esc_attr( is_post_type_archive( 'herb' ) || is_tax( 'herb-category' ) ? 'row-cols-lg-4' : 'row-cols-lg-3' ); ?> g-3 g-lg-5">
                     <?php

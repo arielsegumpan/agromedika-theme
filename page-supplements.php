@@ -12,7 +12,10 @@ $page_title = get_the_title();
 ?>
  
 <main>
-    <section id="jumb_custom_ing" class="bg-lteal"> 
+    <section id="prod_jumbotron" class="bg-lteal">  
+        <div class="jumb-overlay"></div>
+    </section>
+    <section id="jumb_custom_ing"> 
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8 mx-auto my-auto text-center">
@@ -25,7 +28,7 @@ $page_title = get_the_title();
     </section>
 
     <?php if (!empty($dietary_supplements_block_1['dietary_supplements_block_1_image']['url']) && $dietary_supplements_block_1['dietary_supplements_block_1_content']) : ?>
-    <section id="main" class="bg-lteal">
+    <section id="main">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6">
@@ -52,7 +55,7 @@ $page_title = get_the_title();
     <?php endif; ?>
 
     <?php if (!empty($dietary_supplements_block_2['dietary_supplements_block_2_title']) && !empty($dietary_supplements_block_2['dietary_supplements_block_2_icons'][0]['dietary_supplements_block_2_icon']['url'])): ?>
-    <section id="infographics">
+    <section id="infographics" class="bg-lteal">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 mx-auto text-center">

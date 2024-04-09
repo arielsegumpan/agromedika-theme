@@ -17,7 +17,7 @@ if ($recent_posts_query->have_posts()) :
                         echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'news_update_img', false, array('class' => 'img-fluid rounded-4'))));
                         ?>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                     <div class="title mt-2 mt-lg-2">
                         <h5 class="fw-bold text-primary"><?php the_title(); ?></h5>
                         <div class="mt-4">

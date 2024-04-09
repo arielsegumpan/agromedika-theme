@@ -3,7 +3,7 @@
 $args = [
     'post_type'      => 'herb',
     'post_status'    => 'publish',
-    'posts_per_page' => 12,
+    'posts_per_page' => 16,
     'orderby'        => 'title',
     'order'          => 'ASC',
     'paged'          => get_query_var('paged') ? get_query_var('paged') : 1
@@ -50,7 +50,7 @@ $getProd = new WP_Query($args);
     
     <div class="col-12 mx-auto text-center mt-5 pt-lg-5">
         <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center pagination-lg">
+            <ul class="pagination justify-content-center">
                 <?php
                 echo '<li class="page-item ' . ($getProd->current_page == 1 ? 'disabled' : '') . '">';
                 echo html_entity_decode(esc_html(get_previous_posts_link('<span class="page-link text-primary"><i class="bi bi-arrow-left me-2"></i> Previous</span>')));

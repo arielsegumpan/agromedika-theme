@@ -12,7 +12,10 @@ $page_title = get_the_title();
 ?>
 
 <main>
-    <section id="jumb_custom_ing" class="bg-lteal"> 
+    <section id="prod_jumbotron" class="bg-lteal">  
+        <div class="jumb-overlay"></div>
+    </section>
+    <section id="jumb_custom_ing" class="bg-white"> 
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-8 mx-auto my-auto text-center">
@@ -25,10 +28,10 @@ $page_title = get_the_title();
     </section>
 
     <?php if (!empty($animal_nutrition_block_1['animal_nutrition_block_1_image']['url']) && $animal_nutrition_block_1['animal_nutrition_block_1_content']) : ?>
-    <section id="main" class="bg-lteal">
+    <section id="main" class="bg-white">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 pe-lg-5">
                 <?php if (has_post_thumbnail()) : ?>
                     <?php $featured_image_id = get_post_thumbnail_id();
                         echo html_entity_decode(esc_html(wp_get_attachment_image($featured_image_id, 'sg_img', false, array('class' => 'img-fluid rounded-5 cust-img'))));
@@ -52,7 +55,7 @@ $page_title = get_the_title();
     <?php endif; ?>
 
     <?php if (!empty($animal_nutrition_block_2['animal_nutrition_block_2_title']) && !empty($animal_nutrition_block_2['animal_nutrition_block_2_icons'][0]['animal_nutrition_block_2_icon']['url'])): ?>
-    <section id="infographics" class="bg-white">
+    <section id="infographics" class="bg-lteal">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-md-8 mx-auto text-center">

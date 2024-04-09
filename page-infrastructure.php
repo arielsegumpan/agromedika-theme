@@ -41,15 +41,14 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                 <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
                   <div class="row"> 
                     <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
-                      <h1 class="fw-bold text-black"><?php echo esc_html($infrastructure_jumbotron['infrastructure_hero_title']); ?></h1>
-                      <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea($infrastructure_jumbotron['infrastructure_hero_sub_title'])); ?></h5>
+                      <h1 class="fw-bold text-white"><?php echo esc_html($infrastructure_jumbotron['infrastructure_hero_title']); ?></h1>
+                      <h5 class="text-white mt-4"><?php echo nl2br(esc_textarea($infrastructure_jumbotron['infrastructure_hero_sub_title'])); ?></h5>
                     </div>
                   </div>
                 </div> 
             </div>
           </div>
         </div>
-        <div class="jumb-overlay"></div>
       </section>
     <?php endif; ?>
 
@@ -57,7 +56,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
     <section id="product_facility" class="bg-lteal">
         <div class="container">
             <div class="row">
-              <div class="col-12 col-lg-7 text-center text-lg-start mb-5 mb-lg-0">
+              <div class="col-12 col-lg-7 text-center text-lg-start mb-5 mb-lg-0 pe-lg-5">
                 <h1 class="fw-bold text-black mb-4"><?php echo esc_html__( $infrastructure_facility['infrastructure_title'], 'agromedika' ) ;?></h1>
                   <p class="lh-lg text-secondary">
                     <?php echo nl2br(esc_textarea( $infrastructure_facility['infrastructure_content'] )) ;?>
@@ -80,7 +79,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <div class="row row-cols-2 g-3 g-lg-4">
+                        <div class="row row-cols-2 g-3 g-lg-4 pe-lg-5">
                             <?php if (!empty($infrastructure_rnd)) :
                                 $col_class = 'col-12';
                                 foreach ($infrastructure_rnd['infrastructure_rnd_images'] as $index => $rnd_img_gallery) :
@@ -107,14 +106,14 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
     <?php endif; ?>
 
     <?php if (!empty($infrastructure_organic['infrastructure_organic_title'])) : ?>
-        <section id="organic">
+        <section id="organic" class="bg-white">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-6 text-center text-lg-start">
                         <h2 class="fw-bold mb-4 text-black"><?php echo esc_html($infrastructure_organic['infrastructure_organic_title']) ?></h2>
                         <div class="lh-lg text-secondary mt-4"><?php echo wp_kses_decode_entities($infrastructure_organic['infrastructure_organic_content']); ?></div>
                     </div>
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 ps-lg-5">
                         <div id="organicGallery" class="carousel slide">
                             <div class="carousel-inner">
 

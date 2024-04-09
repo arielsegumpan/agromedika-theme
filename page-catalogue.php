@@ -20,8 +20,11 @@
  
  ?>
     <main>
+    <section id="prod_jumbotron" class="bg-lteal">
+        <div class="jumb-overlay"></div>
+    </section>
         <?php if(!empty($product_catalogue_jumbotron['product_catalogue_jumbotron_heading'])) :?>
-        <section id="no-jumbotron" class="bg-lteal">
+        <section id="no-jumbotron" class="bg-white">
             <div class="container">
               <div class="row">
                 <div class="col-12 col-lg-8 mx-auto my-auto text-center">
@@ -34,7 +37,7 @@
         <?php endif;?>
     
 
-        <section id="main" class="bg-lteal">
+        <section id="main" class="bg-white">
             <div class="container">
               <div class="row">
                 <div class="col-12 col-md-4 col-lg-3">

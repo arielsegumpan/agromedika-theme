@@ -52,7 +52,7 @@ foreach ($acf_field_names as $field_name) {
                         $id = ($key == 1) ? 'first' : (($key == 2) ? 'second' : 'third');
                     ?>
                         <div class="card <?php echo $class; ?> border-0 bg-transparent" id="<?php echo $id; ?>">
-                            <h2 class="fw-bold"><?php echo esc_html($getSlide['company_hero_text_slide']); ?></h2>
+                            <h2 class="fw-bold text-white"><?php echo esc_html($getSlide['company_hero_text_slide']); ?></h2>
                         </div>
                     <?php endforeach; ?>
 
@@ -70,7 +70,7 @@ foreach ($acf_field_names as $field_name) {
         <section id="who" class="bg-lteal">
             <div class="container">
               <div class="row">
-                <div class="col-12 col-lg-6 mb-5 mb-xl-0">
+                <div class="col-12 col-lg-6 mb-5 mb-xl-0 pe-lg-5">
 
                   <?php
                       $get_id = $acf_fields['company_about']['company_about_image']['id'];

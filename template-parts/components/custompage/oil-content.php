@@ -3,7 +3,7 @@
     $essential_oil_page_link = get_acf_field('essential_oil_page_link');
     ?>
 
-    <section id="product_cat" class="bg-lteal">
+    <section id="product_cat" class="bg-white">
         <div class="container">
             <div class="row mb-5 pb-lg-5">
                 <div class="col-12 text-center">

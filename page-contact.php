@@ -28,22 +28,27 @@ $contact_content = $acf_fields['contact_content'];
 ?>
 
 <main>
-    <section id="contact" class="bg-lteal">
+    <section id="prod_jumbotron" class="bg-lteal">  
+        <div class="jumb-overlay"></div>
+    </section>
+    <section id="contact" class="bg-white">
         <div class="container">
             <div class="row">
-              <div class="col-12 col-lg-6 mx-auto position-relative">
-                <div class="card rounded-5 border-0 p-3 p-xl-5 mt-5">
+              <div class="col-12 col-lg-10 mx-auto position-relative">
+                <div class="card rounded-5 border-0 p-3 p-xl-5 mt-5 bg-lteal">
                   <h1 class="fw-bold text-black text-center pt-4"><?php echo !empty($contact_content['contact_page_title']) ? esc_html($contact_content['contact_page_title']) : get_the_title(); ?></h1>
                   <div class="px-3 py-5 p-xl-5">
                     <?php echo !empty($contact_content['contact_from_shortcode']) ? html_entity_decode(esc_html($contact_content['contact_from_shortcode'])) : ''; ?>
                   </div>
                 </div>
               </div>
-              <div class="col-12 col-lg-6">
+            </div>
+            <div class="row">
+              <div class="col-12 col-lg-10 mx-auto text-center">
                 <div class="map-wrapper pt-lg-5">
                   <?php echo html_entity_decode(esc_html($contact_content['contact_gmap'] )) ;?>
                 </div>
-                <div class="mt-4 text-xl-start text-center">
+                <div class="mt-4 text-center">
 
                   <span><i class="bi bi-geo-alt fs-1 text-primary"></i></span>
                   <p class="lh-lg text-secondary mb-3"><?php echo esc_html($contact_content['contact_address']); ?></p>

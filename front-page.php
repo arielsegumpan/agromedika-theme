@@ -17,6 +17,7 @@ $acf_fields = array(
     'home_post' => 'home_post',
 );
 
+$music_file = get_acf_option_field('music_file');
 // Initialize an empty array to store the field values
 $acf_values = array();
 
@@ -33,6 +34,22 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
 
 
 ?>
+<?php if (!empty($music_file)) : 
+  $formatted_title = ucwords(str_replace('_', ' ', $music_file['title']));
+  ?>
+    <div id="music" >
+      <div class="card px-2 py-2 rounded-4 shadow border border-primary text-centers">
+        <div id="audio_btn" class="d-flex flex-row gap-2 align-items-center p-2">
+          <i class="bi bi-volume-up fs-5"></i>
+          <small class="music_title fw-bold text-center text-secondary"><?php echo esc_attr($formatted_title); ?></small>
+        </div>
+        <audio controls autoplay loop>
+          <source src="<?php echo esc_url($music_file['url']); ?>" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
+<?php endif; ?>
 
 <main>
     <!-- Jumbotron Section -->
@@ -53,13 +70,12 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
         </div>
       </section>
     <?php endif; ?>
-
     <!-- About Section -->
     <?php if (!empty($acf_values['home_about']) && !empty($acf_values['home_about']['home_about_images'])) :?>
       <section id="about" class="bg-lteal">
         <div class="container container-lg-fluid">
           <div class="row">
-            <div class="col-12 col-lg-6 order-2 order-lg-1 mt-5 mt-lg-0">
+            <div class="col-12 col-lg-6 order-2 order-lg-1 mt-5 mt-lg-0 pe-lg-5">
             <?php foreach ($acf_values['home_about']['home_about_images'] as $home_about_image) : ?>
               <?php
               $about_img_id = $home_about_image['home_about_image']['id'];
@@ -230,4 +246,6 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
       </section>
     <?php endif; ?>
 </main>
+
 <?php get_footer(); ?>
+

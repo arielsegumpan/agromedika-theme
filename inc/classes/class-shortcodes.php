@@ -184,11 +184,20 @@ namespace AGROMEDIKA_THEME\Inc;
             if ($query->have_posts()) {
                 while ($query->have_posts()) {
                     $query->the_post();
+                    $herb_single_contents = get_acf_field('herb_single_contents');
                     $post_id = get_the_ID();
-                    echo '<tr><td><a href="' . esc_url(get_permalink($post_id)) . '" class="text-decoration-none text-primary">' . esc_html(get_the_title($post_id)) . '</a></td>';
+                    echo '<tr><td>
+                    <a href="' . esc_url(get_permalink($post_id)) . '" class="text-decoration-none text-primary">';
+                     esc_html(get_the_title($post_id));
+                    echo '<div class="thumbnail d-flex flex-row g-2 align-items-center">';
+                    echo has_post_thumbnail() ? wp_get_attachment_image(get_post_thumbnail_id(), 'cust_img_thumb', false,['class' => 'rounded-4']) : wp_get_attachment_image($herb_single_contents['herbs_gallery'][0]['herb_image']['id'], 'cust_img_thumb', false,['class' => 'rounded-4']);
+                    echo '<span class="ms-3">' . esc_html(get_the_title()) . '</span>';
+                    echo '</div>';
+                     echo '</a>
+                    </td>';
                     foreach ($child_terms as $child_term_id) {
                         $has_post = has_term($child_term_id, 'application-category', $post_id);
-                        echo '<td>' . ($has_post ? '<i class="bi bi-check-circle text-primary"></i>' : '<i class="bi bi-x-circle text-danger"></i>') . '</td>';
+                        echo '<td>' . ($has_post ? '<i class="bi bi-check-circle text-primary fs-5"></i>' : '<i class="bi bi-x-circle text-danger fs-5"></i>') . '</td>';
                     }
                     echo '</tr>';
                 }
@@ -214,6 +223,12 @@ namespace AGROMEDIKA_THEME\Inc;
             'post_type'      => 'herb',
             'post_status'    => 'publish',
             'posts_per_page' => 12,
+            'meta_query' => array(
+                array(
+                    'key'   => 'herb_single_contents_is_approved_is_approved_by_the_doh',
+                    'value' => '1',
+                )
+            )
         );
      
         $loop = new \WP_Query($args);

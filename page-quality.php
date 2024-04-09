@@ -39,15 +39,14 @@ get_header();
                 <div id="blog-cont" class="container position-absolute top-50 start-50 translate-middle">
                   <div class="row"> 
                     <div class="col-12 col-lg-8 mx-auto my-auto text-center px-3 px-lg-0">
-                      <h1 class="fw-bold text-black"><?php echo esc_html($quality_jumbotron['quality_hero_title']) ;?></h1>
-                      <h5 class="text-black mt-4"><?php echo nl2br(esc_textarea( $quality_jumbotron['quality_hero_sub_title'] )) ;?></h5>
+                      <h1 class="fw-bold text-white"><?php echo esc_html($quality_jumbotron['quality_hero_title']) ;?></h1>
+                      <h5 class="text-white mt-4"><?php echo nl2br(esc_textarea( $quality_jumbotron['quality_hero_sub_title'] )) ;?></h5>
                     </div>
                   </div>
                 </div> 
             </div>
           </div>
         </div>
-        <div class="jumb-overlay"></div>
       </section>
     <?php endif ;?>
     <?php if(!empty($quality_control['quality_control_title']) && !empty($quality_control['quality_control_content'])) :?>

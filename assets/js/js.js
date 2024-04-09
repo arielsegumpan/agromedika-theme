@@ -1,4 +1,19 @@
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  var audio = document.getElementById('bg_sound');
+
+  // Function to unmute audio when it starts playing
+  function handleAutoPlay() {
+    audio.muted = false; // Unmute audio
+    audio.removeEventListener("play", handleAutoPlay); // Remove event listener after playing
+  }
+
+  // Add event listener to check when audio starts playing
+  audio.addEventListener("play", handleAutoPlay);
+});
+
+
 // Close dropdown menus when clicking outside of them
 $(document).on('click', function(e) {
   if (!$(e.target).closest('.dropdown').length) {

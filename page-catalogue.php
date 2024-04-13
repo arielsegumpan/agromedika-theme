@@ -45,17 +45,19 @@ $product_catalogue_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '
     <section id="main" class="bg-white">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
-                    <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo !empty($product_catalogue_filter_title['product_catalogue_menu_filter_title']) ? esc_html($product_catalogue_filter_title['product_catalogue_menu_filter_title']) : esc_html('Filter Options'); ?></h5>
-                    <ul id="filter-menu-2" class="list-unstyled list-group list-group-flush">
-                        <button type="button" class="filter-item list-group-item list-group-item-action text-secondary bg-transparent" data-filter="all"><?php echo esc_html('All'); ?></button>
+                <div class="col-12 text-center mb-5 pb-lg-4">
+                    <?php if(!empty($product_catalogue_filter_title['product_catalogue_menu_filter_title'])):?>
+                    <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo esc_html($product_catalogue_filter_title['product_catalogue_menu_filter_title']); ?></h5>
+                    <?php endif;?>
+                    <div id="filter-menu-2" class="d-flex flex-row flex-wrap gap-3 justify-content-center align-items-center">
+                        <button type="button" class="filter-item btn btn-primary text-lteal" data-filter="all"><?php echo esc_html('All'); ?></button>
                         <?php
                         // Display product catalogue categories filter
                         display_product_catalogue_categories_filter();
                         ?>
-                    </ul>
+                    </div>
                 </div>
-                <div class="col-12 col-md-8 col-lg-9 mt-5 mt-lg-0">
+                <div class="col-12 col-md-10 mx-auto mt-5 mt-lg-0">
                     <div class="container-img-pdf">
                         <?php
                         // Display product catalogue galleries
@@ -77,7 +79,7 @@ function display_product_catalogue_categories_filter()
     $categories = get_terms('product-catalogue-category');
     if (!empty($categories)) {
         foreach ($categories as $category) {
-            echo '<button type="button" class="filter-item list-group-item list-group-item-action text-secondary bg-transparent" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
+            echo '<button type="button" class="filter-item btn btn-primary text-lteal" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
         }
     } else {
         echo '<p>' . esc_html__('No options found') . '</p>';
@@ -114,16 +116,6 @@ function display_product_catalogue_galleries($query, $product_catalogue_featured
                             <a href="<?php echo esc_url(the_permalink()); ?>" class="text-decoration-none">
                                 <h5 class="text-primary"><?php echo esc_html(substr(get_the_title(), 0, 30)) . '...'; ?></h5>
                             </a>
-                            <div class="d-flex flex-row justify-content-start align-items-center mt-3">
-                                <div class="me-3">
-                                    <a href="#!" class="text-decoration-none text-secondary bookmark-button" data-post-id="<?php echo esc_attr(get_the_ID()); ?>">
-                                        <i class="bi bi-bookmark fs-5"></i>
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="<?php echo esc_url(the_permalink()); ?>" class="view text-decoration-none text-secondary"><i class="bi bi-eye fs-5"></i></a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

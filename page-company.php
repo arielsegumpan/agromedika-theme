@@ -12,6 +12,7 @@ $acf_field_names = array(
     'company_timeline',
     'company_team',
     'company_mission_and_vision',
+    'company_core_values',
     'company_youtube'
 );
 
@@ -25,7 +26,6 @@ foreach ($acf_field_names as $field_name) {
 <main>
 
     <?php if (!empty($acf_fields['company_jumbotron']['company_hero_text_slides']['0']['company_hero_text_slide'])): ?>
-
         <section id="jumbotron-product" class="bg-lteal position-relative overflow-hidden">
           <?php if (has_post_thumbnail()) : ?>
               <?php
@@ -92,6 +92,30 @@ foreach ($acf_field_names as $field_name) {
           </section>
     <?php endif; ?>
 
+    <?php if(!empty($acf_fields['company_mission_and_vision']['company_mission_content']) && !empty($acf_fields['company_mission_and_vision']['company_vision_content'])):?>
+    <section id="rnd" class="bg-lteal">
+            <div id="mission_vision">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-12 col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+                          <div class="mission">
+                              <h2 class="fw-bold"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_title']); ?></h2>
+                              <h4 class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_content']); ?></h4>
+                          </div>
+                      </div>
+
+                      <div class="col-12 col-lg-6 text-center text-lg-start">
+                        <div class="mission">
+                            <h2 class="fw-bold"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_title']); ?></h2>
+                            <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_content']); ?></p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+    </section>
+    <?php endif;?>
+
     <?php if (!empty($acf_fields['company_timeline']['company_timeline_title'])) : ?>
         <section id="infographics" class="bg-primary">
             <div class="container-fluid">
@@ -135,51 +159,58 @@ foreach ($acf_field_names as $field_name) {
     <?php endif; ?>
 
     <?php if (!empty($acf_fields['company_team']['company_title']) && !empty($acf_fields['company_team']['company_team_content'])) : ?>
-        <section id="team">
+        <section id="team" class="mb-5 mb-lg-0">
             <div class="container">
               <div class="row">
                 <div class="col-12 col-lg-8 mx-auto text-center">
                   <h2 class="fw-bold text-black"><?php echo esc_html($acf_fields['company_team']['company_title']); ?></h2>
                   <p class="text-secondary mt-4"><?php echo nl2br(esc_textarea($acf_fields['company_team']['company_team_content'])); ?></p>
                 </div>
-                <?php if (!empty($acf_fields['company_team']['company_team_image']['url'])) : ?>
-                    <div class="col-12 mt-3 mt-lg-5">
-                        <?php
-                            $comp_id = $acf_fields['company_team']['company_team_image']['id'];
+              </div>
+              <?php if (!empty($acf_fields['company_team']['company_leadership_team'][0]['team_name'])) : ?>
+              <div class="row mt-5 pt-lg-3">
+                  <?php foreach($acf_fields['company_team']['company_leadership_team'] as $key => $get_team) :?>
+                    <div class="col-12 col-md-4 col-lg-3 text-center px-lg-4 mb-5 mb-md-4">
+                      <div class="team_img">
+                        <?php 
+                            $get_team_id = $get_team['team_profile']['id'];
                             echo html_entity_decode(esc_html(
-                            wp_get_attachment_image($comp_id, 'company_team_thumbnail', false, array('class' => 'img-fluid rounded-5'))
+                            wp_get_attachment_image($get_team_id, 'team_thumbnail', false, array('class' => 'img-fluid object-fit-cover rounded-5 w-100'))
                         ));?>
+                        <h4 class="fw-bold text-primary mt-4"><?php echo esc_html($get_team['team_name']);?></h4>
+                        <h6 class="text-secondary px-lg-5 small"><?php echo esc_html($get_team['team_position']);?></h6>
+                        <?php if(!empty($get_team['socmed_links'][0]['socmed_url'])):?>
+                        
+                        <div class="d-flex flex-row justify-content-center algin-items-center gap-3 mx-auto mt-3">
+                        <?php foreach($get_team['socmed_links'] as $get_socmed):?>
+                          <a  href="<?php echo esc_url($get_socmed['socmed_url']);?>" class="text-decoration-none text-primary fs-5" target="_blank">
+                          <?php echo html_entity_decode(esc_html($get_socmed['socmed_link']));?></a>
+                        <?php endforeach;?>
+                        </div>
+                        <?php endif;?>
+
+                      </div>
                     </div>
-                <?php endif; ?>
+                  <?php endforeach; ?>
+                    
               </div>
-            </div>
-    
-            <div id="mission_vision">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-12 col-md-9 col-lg-6 mx-auto text-center mt-5">
-                          <div class="mission">
-                              <h2 class="fw-bold"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_title']); ?></h2>
-                              <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_content']); ?></p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="vision">
-                      <div class="row mb-5">
-                          <div class="col-12 col-md-10 mx-auto text-center mt-5">
-                              <div class="mission">
-                                <h2 class="fw-bold"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_title']); ?></h2>
-                                <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_content']); ?></p>
-                              </div>
-                          </div>
-                      </div>
+              <?php endif; ?>
+              <?php if(!empty($acf_fields['company_core_values']['company_core_values_heading']) || !empty($acf_fields['company_core_values']['company_core_values_content'])) :?>
+              <div class="row mt-5 mt-lg-0 pt-xl-5 pb-lg-5 pb-xl-0">
+                <div class="col-12 col-lg-9 mx-auto text-center pt-4 pt-xl-5">
+                  <div class="mission">
+                      <h2 class="fw-bold mb-5"><?php echo esc_html($acf_fields['company_core_values']['company_core_values_heading']); ?></h2>
+                      <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_core_values']['company_core_values_content']); ?></p>
+                    </div>
                   </div>
               </div>
+              <?php endif;?>
             </div>
           </section>
     <?php endif; ?>
+
     <?php if(!empty($acf_fields['company_youtube']['company_youtube_link'])) :?>
-        <section id="yt">
+        <section id="yt" class="pt-lg-5 pt-xl-0">
             <div class="container">
               <div class="row">
                 <div class="col-12">
@@ -209,3 +240,6 @@ foreach ($acf_field_names as $field_name) {
     
 </main>
 <?php get_footer(); ?>
+
+
+

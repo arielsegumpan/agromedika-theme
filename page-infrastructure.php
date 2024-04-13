@@ -12,6 +12,7 @@ $acf_field_names = array(
     'infrastructure_rnd',
     'infrastructure_organic',
     'infrastructure_gallery',
+    'infrastructure_pack_transport'
 );
 
 $acf_fields = array();
@@ -25,6 +26,7 @@ $infrastructure_facility = $acf_fields['infrastructure_facility'];
 $infrastructure_rnd = $acf_fields['infrastructure_rnd'];
 $infrastructure_organic = $acf_fields['infrastructure_organic'];
 $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
+$infrastructure_pack_transport = $acf_fields['infrastructure_pack_transport'];
 
 ?>  
 <main class="bg-lteal">
@@ -106,7 +108,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
     <?php endif; ?>
 
     <?php if (!empty($infrastructure_organic['infrastructure_organic_title'])) : ?>
-        <section id="organic" class="bg-white">
+        <section id="rnd" class="bg-lteal">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-lg-6 text-center text-lg-start">
@@ -114,7 +116,7 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                         <div class="lh-lg text-secondary mt-4"><?php echo wp_kses_decode_entities($infrastructure_organic['infrastructure_organic_content']); ?></div>
                     </div>
                     <div class="col-12 col-lg-6 ps-lg-5">
-                        <div id="organicGallery" class="carousel slide">
+                        <div id="packtransGallery" class="carousel slide">
                             <div class="carousel-inner">
 
                                 <?php
@@ -123,12 +125,57 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                                         <?php
                                         $org_id = $organic_carousel['organic_carousel_image']['id'];
                                             echo html_entity_decode(esc_html(
-                                            wp_get_attachment_image($org_id, 'sg_img', false, array('class' => 'd-block w-100 rounded-5'))
+                                            wp_get_attachment_image($org_id, 'sg_img', false, array('class' => 'd-block w-100 rounded-5 object-fit-cover'))
                                         )); ;?>
                                         
                                         <div class="carousel-caption d-none d-md-block">
                                             <h5><?php echo esc_html($organic_carousel['organic_carousel_title']); ?></h5>
                                             <p><?php echo nl2br(esc_textarea($organic_carousel['organic_carousel_content'])); ?></p>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
+
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#packtransGallery" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#packtransGallery" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <?php endif; ?>
+
+
+
+
+
+    <?php if (!empty($infrastructure_pack_transport['infrastructure_pack_transport_title'])) : ?>
+        <section id="rnd" class="bg-lteal">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6 pe-lg-5 order-2 order-lg-1 mt-5 mt-lg-0">
+                        <div id="organicGallery" class="carousel slide">
+                            <div class="carousel-inner">
+
+                                <?php
+                                foreach ($infrastructure_pack_transport['infrastructure_pack_transport_carousel'] as $key => $pactrans_carousel) : ?>
+                                    <div class="carousel-item <?php echo esc_attr($key === 0 ? 'active' : ''); ?>">
+                                        <?php
+                                        $pactrans_id = $pactrans_carousel['pack_transport_carousel_image']['id'];
+                                            echo html_entity_decode(esc_html(
+                                            wp_get_attachment_image($pactrans_id, 'sg_img', false, array('class' => 'd-block w-100 rounded-5 object-fit-cover'))
+                                        )); ;?>
+                                        
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5><?php echo esc_html($pactrans_carousel['pack_transport_carousel_title']); ?></h5>
+                                            <p><?php echo nl2br(esc_textarea($pactrans_carousel['pack_transport_carousel_content'])); ?></p>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -145,12 +192,21 @@ $infrastructure_gallery = $acf_fields['infrastructure_gallery'];
                             </button>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-6 text-center text-lg-start order-1 order-lg-2">
+                        <h2 class="fw-bold mb-4 text-black"><?php echo esc_html($infrastructure_pack_transport['infrastructure_pack_transport_title']) ?></h2>
+                        <div class="lh-lg text-secondary mt-4"><?php echo wp_kses_decode_entities($infrastructure_pack_transport['infrastructure_pack_transport_content']); ?></div>
+                    </div>
                 </div>
             </div>
         </section>
     <?php endif; ?>
+
+
+
+
+
     <?php if (!empty($infrastructure_gallery['infrastructure_gallery_title'])) : ?>   
-        <section id="infras-gallery" class="bg-lteal">
+        <section id="infras-gallery" class="bg-white">
           <div class="container"> 
             <div class="row">
               <div class="col-12 col-lg-9 mx-auto text-center mb-5">

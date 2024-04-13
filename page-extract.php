@@ -28,9 +28,9 @@ $extract_list_jumbotron = get_acf_field('extract_list_jumbotron');
          <div class="container">
              <div class="row">
                  <div class="col-12 mx-auto">
-                     <div class="cont-img">
+                     <div class="cont-img extract_lists">
                         <?php if(have_posts( ) && !empty(get_the_content())) : while(have_posts(  )) : the_post() ; ?>
-                          <?php the_content() ?>
+                        <?php echo html_entity_decode(the_content()) ?>
                         <?php endwhile; else:?>
                         <div class="text-center w-100">
                           <h4 class="text-black mb-4"><?php  echo esc_html__('No post content');?></h4>

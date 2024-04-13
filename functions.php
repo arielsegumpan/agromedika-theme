@@ -87,40 +87,32 @@ if (!function_exists('woocommerce_template_loop_product_thumbnail')) {
 
 // Get Categories by Post Type
 function post_categories_by_post_type_shortcode($atts) {
-    global $post;
-
-    // Check if we have a valid post
-    if (!isset($post) || empty($post->ID)) {
-        return 'No post found.';
+    // Check if we have a valid post ID
+    if (!isset($atts['post_id'])) {
+        return 'No post ID provided.';
     }
 
-    // Define the allowed post types add custom post type if necessary
-    $allowed_post_types = array('post');
+    // Get the categories of the provided post ID from the "career-category" taxonomy
+    $categories = get_the_terms($atts['post_id'], 'career-category');
 
-    // Get the post's post type
-    $post_type = get_post_type($post);
-
-    // Check if the post type is allowed
-    if (in_array($post_type, $allowed_post_types)) {
-        // Get the post's categories
-        $categories = get_the_category();
+    // Check if categories were retrieved
+    if (!empty($categories) && !is_wp_error($categories)) {
         $output = '';
-        if (!empty($categories)) {
-            foreach ($categories as $category) {
-                $output .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" class="text-decoration-none text-lteal">
-                    <span class="badge text-bg-primary px-2 rounded-2"><small class="text-lteal">
-                    ' . $category->name . '</small></span></a>';
-            }
-        } else {
-            $output = '';
+        foreach ($categories as $category) {
+            $output .= '<a href="' . esc_url(get_term_link($category)) . '" class="text-decoration-none text-lteal">
+                <span class="badge text-bg-primary px-2 rounded-2"><small class="text-lteal">
+                ' . $category->name . '</small></span></a>';
         }
     } else {
         $output = '';
     }
+
     return $output;
 }
 
 add_shortcode('post_categories', 'post_categories_by_post_type_shortcode');
+
+
 
 
 // Breadcrumbs

@@ -25,23 +25,16 @@ $acf_values = array();
 foreach ($acf_fields as $key => $field_name) {
     $acf_values[$key] = get_acf_field($field_name);
 }
-
 has_post_thumbnail() ? $background_image = get_the_post_thumbnail_url(get_the_ID(), 'full') : '';
 $background_image = empty($background_image) && !empty($acf_values['home_jumbotron']['home_jumbotron_image']['url']) ? $acf_values['home_jumbotron']['home_jumbotron_image']['url'] : $background_image;
-
-
 $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
-
-
 ?>
 <?php if (!empty($music_file)) : 
-  $formatted_title = ucwords(str_replace('_', ' ', $music_file['title']));
   ?>
     <div id="music" >
-      <div class="card px-2 py-2 rounded-4 shadow border border-primary text-centers">
-        <div id="audio_btn" class="d-flex flex-row gap-2 align-items-center p-2">
+      <div class="card py-2 rounded-4 shadow border border-primary text-centers">
+        <div id="audio_btn" class="d-flex flex-row gap-2 align-items-center justify-content-center">
           <i class="bi bi-volume-up fs-5"></i>
-          <small class="music_title fw-bold text-center text-secondary"><?php echo esc_attr($formatted_title); ?></small>
         </div>
         <audio controls autoplay loop>
           <source src="<?php echo esc_url($music_file['url']); ?>" type="audio/mpeg">
@@ -62,8 +55,8 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
                   wp_get_attachment_image($jumb_id, 'jumbotron', false, array('class' => 'object-fit-cover'))
                   )); ;?>
                 <div id="content-wrap" class="col-12 col-lg-7 col-xxl-6 me-auto my-auto text-center text-xl-start px-5 px-lg-1">
-                  <h1 class="display-5 fw-bold text-black px-md-3 px-lg-0"><?php echo esc_html($acf_values['home_jumbotron']['home_jumbotron_title']); ?></h1>
-                  <h5 class=" mt-4 fw-bold px-md-3 px-lg-0"><?php echo esc_html($acf_values['home_jumbotron']['home_jumbotron_sub_title']); ?></h5>
+                  <h1 class="display-5 fw-bold text-white px-md-3 px-lg-0"><?php echo esc_html($acf_values['home_jumbotron']['home_jumbotron_title']); ?></h1>
+                  <h5 class=" mt-4 fw-bold text-white px-md-3 px-lg-0"><?php echo esc_html($acf_values['home_jumbotron']['home_jumbotron_sub_title']); ?></h5>
                 </div>
               </div>
           </div>
@@ -238,7 +231,7 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
             </div>
 
             <div class="text-center mt-5">
-              <a href="<?php echo esc_url($acf_values['home_post']['home_post_page_link']); ?>" class="text-decoration-none text-black fw-bold"><i class="bi bi-arrow-right me-2"></i><?php echo esc_html($acf_values['home_post']['home_post_button_name']); ?></a>
+              <a href="<?php echo esc_url($acf_values['home_post']['home_post_page_link']); ?>" class="text-decoration-none text-primary fw-bold"><i class="bi bi-arrow-right me-2"></i><?php echo esc_html($acf_values['home_post']['home_post_button_name']); ?></a>
             </div>
           
           </div>

@@ -20,7 +20,7 @@
             <?php if (!empty($pharmaceutical_page_link)) : ?>
             <div class="row mt-5 pt-lg-4">
                 <div class="col-6 mx-auto text-center">
-                    <a href="<?php echo esc_url($pharmaceutical_page_link) ?>" class="text-decoration-none text-black">
+                    <a href="<?php echo esc_url($pharmaceutical_page_link) ?>" class="text-decoration-none text-primary fw-bold">
                         <i class="bi bi-arrow-right me-3"></i><?php echo esc_html('Back to All Herbs'); ?>
                     </a>
                 </div>

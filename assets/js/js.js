@@ -87,6 +87,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
 $(document).ready(function () {
 
+
+
+// ADD CLASS wp table
+  $('section#main figure.wp-block-table table tbody tr td:first-child').each(function(){
+    $(this).html($(this).html().replace(/<br>/g, ' '));
+  });
+  $('section#main figure.wp-block-table table tbody tr td a').addClass('text-decoration-none text-primary');
+  $('section#main .extract_lists figure.wp-block-table table thead tr th:nth-child(5)').css('width', '120px');
+  $('section#main .extract_lists figure.wp-block-table table thead tr th:nth-child(3)').css('width', '200px');
+
+
+ 
   nextCard();
   setInterval(nextCard, 5000); 
 

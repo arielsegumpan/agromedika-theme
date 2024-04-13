@@ -24,6 +24,7 @@ namespace AGROMEDIKA_THEME\Inc;
         add_shortcode('get_food_prod_categories', [$this, 'get_foods_prod_categories']);
         add_shortcode('get_personal_cosmetic_categories', [$this, 'get_personal_cosmetics_categories']);
         add_shortcode('get_animal_nutrition_categories', [$this, 'get_animal_nutritions_categories']);
+        add_shortcode('get_career_related_categories', [$this,'display_related_categories_shortcode']);
     }
 
     public function social_share_buttons_shortcode($atts) {
@@ -197,7 +198,7 @@ namespace AGROMEDIKA_THEME\Inc;
                     </td>';
                     foreach ($child_terms as $child_term_id) {
                         $has_post = has_term($child_term_id, 'application-category', $post_id);
-                        echo '<td>' . ($has_post ? '<i class="bi bi-check-circle text-primary fs-5"></i>' : '<i class="bi bi-x-circle text-danger fs-5"></i>') . '</td>';
+                        echo '<td>' . ($has_post ? '<i class="bi bi-check-circle text-primary fs-5"></i>' : '<i class="bi bi-circle text-primary fs-5"></i>') . '</td>';
                     }
                     echo '</tr>';
                 }
@@ -618,6 +619,35 @@ namespace AGROMEDIKA_THEME\Inc;
          // Return output
          return $output;
     }
+    
+
+
+    function display_related_categories_shortcode($atts) {
+        // Get the post ID from the shortcode attributes or the global $post
+        $post_id = !empty($atts['post_id']) ? intval($atts['post_id']) : get_the_ID();
+    
+        // Get the terms (categories) associated with the career post in the 'career-category' taxonomy
+        $terms = get_the_terms($post_id, 'career-category');
+    
+        // Initialize output variable
+        $output = '';
+    
+        // Check if terms were found
+        if ($terms && !is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                // Generate the HTML for each category
+                $category_output = '<a href="' . esc_url(get_term_link($term)) . '" class="text-decoration-none text-lteal">';
+                $category_output .= '<span class="badge text-bg-primary px-2 rounded-2"><small class="text-lteal">';
+                $category_output .= esc_html($term->name);
+                $category_output .= '</small></span></a>';
+                // Add category output to overall output
+                $output .= $category_output;
+            }
+        }
+    
+        return $output;
+    }
+    
     
     
  }

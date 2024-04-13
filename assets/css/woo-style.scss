@@ -1,6 +1,7 @@
 $white:#ffffff;
 $green: #0A7742;
 $green_light: #55FF70;
+$lteal: #EEFFF5;
 $gray: #DBDBDB;
 $dark-gray: #6C6C6C;
 $trans: .3s ease;
@@ -227,6 +228,36 @@ section#product_lists{
 //         }
 //     }
 // }
+
+#content-wrap{
+    h1, h5{
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+@media (max-width: 375px) {
+    .wp-block-table.is-style-stripes tbody tr:nth-child(odd){
+        background: $lteal !important;
+    }
+    
+   section#main{
+    figure.wp-block-table{
+        table{
+            thead{
+                text-align: center!important;
+                tr{
+                    th:nth-child(1){
+                        width: 50px;
+                    }
+                    // th{
+                    //     width: 150px;
+                    // }
+                }
+            }
+        }
+    }
+   }
+}
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) { 
     section#product_lists{

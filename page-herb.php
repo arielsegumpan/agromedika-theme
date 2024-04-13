@@ -41,80 +41,62 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
                     <?php endif; ?>
                 </div>
             </div>
-            <?php endif;
 
-            $term_slugs = array();
-
-            // Check if herb product indications exist and is an array
-            if (!empty($herbs_indication['herb_product_indication']) && is_array($herbs_indication['herb_product_indication'])) {
-                foreach ($herbs_indication['herb_product_indication'] as $get_herb_terms) {
-                    if (!empty($get_herb_terms->slug) && !in_array($get_herb_terms->slug, $term_slugs)) {
-                        // Add the term slug to the array
-                        $term_slugs[] = $get_herb_terms->slug;
-                    }
-                }
-            }
-
-            $output = '';
-            $categories = get_terms(array(
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
+            <?php
+            $categories = get_categories(array(
                 'taxonomy' => 'herb-category',
-                'hide_empty' => false,
-                'slug' => $term_slugs, // Pass the collected term slugs to retrieve specific terms
+                'orderby' => 'name',
+                'order' => 'ASC',
+                'number' => 6,
             ));
 
-            if (!empty($categories) && !is_wp_error($categories)) {
-                foreach ($categories as $category) {
-                    $args = array(
+            if ($categories) :
+                foreach ($categories as $category) :
+                    $posts = new WP_Query(array(
                         'post_type' => 'herb',
-                        'posts_per_page' => -1,
+                        'posts_per_page' => 6,
                         'tax_query' => array(
                             array(
                                 'taxonomy' => 'herb-category',
-                                'field' => 'slug',
-                                'terms' => $category->slug,
+                                'field' => 'id',
+                                'terms' => $category->term_id,
                             ),
                         ),
-                    );
+                    ));
 
-                    $query = new WP_Query($args);
-
-                    // If there are posts for the current term, generate output
-                    if ($query->have_posts()) {
-                        $output .= '<div class="row mb-5 pb-lg-3">';
-                        $output .= '<div class="col-12">';
-                        $output .= '<h4 class="text-center mx-auto">' . esc_html($category->name) . '</h4>';
-                        $output .= '<div class="table-responsive">';
-                        $output .= '<table class="table table-striped table-borderless mt-4 align-middle">';
-                        $output .= '<tbody>';
-                        $output .= '<tr>';
-
-                        $count = 0;
-                        while ($query->have_posts()) {
-                            $query->the_post();
-                            $output .= '<td class="w-25">';
-                            $output .= '<a href="' . esc_url(get_permalink()) . '" class="text-primary text-decoration-none">';
-                            $output .= esc_html(get_the_title());
-                            $output .= '</a>';
-                            $output .= '</td>';
-
-                            $count++;
-                            if ($count % 4 == 0) {
-                                $output .= '</tr><tr>';
-                            }
-                        }
-
-                        $output .= '</tbody>';
-                        $output .= '</table>';
-                        $output .= '</div>';
-                        $output .= '</div>';
-                        $output .= '</div>';
-                    }
-                    wp_reset_postdata(); 
-                }
-            }
-
-            echo $output;
+                    if ($posts->have_posts()) :
             ?>
+                        <div class="col">
+                            <div class="card bg-transparent border-0 text-center">
+                                <h4 class="mb-3"><?php echo esc_html($category->name); ?></h4>
+                                <div class="list-group list-group-flush">
+                                    <?php
+                                    while ($posts->have_posts()) :
+                                        $posts->the_post();
+                                    ?>
+                                        <a href="<?php echo esc_url(get_permalink()); ?>" class="list-group-item border-0 text-primary" aria-current="true"><?php echo esc_html(get_the_title()); ?></a>
+                                    <?php
+                                    endwhile;
+                                    wp_reset_postdata();
+                                    if ($posts->found_posts >= 6) :
+                                    ?>
+                                        <div class="list-group-item mt-3">
+                                            <a href="<?php echo esc_url(get_category_link($category->term_id)); ?>" class="btn text-primary fw-bold rounded-3" aria-current="true">
+                                                <i class="bi bi-arrow-right me-2"></i>
+                                                <?php esc_html_e('More Health Benefits'); ?>
+                                            </a>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+            <?php
+                    endif;
+                endforeach;
+            endif;
+        endif;?>
+
         </div>
     </section>
 </main>

@@ -20,6 +20,7 @@ $certificate_jumbotron = get_acf_field('certificate_jumbotron');
                 <div class="row">
                     <div class="col-12 col-lg-8 mx-auto my-auto text-center">
                         <h1 class="fw-bold text-black"><?php echo esc_html($certificate_jumbotron['certificate_jumbotron_heading']); ?></h1>
+                        
                         <?php if (!empty($certificate_jumbotron['certificate_jumbotron_content'])) : ?>
                             <h5 class="text-secondary mt-4"><?php echo nl2br(esc_textarea($certificate_jumbotron['certificate_jumbotron_content'])); ?></h5>
                         <?php endif; ?>
@@ -32,14 +33,13 @@ $certificate_jumbotron = get_acf_field('certificate_jumbotron');
     <section id="main">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
-                    <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo !empty($certificate_jumbotron['certificate_filter_title']) ? esc_html($certificate_jumbotron['certificate_filter_title']) : esc_html__('Filter Options', 'tqp'); ?></h5>
+                <div class="col-12 text-center mb-5 pb-lg-4">
                     <?php
                     // Display certificate categories filter
                     get_certificate_categories_filter();
                     ?>
                 </div>
-                <div class="col-12 col-md-8 col-lg-9 mt-5 mt-lg-0">
+                <div class="col-12 col-md-10 mx-auto mt-5 mt-lg-0">
                     <div class="container-img">
                         <?php
                         // Display certificate galleries
@@ -62,12 +62,15 @@ function get_certificate_categories_filter()
 
     if (!empty($categories)) :
         ?>
-        <ul id="filter-menu" class="list-unstyled list-group list-group-flush">
-            <button type="button" class="filter-item list-group-item list-group-item-action text-secondary bg-transparent" data-filter="all"><?php echo esc_html__('All'); ?></button>
+         <?php if(!empty($certificate_jumbotron['certificate_filter_title'])):?>
+        <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo esc_html($certificate_jumbotron['certificate_filter_title']); ?></h5>
+        <?php endif;?>
+        <div id="filter-menu" class="d-flex flex-row flex-wrap gap-3 justify-content-center align-items-center">
+            <button type="button" class="filter-item btn btn-primary text-lteal" data-filter="all"><?php echo esc_html__('All'); ?></button>
             <?php foreach ($categories as $category) : ?>
-                <button type="button" class="filter-item list-group-item list-group-item-action text-secondary bg-transparent" data-filter="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></button>
+                <button type="button" class="filter-item btn btn-primary text-lteal" data-filter="<?php echo esc_attr($category->slug); ?>"><?php echo esc_html($category->name); ?></button>
             <?php endforeach; ?>
-        </ul>
+        </div>
     <?php else : ?>
         <p><?php esc_html_e('No options found.'); ?></p>
     <?php endif;

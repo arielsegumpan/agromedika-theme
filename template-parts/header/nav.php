@@ -24,13 +24,13 @@ if (!empty($header_menus) && is_array($header_menus)) :
             $has_children = !empty($child_menu_items) && is_array($child_menu_items);
             if (!$has_children) :?>
                 <li class="nav-item me-3 text-uppercase">
-                    <a class="nav-link" href="<?php echo esc_url($menu_item->url); ?>">
+                    <a class="nav-link  text-black" href="<?php echo esc_url($menu_item->url); ?>">
                         <?php echo esc_html($menu_item->title); ?>
                     </a>
                 </li>
 <?php else : ?>
                 <li class="nav-item dropdown me-3">
-                    <a class="nav-link dropdown-toggle text-uppercase" href="<?php echo esc_url($menu_item->url); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle text-uppercase text-black" href="<?php echo esc_url($menu_item->url); ?>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php echo esc_html($menu_item->title); ?><i class="bi bi-chevron-down ms-2"></i>
                     </a>
                     <ul class="dropdown-menu drop-1">
@@ -45,12 +45,12 @@ if (!empty($header_menus) && is_array($header_menus)) :
                                         $sub_child_menu_items = $menu_class->get_child_menu_items($header_menus, $child_menu_item->ID);
                                         foreach ($sub_child_menu_items as $sub_child_menu_item) :
                                         ?>
-                                            <li><a class="dropdown-item text-uppercase" href="<?php echo esc_url($sub_child_menu_item->url); ?>"><?php echo esc_html($sub_child_menu_item->title); ?></a></li>
+                                            <li><a class="dropdown-item text-uppercase text-black" href="<?php echo esc_url($sub_child_menu_item->url); ?>"><?php echo esc_html($sub_child_menu_item->title); ?></a></li>
                                         <?php endforeach; ?>
                                     </ul>
                                 </li>
                             <?php else : ?>
-                                <li><a class="dropdown-item text-uppercase" href="<?php echo esc_url($child_menu_item->url); ?>"><?php echo esc_html($child_menu_item->title); ?></a></li>
+                                <li><a class="dropdown-item text-uppercase text-black" href="<?php echo esc_url($child_menu_item->url); ?>"><?php echo esc_html($child_menu_item->title); ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>

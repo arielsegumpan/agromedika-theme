@@ -27,10 +27,10 @@ $price_lists_jumbotron = get_acf_field('price_lists_jumbotron');
     <?php endif ;?>
 
     <section id="main">
-         <div class="container">
+         <div class="container"> 
              <div class="row">
 
-                 <div class="col-12 col-xl-10 mt-5 mt-lg-0 mx-auto">
+                 <div class="col-12 mt-5 mt-lg-0 mx-auto">
                      <div class="cont-img">
                         <?php if(have_posts( ) && !empty(get_the_content())) : while(have_posts(  )) : the_post() ; ?>
                           <div class="lh-lg">

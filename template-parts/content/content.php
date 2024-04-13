@@ -6,6 +6,7 @@
 $featured_image_url = get_the_post_thumbnail_url(get_the_ID());
 $featured_image_alt = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
 $herb_single_contents = get_acf_field('herb_single_contents');
+$opening_position = get_acf_field('opening_position');
 ?>
 
     <a href="<?php echo esc_url(get_permalink()) ?>" class="text-decoration-none">
@@ -26,6 +27,11 @@ $herb_single_contents = get_acf_field('herb_single_contents');
             <?php endif ?>
             <div class="card-body">
                 <div class="title mt-4 mt-lg-0">
+                    <?php if (!empty($opening_position)): ?>
+                        <div class="mt-1 text-secondary">
+                            <small><i class="bi bi-briefcase me-2"></i> <?php echo esc_html($opening_position); ?></small>
+                        </div>
+                    <?php endif; ?>
                     <h5 class="fw-bold text-primary"><?php echo esc_html(get_the_title()) ?></h5>
                     <?php if(!empty($herb_single_contents['herb_scientific_name'])) :?>
                         <h6 class="text-secondary"><small class="fst-italic" style="font-size: .98em;"><?php echo esc_html( $herb_single_contents['herb_scientific_name'] ) ?></small></h6>

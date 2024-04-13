@@ -85,6 +85,7 @@
         add_image_size( 'company_team_thumbnail', 1296 , 406 ,true );
         add_image_size( 'rnd_thumbnail', 306 , 250 ,true );
         add_image_size( 'rnd_gall_thumbnail', 306 , 230 ,true );
+        add_image_size( 'team_thumbnail', 306 , 350 ,true );
         add_image_size( 'quality_assurance_thumbnail', 416 , 500 ,true );
         add_image_size( 'single_herb_thumbnail', 300 , 280 ,true );
         add_image_size( 'company_jumbotron', 1400 , 933 ,true );

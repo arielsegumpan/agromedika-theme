@@ -37,20 +37,22 @@ $query = new WP_Query($query_args);
             </div>
         </section>
     <?php endif; ?>
-    <section id="main" class="bg-white">
+    <section id="main" class="bg-white"> 
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-4 col-lg-3">
-                    <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo !empty($infographic_filter_title['infographic_menu_filter_title']) ? esc_html($infographic_filter_title['infographic_menu_filter_title']) : esc_html_e('Filter Options', 'tqp'); ?></h5>
-                    <ul id="filter-menu" class="list-unstyled list-group list-group-flush">
-                        <button type="button" class="filter-item list-group-item list-group-item-action text-secondary  bg-transparent" data-filter="all"><?php esc_html_e('All'); ?></button>
+                <div class="col-12 text-center mb-5 pb-lg-4">
+                    <?php if(!empty($infographic_filter_title['infographic_menu_filter_title'])) :?>
+                    <h5 class="fw-bold mb-4"><i class="bi bi-filter me-2"></i><?php echo esc_html($infographic_filter_title['infographic_menu_filter_title']); ?></h5>
+                    <?php endif;?>
+                    <div id="filter-menu" class="d-flex flex-row flex-wrap gap-3 justify-content-center align-items-center">
+                        <button type="button" class="filter-item btn btn-primary text-lteal" data-filter="all"><?php esc_html_e('All'); ?></button>
                         <?php
                         // Display infographic categories filter
                         get_infographic_categories_filter();
                         ?>
-                    </ul>
+                    </div>
                 </div>
-                <div class="col-12 col-md-8 col-lg-9 mt-5 mt-lg-0">
+                <div class="col-12 col-md-10 mx-auto mt-5 mt-lg-0">
                     <div class="container-img">
                         <?php
                         // Display infographic galleries
@@ -72,7 +74,7 @@ function get_infographic_categories_filter()
     $categories = get_terms('infographic-category');
     if (!empty($categories)) {
         foreach ($categories as $category) {
-            echo '<button type="button" class="filter-item list-group-item list-group-item-action text-secondary  bg-transparent" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
+            echo '<button type="button" class="filter-item btn btn-primary text-lteal" data-filter="' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</button>';
         }
     } else {
         echo '<p>' . esc_html__('No options found', 'tqp') . '</p>';

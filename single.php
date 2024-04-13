@@ -98,7 +98,7 @@ $page_footer_soc_med = $option_values['page_footer_soc_med'];
                         ?>
                         <div id="soc_med">
                             <h5 class="fw-bold text-primary mb-3">Follow us on</h5>
-                            <div class="d-flex flex-row gap-4 justify-content-center justify-content-lg-start mb-4">
+                            <div class="d-flex flex-row gap-4 justify-content-lg-start mb-4">
                             <?php if (!empty($page_footer_soc_med['footer_soc_med'])) : foreach ($page_footer_soc_med['footer_soc_med'] as $page_footer_socmed) : ?>
                                     <a target="_blank" href="<?php echo esc_url($page_footer_socmed['footer_soc_med_link']); ?>" class="text-decoration-none text-primary fs-5"><?php echo wp_kses_decode_entities($page_footer_socmed['footer_soc_med_icons']) ?></a>
                             <?php endforeach;

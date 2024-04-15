@@ -84,7 +84,7 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
                                         <div class="list-group-item mt-3">
                                             <a href="<?php echo esc_url(get_category_link($category->term_id)); ?>" class="btn text-primary fw-bold rounded-3" aria-current="true">
                                                 <i class="bi bi-arrow-right me-2"></i>
-                                                <?php esc_html_e('More Health Benefits'); ?>
+                                                <?php esc_html_e('See More'); ?>
                                             </a>
                                         </div>
                                     <?php endif; ?>

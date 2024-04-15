@@ -88,7 +88,7 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
           </div>
         </div>
       </section>
-    <?php endif; ?>
+    <?php endif;?>
 
     <!-- Products Section -->
     <?php if (!empty($acf_values['home_products']) && !empty($acf_values['home_products']['home_product_content_image']['url'])) :?>
@@ -109,7 +109,7 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
                   }?>  
               </div>
             </div>
-          </div> 
+          </div>
           <?php if(!empty($acf_values['home_products']['home_page_carousel'][0]['home_page_carousel_image']['url']) && !empty($acf_values['home_products']['home_page_carousel'][0]['home_page_carousel_title'])) :?>
           <div class="row">
             <div class="col-12 col-lg-10 mx-auto">

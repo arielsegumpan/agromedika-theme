@@ -97,18 +97,26 @@ foreach ($acf_field_names as $field_name) {
             <div id="mission_vision">
               <div class="container">
                   <div class="row">
-                      <div class="col-12 col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+                      <div class="col-12 col-lg-6 mb-5 mb-lg-0 text-center text-lg-start pe-lg-5">
+                          <div class="mission mb-5">
+                              <h2 class="fw-bold mb-4"><i class="bi bi-eye me-2 fs-1"></i><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_title']); ?></h2>
+                              <?php if(!empty($acf_fields['company_mission_and_vision']['company_vision_content'])):?>
+                              <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_content']); ?></p>
+                              <?php endif;?>
+                          </div>
                           <div class="mission">
-                              <h2 class="fw-bold"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_title']); ?></h2>
-                              <h4 class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_vision_content']); ?></h4>
+                            <h2 class="fw-bold mb-4"><i class="bi bi-flag me-2"></i><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_title']); ?></h2>
+                            <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_content']); ?></p>
                           </div>
                       </div>
 
-                      <div class="col-12 col-lg-6 text-center text-lg-start">
-                        <div class="mission">
-                            <h2 class="fw-bold"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_title']); ?></h2>
-                            <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_mission_and_vision']['company_mission_content']); ?></p>
-                        </div>
+                      <div class="col-12 col-lg-6">
+                      <?php
+                          $mv_img_id = $acf_fields['company_mission_and_vision']['company_mission_and_vision_image']['id'];
+                          echo html_entity_decode(esc_html(
+                          wp_get_attachment_image($mv_img_id, 'company_thumbnail', false, array('class' => 'img-fluid rounded-5 who-img'))
+                      ));?>
+
                       </div>
                   </div>
               </div>
@@ -164,7 +172,9 @@ foreach ($acf_field_names as $field_name) {
               <div class="row">
                 <div class="col-12 col-lg-8 mx-auto text-center">
                   <h2 class="fw-bold text-black"><?php echo esc_html($acf_fields['company_team']['company_title']); ?></h2>
+                  <?php if(!empty($acf_fields['company_team']['company_team_content'])):?>
                   <p class="text-secondary mt-4"><?php echo nl2br(esc_textarea($acf_fields['company_team']['company_team_content'])); ?></p>
+                  <?php endif;?>
                 </div>
               </div>
               <?php if (!empty($acf_fields['company_team']['company_leadership_team'][0]['team_name'])) : ?>
@@ -195,26 +205,54 @@ foreach ($acf_field_names as $field_name) {
                     
               </div>
               <?php endif; ?>
-              <?php if(!empty($acf_fields['company_core_values']['company_core_values_heading']) || !empty($acf_fields['company_core_values']['company_core_values_content'])) :?>
-              <div class="row mt-5 mt-lg-0 pt-xl-5 pb-lg-5 pb-xl-0">
-                <div class="col-12 col-lg-9 mx-auto text-center pt-4 pt-xl-5">
-                  <div class="mission">
-                      <h2 class="fw-bold mb-5"><?php echo esc_html($acf_fields['company_core_values']['company_core_values_heading']); ?></h2>
-                      <p class="lh-lg text-secondary"><?php echo esc_html($acf_fields['company_core_values']['company_core_values_content']); ?></p>
-                    </div>
-                  </div>
-              </div>
-              <?php endif;?>
             </div>
           </section>
     <?php endif; ?>
 
+    <!-- core vlaues -->
+    <?php if(!empty($acf_fields['company_core_values']['company_core_values_heading']) || !empty($acf_fields['company_core_values']['company_core_values_content'])) :?>
+    <div class="core_values bg-primary mb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-10 mx-auto text-center">
+                    <div class="mission">
+                        <h1 class="dispaly-5 text-white fw-bold <?php echo !empty($acf_fields['company_core_values']['company_core_values_content']) ? 'mb-5' : '';?>"><?php echo esc_html($acf_fields['company_core_values']['company_core_values_heading']); ?></h1>
+                        <?php if(!empty($acf_fields['company_core_values']['company_core_values_content'])):?>
+                        <p class="lh-lg text-lteal"><?php echo esc_html($acf_fields['company_core_values']['company_core_values_content']); ?></p>
+                        <?php endif;?>
+                      </div>
+                </div>
+            </div>
+            <?php if(!empty($acf_fields['company_core_values']['core_values'][0]['core_value_heading'])):?>
+            <div class="row row-cols-3 row-gap-5 mt-5 pt-lg-5">
+                <?php foreach($acf_fields['company_core_values']['core_values'] as $key => $core_value) :?>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="d-flex flex-column justify-content-center gap-3 align-items-center">
+                        <?php
+                            $core_value_id = $core_value['core_value_icon']['id'];
+                            echo html_entity_decode(esc_html(
+                            wp_get_attachment_image($core_value_id, 'core_values_icon', false, array('class' => 'rounded-5'))
+                          ));?>
+                        <div class="vision_title_Wrap text-center">
+                            <h6 class="fw-bold text-white fs-4"><?php echo esc_html($core_value['core_value_heading']); ?></h6>
+                            <?php if(!empty($core_value['core_value_sub_heading'])):?>
+                            <p class="text-secondary text-white mt-3"><?php echo esc_html($core_value['core_value_sub_heading']); ?></p>
+                            <?php endif;?>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach;?>
+            </div>
+            <?php endif;?>
+        </div>
+    </div>
+    <?php endif;?>
     <?php if(!empty($acf_fields['company_youtube']['company_youtube_link'])) :?>
-        <section id="yt" class="pt-lg-5 pt-xl-0">
+        <section id="yt" class="pt-lg-5 mt-5">
             <div class="container">
               <div class="row">
                 <div class="col-12">
-                  <div class="ratio ratio-16x9">
+                  <div class="ratio ratio-16x9 mt-5">
                     <?php echo html_entity_decode(esc_html($acf_fields['company_youtube']['company_youtube_link'])) ;?>
                   </div>
                 </div>

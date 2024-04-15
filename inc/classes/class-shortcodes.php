@@ -454,7 +454,7 @@ namespace AGROMEDIKA_THEME\Inc;
          $output = '';
          $personal_cosmetics_term = '';
  
-         $possible_names = array('Personal Care/Cosmetic', 'personal care/cosmetic', 'Personal Care Cosmetics', 'Personal Care Cosmetic', 'Personal Care', 'Personal', 'Cosmetics', 'Care Cosmetics', 'Personal Cosmetics', 'personal care cosmetics');
+         $possible_names = array('Personal Care/Cosmetic','Personal Care/Cosmetics', 'personal care/cosmetics', 'personal care/cosmetic', 'Personal Care Cosmetics', 'Personal Care Cosmetic', 'Personal Care', 'Personal', 'Cosmetics', 'Care Cosmetics', 'Personal Cosmetics', 'personal care cosmetics');
  
          // Find the correct term
          foreach ($possible_names as $name) {
@@ -527,7 +527,7 @@ namespace AGROMEDIKA_THEME\Inc;
              wp_reset_postdata();
          } else {
              // Handle case when term is not found
-             $output .= '<p>Term "Personal Care Cosmetics" not found.</p>';
+             $output .= '<p>No assigned products for "Personal Care Cosmetics".</p>';
          }
  
          // Return output

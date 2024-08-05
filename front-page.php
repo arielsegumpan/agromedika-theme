@@ -17,7 +17,6 @@ $acf_fields = array(
     'home_post' => 'home_post',
 );
 
-$music_file = get_acf_option_field('music_file');
 // Initialize an empty array to store the field values
 $acf_values = array();
 
@@ -29,21 +28,6 @@ has_post_thumbnail() ? $background_image = get_the_post_thumbnail_url(get_the_ID
 $background_image = empty($background_image) && !empty($acf_values['home_jumbotron']['home_jumbotron_image']['url']) ? $acf_values['home_jumbotron']['home_jumbotron_image']['url'] : $background_image;
 $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
 ?>
-<?php if (!empty($music_file)) : 
-  ?>
-    <div id="music" >
-      <div class="card py-2 rounded-4 shadow border border-primary text-centers">
-        <div id="audio_btn" class="d-flex flex-row gap-2 align-items-center justify-content-center">
-          <i class="bi bi-volume-up fs-5"></i>
-        </div>
-        <audio controls autoplay loop>
-          <source src="<?php echo esc_url($music_file['url']); ?>" type="audio/mpeg">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div>
-<?php endif; ?>
-
 <main>
     <!-- Jumbotron Section -->
     <?php if (!empty($background_image)) : ?>
@@ -106,44 +90,39 @@ $jumb_id = $acf_values['home_jumbotron']['home_jumbotron_image']['ID'];
                 <?php 
                   if(shortcode_exists('agromedika_recent_product')){
                     echo do_shortcode('[agromedika_recent_product]'); 
-                  }?>  
+                  }?>   
               </div>
             </div>
           </div>
           <?php if(!empty($acf_values['home_products']['home_page_carousel'][0]['home_page_carousel_image']['url']) && !empty($acf_values['home_products']['home_page_carousel'][0]['home_page_carousel_title'])) :?>
           <div class="row">
-            <div class="col-12 col-lg-10 mx-auto">
+            <div class="col-12">
               <div id="carous_product">
                   <h2 class="text-center mb-5 pb-lg-3"><?php echo esc_html($acf_values['home_products']['home_page_carousel_main_title']) ?></h2>
-                <div id="prod-carouselAutoPlaying" class="carousel slide position-relative" data-bs-ride="carousel">
-                  <div class="carousel-inner rounded-5">
+                  <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3 g-4 g-lg-5 justify-content-center">
+                  <?php foreach($acf_values['home_products']['home_page_carousel'] as $key => $get_prod_carous) :?>
+                    <div class="col">
+                      <a href="<?php echo esc_url($get_prod_carous['home_page_carousel_page_link']) ;?>" class="text-decoration-none text-white">
+                        <div class="card border-0 bg-transparent">
 
-                    <?php foreach($acf_values['home_products']['home_page_carousel'] as $key => $get_prod_carous) :?>
-                    <div class="carousel-item <?php echo esc_html( $key == 0 ? 'active' : ''); ?>">
-                      <?php
-                        $prod_img_id =  $get_prod_carous['home_page_carousel_image']['id'];
-                        echo html_entity_decode(esc_html(
-                          wp_get_attachment_image($prod_img_id, 'prod_carousel_img', false, array('class' => 'd-block w-100'))
-                      ));?>
-                      <div class="carous_caption position-absolute text-white">
-                       <a href="<?php echo esc_url($get_prod_carous['home_page_carousel_page_link']) ;?>" class="text-decoration-none text-white">
-                        <h2><?php echo esc_html($get_prod_carous['home_page_carousel_title']); ?></h2>
-                        <small class="text-uppercase"><?php echo esc_html($acf_values['home_products']['home_page_carousel_button_title']); ?><i class="bi bi-arrow-right ms-2 text-primary"></i></small>
-                       </a>
-                      </div>
+                          <?php
+                          $prod_img_id =  $get_prod_carous['home_page_carousel_image']['id'];
+                          echo html_entity_decode(esc_html(
+                            wp_get_attachment_image($prod_img_id, 'prod_carousel_img', false, array('class' => 'd-block w-100 rounded-5'))
+                          ));?>
+
+                          <div class="carous_caption position-absolute text-white mx-3 mx-sm-4 mx-lg-4 mt-3">
+                          
+                            <h3><?php echo esc_html($get_prod_carous['home_page_carousel_title']); ?></h3>
+                            <small class="text-uppercase"><?php echo esc_html($acf_values['home_products']['home_page_carousel_button_title']); ?><i class="bi bi-arrow-right ms-2 text-white"></i></small>
+                          
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                    <?php endforeach;?>
-                    
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#prod-carouselAutoPlaying" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"><?php echo esc_html('Previous') ;?></span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#prod-carouselAutoPlaying" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden"><?php echo esc_html('Next') ?></span>
-                  </button>
+                  <?php endforeach;?>
                 </div>
+                 
               </div>
             </div>
           <?php endif;?>

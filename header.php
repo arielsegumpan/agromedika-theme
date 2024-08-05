@@ -14,14 +14,38 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <?php wp_head()?>
   </head>
-  <body <?php body_class();?>>
 
-    <div id="scroll_btn">
-      <i class='bi bi-chevron-up text-lteal fs-4 rounded-3 bg-primary'></i>
+  <?php
+$excluded_pages = array('contact-us', 'contact', 'careers', 'quality', 'blog', 'news-and-updates');
+$excluded_posts = array('news-and-updates', 'herb');
+
+$music_file = get_acf_option_field('music_file');
+$should_display_music = !empty($music_file) && 
+    !is_page($excluded_pages) &&
+    !is_single($excluded_posts) && 
+    !is_singular('herb') &&
+    !is_home();
+?>
+
+<?php if ($should_display_music) : ?>
+    <div id="music">
+        <div class="card py-2 rounded-4 shadow border border-primary text-center">
+            <div id="audio_btn" class="d-flex flex-row gap-2 align-items-center justify-content-center">
+                <i class="bi bi-volume-up fs-5"></i>
+            </div>
+            <audio controls autoplay loop>
+                <source src="<?php echo esc_url($music_file['url']); ?>" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
     </div>
+<?php endif; ?>
 
-    <header class="position-absolute w-100">
-        <nav class="navbar navbar-expand-xl bg-transparent">
+
+
+  <body <?php body_class();?>>
+    <header id="hdr_main" class="<?php echo esc_attr(is_page( ['about', 'company','history'] ) ? 'hdr_bg' : 'bg-lteal');?> position-fixed w-100">
+          <nav class="navbar navbar-expand-xl bg-transparent">
             <div class="container">
               <?php
                 $custom_logo_id = get_theme_mod('custom_logo');
@@ -52,11 +76,18 @@
               </button>
               <div class="collapse navbar-collapse py-3 py-lg-auto" id="navbarSupportedContent">
 
+                <div id="sm_search" class="d-flex flex-row justify-content-between align-items-center mb-4">
+                  <div class="me-2 w-100">
+                  <?php get_template_part( 'searchform1'); ?>
+                  </div>
+                  <a href="#!" class="btn btn-primary text-white"><i class="bi bi-person"></i></a>
+                </div>
+
                 <?php if(has_nav_menu('agromedika-header-menu')):?>
                     <?php get_template_part('template-parts/header/nav');?>
                 <?php endif; ?>
 
-                <div class="d-flex flex-row  ps-3 ps-lg-auto mt-4 mt-xl-0">
+                <div id="lrg_search" class="d-flex flex-row  ps-3 ps-lg-auto mt-4 mt-xl-0">
                   <div class="search-container me-2">
                     <?php get_search_form() ?>
                   </div> 

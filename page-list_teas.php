@@ -10,14 +10,11 @@ $list_of_teas_jumbotron = get_acf_field('list_of_teas_jumbotron');
 
  ?>
  <main>
-    <section id="prod_jumbotron" class="bg-lteal">  
-        <div class="jumb-overlay"></div>
-    </section>
     <?php if(!empty($list_of_teas_jumbotron['list_of_teas_heading'])) :?>
      <section id="no-jumbotron">
          <div class="container">
              <div class="row">
-                <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+                <div class="col-12 col-lg-8 mx-auto my-auto text-center mt-3">
                      <h1 class="fw-bold text-black"><?php echo esc_html($list_of_teas_jumbotron['list_of_teas_heading']);?></h1>
                      <h6 class="text-secondary mt-4"><?php echo nl2br(esc_textarea($list_of_teas_jumbotron['list_of_teas_sub_heading']));?></h6>
                  </div>

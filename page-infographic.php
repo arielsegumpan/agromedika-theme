@@ -21,13 +21,10 @@ $query = new WP_Query($query_args);
 
 <main>
     <?php if (!empty($infographic_content['infographic_heading'])) : ?>
-        <section id="prod_jumbotron" class="bg-lteal">
-            <div class="jumb-overlay"></div>
-        </section>
         <section id="no-jumbotron" class="bg-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center mt-5">
                         <h1 class="fw-bold text-black"><?php echo esc_html($infographic_content['infographic_heading']); ?></h1>
                         <?php if (!empty($infographic_content['infographic_sub_heading'])) : ?>
                             <h5 class="text-black mt-4"><?php echo esc_html($infographic_content['infographic_sub_heading']); ?></h5>

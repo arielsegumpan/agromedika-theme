@@ -12,13 +12,11 @@ $certificate_jumbotron = get_acf_field('certificate_jumbotron');
 ?>
 <main>
     <?php if (!empty($certificate_jumbotron['certificate_jumbotron_heading'])) : ?>
-        <section id="prod_jumbotron" class="bg-lteal">
-            <div class="jumb-overlay"></div>
-        </section>
+       
         <section id="no-jumbotron" class="bg-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center mt-5">
                         <h1 class="fw-bold text-black"><?php echo esc_html($certificate_jumbotron['certificate_jumbotron_heading']); ?></h1>
                         
                         <?php if (!empty($certificate_jumbotron['certificate_jumbotron_content'])) : ?>

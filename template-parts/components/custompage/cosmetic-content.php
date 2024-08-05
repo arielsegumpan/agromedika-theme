@@ -1,5 +1,6 @@
 <?php if(have_posts()): while(have_posts()) : the_post(); ?>
     <?php 
+    $personal_care_cosmetics_block_4 = get_acf_field('personal_care_cosmetics_block_4');
     $personal_care_cosmetics_page_link = get_acf_field('personal_care_cosmetics_page_link');
     ?>
 

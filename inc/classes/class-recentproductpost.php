@@ -23,6 +23,8 @@ class RecentProductPost {
             'post_type'      => 'herb',
             'post_status'    => 'publish',
             'posts_per_page' => 12,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
             'meta_query' => array(
                 array(
                     'key'   => 'herb_single_contents_is_approved_is_post_featured',

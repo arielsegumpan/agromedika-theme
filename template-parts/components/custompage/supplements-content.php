@@ -1,5 +1,6 @@
 <?php if(have_posts()): while(have_posts()) : the_post(); ?>
-    <?php 
+    <?php
+    $dietary_supplements_block_4 = get_acf_field('dietary_supplements_block_4');
     $dietary_supplements_page_link = get_acf_field('dietary_supplements_page_link');
     ?>
 
@@ -8,7 +9,7 @@
             <div class="row mb-5 pb-lg-5">
                 <div class="col-12 text-center">
                     <h2 class="fw-bold text-black">
-                        <?php echo !empty($dietary_supplements_block_3['dietary_supplements_block_3_title']) ? esc_html($dietary_supplements_block_3['dietary_supplements_block_3_title']) : esc_html('Product Menu'); ?>
+                        <?php echo !empty($dietary_supplements_block_4['dietary_supplements_block_4_title']) ? esc_html($dietary_supplements_block_4['dietary_supplements_block_4_title']) : esc_html('Product Menu'); ?>
                     </h2>
                 </div>
             </div> 

@@ -10,14 +10,11 @@ $price_lists_jumbotron = get_acf_field('price_lists_jumbotron');
 ?>
 
 <main>
-    <section id="prod_jumbotron" class="bg-lteal">  
-        <div class="jumb-overlay"></div>
-    </section>
     <?php if(!empty($price_lists_jumbotron['price_lists_heading'])):?>
     <section id="no-jumbotron">
         <div class="container">
           <div class="row">
-            <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+            <div class="col-12 col-lg-8 mx-auto my-auto text-center mt-3">
               <h1 class="fw-bold text-black"><?php echo esc_html($price_lists_jumbotron['price_lists_heading']) ?></h1>
               <h5 class="text-black mt-4"><?php echo esc_html($price_lists_jumbotron['price_lists_sub_heading']) ?></h5>
             </div>

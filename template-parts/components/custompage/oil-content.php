@@ -1,5 +1,6 @@
 <?php if(have_posts()): while(have_posts()) : the_post(); ?>
     <?php 
+    $essential_oil_block_4 = get_acf_field('essential_oil_block_4');
     $essential_oil_page_link = get_acf_field('essential_oil_page_link');
     ?>
 
@@ -8,7 +9,7 @@
             <div class="row mb-5 pb-lg-5">
                 <div class="col-12 text-center">
                     <h2 class="fw-bold text-black">
-                        <?php echo !empty($essential_oil_block_3['essential_oil_block_3_title']) ? esc_html($essential_oil_block_3['essential_oil_block_3_title']) : esc_html('Product Menu'); ?>
+                        <?php echo !empty($essential_oil_block_4['essential_oil_block_4_title']) ? esc_html($essential_oil_block_4['essential_oil_block_4_title']) : esc_html('Product Menu'); ?>
                     </h2>
                 </div>
             </div>

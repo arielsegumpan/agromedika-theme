@@ -1227,3 +1227,36 @@ class RecentProductPost {
         </div>
     </div>
 </div>
+
+
+
+//OUT PRODUCTS IN HOME PAGE
+ <div id="prod-carouselAutoPlaying" class="carousel slide position-relative" data-bs-ride="carousel">
+                    <div class="carousel-inner rounded-5">
+
+                      <?php foreach($acf_values['home_products']['home_page_carousel'] as $key => $get_prod_carous) :?>
+                      <div class="carousel-item <?php echo esc_html( $key == 0 ? 'active' : ''); ?>">
+                        <?php
+                          $prod_img_id =  $get_prod_carous['home_page_carousel_image']['id'];
+                          echo html_entity_decode(esc_html(
+                            wp_get_attachment_image($prod_img_id, 'prod_carousel_img', false, array('class' => 'd-block w-100'))
+                        ));?>
+                        <div class="carous_caption position-absolute text-white">
+                        <a href="<?php echo esc_url($get_prod_carous['home_page_carousel_page_link']) ;?>" class="text-decoration-none text-white">
+                          <h2><?php echo esc_html($get_prod_carous['home_page_carousel_title']); ?></h2>
+                          <small class="text-uppercase"><?php echo esc_html($acf_values['home_products']['home_page_carousel_button_title']); ?><i class="bi bi-arrow-right ms-2 text-primary"></i></small>
+                        </a>
+                        </div>
+                      </div>
+                      <?php endforeach;?>
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#prod-carouselAutoPlaying" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden"><?php echo esc_html('Previous') ;?></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#prod-carouselAutoPlaying" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden"><?php echo esc_html('Next') ?></span>
+                    </button>
+                  </div>

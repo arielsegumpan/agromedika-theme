@@ -24,14 +24,11 @@ $product_catalogue_featured_image_alt = get_post_meta(get_post_thumbnail_id(), '
 ?>
 
 <main>
-    <section id="prod_jumbotron" class="bg-lteal">
-        <div class="jumb-overlay"></div>
-    </section>
     <?php if (!empty($product_catalogue_jumbotron['product_catalogue_jumbotron_heading'])) : ?>
         <section id="no-jumbotron" class="bg-white">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-lg-8 mx-auto my-auto text-center">
+                    <div class="col-12 col-lg-8 mx-auto my-auto text-center mt-5">
                         <h1 class="fw-bold text-black"><?php echo esc_html($product_catalogue_jumbotron['product_catalogue_jumbotron_heading']); ?></h1>
                         <?php if (!empty($product_catalogue_jumbotron['product_catalogue_jumbotron_content'])) : ?>
                             <h5 class="text-secondary mt-4"><?php echo html_entity_decode(esc_textarea($product_catalogue_jumbotron['product_catalogue_jumbotron_content'])); ?></h5>

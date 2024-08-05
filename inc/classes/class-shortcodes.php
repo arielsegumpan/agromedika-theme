@@ -76,7 +76,7 @@ namespace AGROMEDIKA_THEME\Inc;
             'taxonomy' => 'herb-category',
             'hide_empty' => false,
         ));
-        
+         
         $output = '';
         
         foreach ($categories as $category) {
@@ -522,7 +522,6 @@ namespace AGROMEDIKA_THEME\Inc;
                  // Handle case when no posts are found
                  $output .= '<p>No herb posts found for Personal Care Cosmetics.</p>';
              }
- 
              // Reset post data
              wp_reset_postdata();
          } else {

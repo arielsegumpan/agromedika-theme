@@ -24,7 +24,6 @@ foreach ($acf_field_names as $field_name) {
 ?>
 
 <main>
-
     <?php if (!empty($acf_fields['company_jumbotron']['company_hero_text_slides']['0']['company_hero_text_slide'])): ?>
         <section id="jumbotron-product" class="bg-lteal position-relative overflow-hidden">
           <?php if (has_post_thumbnail()) : ?>

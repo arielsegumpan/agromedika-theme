@@ -43,7 +43,7 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                     <h6 class="text-black"><small class="fst-italic"><?php echo esc_html($herb_single_contents['herb_scientific_name']) ;?></small></h6>
                     <?php endif ;?>
                     <?php
-                          // Display herb categories
+                    // Display herb categories
                     if ($herb_categories && !is_wp_error($herb_categories)): ?>
                       <div class="herb-categories mt-4">
                           <p><small class="d-flex flex-wrap justify-content-center justify-content-md-start gap-1" style="font-size:11px">
@@ -134,6 +134,13 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                           </div>
                           
                         </div>
+
+                        <div class="row">
+                          <div class="col-12 mt-5 pt-md-3 pt-lg-5">
+                            <?php the_content() ;?>
+                          </div>
+                        </div>
+
                        </div>
                       </div>
                       <div class="tab-pane fade pt-5 px-lg-5" id="nav-document-access" role="tabpanel" aria-labelledby="nav-document-access-tab" tabindex="0">
@@ -166,16 +173,10 @@ $herb_categories = get_the_terms(get_the_ID(), 'herb-category');
                 </div>
             </div>
 
-            <div class="row">
-              <div class="col-12 mt-5 pt-md-3 pt-lg-5">
-                <?php the_content() ;?>
-              </div>
-            </div>
-
             <?php if(!empty($herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'])) :?>
             <div class="row text-center">
               <div class="mt-5 pt-md-3 pt-lg-4">
-                <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Herbs', 'agromedika' ) ?></a>
+                <a href="<?php echo esc_url( $herb_single_contents['herb_back_to_product']['herb_back_to_product_page_link'] ) ;?>" class="text-decoration-none text-primary fw-bold"><i class="bi bi-arrow-left me-2"></i> <?php echo esc_html__( 'Back to All Herbs', 'agromedika' ) ?></a>
               </div>
             </div>
             <?php endif; ?>

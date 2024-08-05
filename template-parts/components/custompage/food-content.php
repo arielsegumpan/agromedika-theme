@@ -1,5 +1,6 @@
 <?php if(have_posts()): while(have_posts()) : the_post(); ?>
     <?php 
+    $functional_food_block_4 = get_acf_field('functional_food_block_4');
     $functional_food_page_link = get_acf_field('functional_food_page_link');
     ?>
 
@@ -8,7 +9,7 @@
             <div class="row mb-5 pb-lg-5">
                 <div class="col-12 text-center">
                     <h2 class="fw-bold text-black">
-                        <?php echo !empty($functional_food_block_3['functional_food_block_3_title']) ? esc_html($functional_food_block_3['functional_food_block_3_title']) : esc_html('Product Menu'); ?>
+                        <?php echo !empty($functional_food_block_4['functional_food_block_4_title']) ? esc_html($functional_food_block_4['functional_food_block_4_title']) : esc_html('Product Menu'); ?>
                     </h2>
                 </div>
             </div>

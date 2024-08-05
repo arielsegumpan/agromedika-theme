@@ -12,9 +12,6 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
 ?>
 
 <main>
-    <section id="prod_jumbotron" class="bg-lteal">  
-        <div class="jumb-overlay"></div>
-    </section>
 
     <?php if($herb_page_main_section['herb_page_title']) : ?>
     <section id="products-main">
@@ -41,14 +38,13 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
                     <?php endif; ?>
                 </div>
             </div>
-
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5">
             <?php
             $categories = get_categories(array(
                 'taxonomy' => 'herb-category',
                 'orderby' => 'name',
                 'order' => 'ASC',
-                'number' => 6,
+                'number' => 99999999,
             ));
 
             if ($categories) :
@@ -65,8 +61,7 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
                         ),
                     ));
 
-                    if ($posts->have_posts()) :
-            ?>
+                    if ($posts->have_posts()) :?>
                         <div class="col">
                             <div class="card bg-transparent border-0 text-center">
                                 <h4 class="mb-3"><?php echo esc_html($category->name); ?></h4>
@@ -84,20 +79,26 @@ $herbs_indication = $herb_page_main_section['herbs_indication'];
                                         <div class="list-group-item mt-3">
                                             <a href="<?php echo esc_url(get_category_link($category->term_id)); ?>" class="btn text-primary fw-bold rounded-3" aria-current="true">
                                                 <i class="bi bi-arrow-right me-2"></i>
-                                                <?php esc_html_e('See More'); ?>
+                                                <?php esc_html_e('More Herbs', 'agromedika'); ?>
                                             </a>
                                         </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-            <?php
+                    <?php
                     endif;
                 endforeach;
             endif;
         endif;?>
 
         </div>
+        </div>
+        <?php if(!empty($herb_page_main_section['herb_page_link'])): ?>
+            <div class="text-center mt-5 pt-md-3 pt-lg-4">
+                <a href="<?php echo esc_url($herb_page_main_section['herb_page_link']);?>" class="text-decoration-none text-primary fw-bold"><i class="bi bi-arrow-right me-2"></i><?php echo esc_html__( 'More Health Benefits', 'agromedika' );?></a>
+            </div>
+        <?php endif;?>
     </section>
 </main>
 

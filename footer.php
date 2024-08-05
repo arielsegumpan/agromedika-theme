@@ -26,10 +26,7 @@ $page_footer_soc_med = $option_values['page_footer_soc_med'];
 $privacy_policy_and_terms_conditions = $option_values['privacy_policy_and_terms_conditions'];
 $page_footer_google_map = $option_values['page_footer_google_map'];
 $page_footer_certificate_icons = $option_values['page_footer_certificate']['page_footer_certificate_icons'];
-
-
 ?>
-
 <footer class="bg-primary">
     <div class="container">
         <div class="row">
@@ -56,7 +53,7 @@ $page_footer_certificate_icons = $option_values['page_footer_certificate']['page
                 </div>
             <?php endif; ?>
             <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0  text-center text-lg-start">
-                <h6 class="fw-bold text-uppercase text-lteal ps-lg-5"><?php echo esc_html('Applications') ?></h6>
+                <h6 class="fw-bold text-uppercase text-lteal ps-xl-5"><?php echo esc_html('Industry Applications') ?></h6>
                 <?php get_template_part('template-parts/footer/nav'); ?>
             </div>
 

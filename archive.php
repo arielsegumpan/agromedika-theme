@@ -14,9 +14,9 @@ get_header();
             <div class="row">
                 <?php $category = get_queried_object();
                 if(!empty($category) && is_tax('herb-category')):?>
-                <div class="col-12 col-lg-8 mx-auto text-center mb-5 pb-lg-4">
+                <div class="col-12 col-lg-9 mx-auto text-center mb-5 pb-lg-4">
                     <h1><?php echo $category->name; ?></h1>
-                    <div class="category-description"><?php echo category_description($category->term_id); ?></div>
+                    <div class="category-description mt-4"><?php echo category_description($category->term_id); ?></div>
                 </div>
                 <?php endif; ?>
                 <div class="col-12">

@@ -698,8 +698,6 @@ function custom_acf_file_url_form_tag_handler($tag){
     return $url;
 }
 
-
-
 // remove CF7 P and SPAN
 add_filter('wpcf7_autop_or_not', '__return_false');
 add_filter('wpcf7_form_elements', function($content) {
@@ -708,6 +706,5 @@ add_filter('wpcf7_form_elements', function($content) {
     return $content;
 });
 
-
-
+	
 

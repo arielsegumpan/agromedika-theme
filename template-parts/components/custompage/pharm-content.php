@@ -9,7 +9,7 @@
             <div class="row mb-5 pb-lg-5">
                 <div class="col-12 text-center">
                     <h2 class="fw-bold text-black">
-                        <?php echo !empty($pharmaceutical_block_3['pharmaceutical_block_3_title']) ? esc_html($pharmaceutical_block_3['pharmaceutical_block_3_title']) : esc_html('Product Menu'); ?>
+                        <?php echo !empty($pharmaceutical_block_4['pharmaceutical_block_4_title']) ? esc_html($pharmaceutical_block_4['pharmaceutical_block_4_title']) : esc_html('Product Menu'); ?>
                     </h2>
                 </div>
             </div>

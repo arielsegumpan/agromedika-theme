@@ -29,7 +29,6 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
         foreach ($classes as $class) {
             $class::get_instance();
         }
-    
         $this->setup_hooks();
     }
     
@@ -37,11 +36,11 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
     protected function setup_hooks(){
         add_action('wp_before_admin_bar_render', [$this,'wpb_custom_logo']);
         add_action('after_setup_theme', [$this,'setup_theme']);
-        add_action('init', [$this, 'remove_price_related_actions']);
-        add_filter( 'woocommerce_variable_sale_price_html', [$this,'agromedika_remove_prices'], 10, 2 );
-        add_action( 'init', [$this,'remove_add_to_cart_button']);
-        add_filter( 'woocommerce_is_purchasable', '__return_false' );
-        add_filter('woocommerce_sale_flash', [$this,'remove_woocommerce_sale_flash'], 10, 3);
+        // add_action('init', [$this, 'remove_price_related_actions']); //remove price
+        // add_filter( 'woocommerce_variable_sale_price_html', [$this,'agromedika_remove_prices'], 10, 2 ); //remove variable price
+        // add_action( 'init', [$this,'remove_add_to_cart_button']); //remove wc buttoncart
+        // add_filter( 'woocommerce_is_purchasable', '__return_false' );// remove wc buttoncart
+        // add_filter('woocommerce_sale_flash', [$this,'remove_woocommerce_sale_flash'], 10, 3); //remove sale tag
         add_filter('admin_footer_text', [$this,'custom_footer_admin_text']);
         add_action( 'after_setup_theme', [$this,'image_sizes'] );
         add_action('pre_get_posts', [$this,'agromedika_modify_search_query']);
@@ -64,7 +63,7 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
             'header-text' => ['site-title', 'site-description'],
             'height'        =>  50,
             'width'         =>  100,
-            'flex-height'   =>  true,
+            'flex-height'   =>  true, 
             'flex-width'    =>  true,
             'unlink-homepage-logo' => true, 
         ]);
@@ -84,7 +83,10 @@ use AGROMEDIKA_THEME\Inc\Traits\Singleton;
             'style'
         ]);
 
-        add_theme_support( 'woocommerce');
+        add_theme_support( 'woocommerce' );
+        add_theme_support( 'wc-product-gallery-zoom' );
+        add_theme_support( 'wc-product-gallery-lightbox' );
+        add_theme_support( 'wc-product-gallery-slider' );
         add_editor_style();
 
         add_theme_support( 'wp-block-styles' );
